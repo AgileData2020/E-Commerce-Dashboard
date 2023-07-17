@@ -1,23 +1,16 @@
 import logo from './logo.svg';
-import './App.css';
-
+import Login from './auth/login';
+import Upload from './component/upload';
+import Dashboard from './Dashboard';
+import Modal from './component/Mdal';
+import ModalCalender from './component/Mdal';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <Login /> */}
+      {/* <Upload /> */}
+       <Dashboard /> 
+      {/* <ModalCalender /> */}
     </div>
   );
 }
