@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import { lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { routesPath } from './Routes';
 const Login = lazy(() => import('./auth/login'));
 const Dashboard = lazy(() => import('./Dashboard/index'));
 const Upload = lazy(() => import("./component/upload/index"));
-
+const Loader = lazy(() => import("./component/Loader/loader"));
 const Layout = lazy(() => import("./component/layout/index"));
 
 
@@ -51,21 +52,24 @@ function App() {
 
 
 
-    <Suspense fallback={<p>Loading.....</p>}>
+    <Suspense fallback={<Loader />}>
       <Routes>
-        {/* <Route path='/portfolio' element={<ProtectedRoutes><Protfolio /></ProtectedRoutes>}></Route>
-        <Route path="/" element={<ProtectedRoutes path="/"><Home /></ProtectedRoutes>}></Route> */}
 
-        <Route path="/" element={<Login />}></Route>
-        <Route path="/upload" element={<Upload />}></Route>
-        <Route path="/dashboard"
+
+        <Route path={routesPath.Login} element={<Login />}></Route>
+
+
+        <Route path={routesPath.UploadData} element={<Upload />}></Route>
+
+
+        <Route path={routesPath.Dashboard}
           element={
             <ProtectedRoutes path="/">
 
               <Dashboard />
 
             </ProtectedRoutes>
-            // <Dashboard />
+
           }>
 
         </Route>

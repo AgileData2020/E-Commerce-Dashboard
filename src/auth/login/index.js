@@ -5,7 +5,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 import { useNavigate } from 'react-router-dom';
-
+import { auth } from '../../api/endPoints';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
