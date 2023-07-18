@@ -4,7 +4,7 @@ import { TextField, Typography, Box, Paper, Grid, InputLabel, InputAdornment, Ou
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
-import zIndex from '@mui/material/styles/zIndex';
+import { useNavigate } from 'react-router-dom';
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -18,12 +18,16 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const Login = () => {
     const [showPassword, setShowPassword] = React.useState(false);
-
+    const navigate = useNavigate();
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
+
+    const submitLoginForm = () => {
+        navigate('/upload')
+    }
     return (
         <>
             <Box sx={{ width: "100%", backgroundColor: '#1930d2', height: '100vh' }}>
@@ -37,7 +41,7 @@ const Login = () => {
                     <img src="bgimg.png" alt="hydro" style={{ width: '240px', }} />
                     <Box sx={{ padding: '40px' }}>
                         <Typography variant="h5" sx={{ fontWeight: 'bold', textAlign: 'center', color: '#fff' }}>Welcome to Hydrocarbon.</Typography>
-                        <Typography variant="subtitle1" sx={{ textAlign: "left", color: '#fff',  }} >The itenlligence client Project admin board </Typography>
+                        <Typography variant="subtitle1" sx={{ textAlign: "left", color: '#fff', }} >The itenlligence client Project admin board </Typography>
                     </Box>
                 </Box>
                 <Box sx={{
@@ -63,7 +67,7 @@ const Login = () => {
                                     </Grid>
                                     <Grid item xs={8} sx={{ marginLeft: '12px' }}>
                                         <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'left' }}>Login</Typography>
-                                        <Typography variant="body1" sx={{ textAlign: "justify" }} >Lorem ipsum is simply dummy text of the Printing and typesetting industry </Typography>
+                                        {/*Typography variant="body1" sx={{ textAlign: "justify" }} >Lorem ipsum is simply dummy text of the Printing and typesetting industry </Typography> */}
                                     </Grid>
 
                                     <Grid item xs={8} sx={{ marginTop: 2 }}>
@@ -100,7 +104,7 @@ const Login = () => {
                                         </Box>
                                     </Grid>
                                     <Grid item xs={5}>
-                                        <IconButton aria-label="delete" size="large" sx={{
+                                        <IconButton aria-label="delete" size="large" onClick={() => submitLoginForm()} sx={{
                                             marginTop: '5px', float: "right", backgroundColor: '#1b32d5', color: '#fff', ":hover":
                                                 { backgroundColor: '#1b32d5', },
 
