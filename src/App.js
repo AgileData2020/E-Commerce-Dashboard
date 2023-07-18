@@ -2,20 +2,40 @@ import logo from './logo.svg';
 import { lazy, Suspense } from 'react';
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import { routesPath } from './Routes';
+
+// import { Circles } from 'react-loader-spinner'; later we remove after testing
+// import LoadingOverlay from "react-loading-overlay"; later we remove after testing
+import Loader from '../src/component/Loader/loader'
 const Login = lazy(() => import('./auth/login'));
 const Dashboard = lazy(() => import('./Dashboard/index'));
 const Upload = lazy(() => import("./component/upload/index"));
-const Loader = lazy(() => import("./component/Loader/loader"));
 const Layout = lazy(() => import("./component/layout/index"));
+
+
 
 
 function App() {
 
+  // Later we remove after testing
+  // const Loader = () => {
+
+  //   return (
+  //     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '85vh' }}>
+  //       <div>
+  //         <LoadingOverlay
+  //           text={"Loading..."}
+  //           active={true}
+  //           spinner={<Circles color="#1b32d5" />}
+  //         />
+  //       </div>
+  //     </div>
+  //   )
+  // }
   let login = true;
   const ProtectedRoutes = ({ children, path }) => {
 
 
-    console.log(path, 'children')
+
 
     if (login) {
       return (
@@ -32,27 +52,14 @@ function App() {
 
   }
 
-  const PublicRoutes = ({ children }) => {
 
-
-
-
-    if (login) {
-
-      return < Navigate to="/" replace={true} />
-
-    } else {
-      return children;
-
-
-    }
-
-  }
   return (
 
 
 
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={
+      <Loader />
+    }>
       <Routes>
 
 

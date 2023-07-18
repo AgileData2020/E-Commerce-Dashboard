@@ -6,7 +6,8 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../api/endPoints';
-
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/slices/auth/login';
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -25,8 +26,10 @@ const Login = () => {
         event.preventDefault();
     };
 
+    const dispatch = useDispatch()
     const submitLoginForm = () => {
-        navigate('/upload')
+        // navigate('/upload')
+        dispatch(loginUser({ test: 'text' }))
     }
     return (
         <>
