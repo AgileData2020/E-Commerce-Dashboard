@@ -1,11 +1,4 @@
 import { configureStore } from "@reduxjs/toolkit";
-
-import storage from 'redux-persist/lib/storage';
-import { combineReducers } from '@reduxjs/toolkit';
-import sliceLogin from "../slices/auth/login";
-;
-
-
 /** Redux persist **/
 
 import {
@@ -17,7 +10,9 @@ import {
     PURGE,
     REGISTER,
 } from 'redux-persist';
-
+import storage from 'redux-persist/lib/storage';
+import { combineReducers } from '@reduxjs/toolkit';
+import sliceLogin from "../slices/auth/login";
 
 const persistConfig = {
     key: 'root', storage,
