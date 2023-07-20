@@ -28,7 +28,7 @@ const Login = () => {
 
     const dispatch = useDispatch()
     const submitLoginForm = () => {
-        // navigate('/upload')
+        navigate('/upload')
         dispatch(loginUser({ test: 'text' }))
     }
     return (
