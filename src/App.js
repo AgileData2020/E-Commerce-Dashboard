@@ -8,7 +8,7 @@ import { routesPath } from './Routes';
 import Loader from '../src/component/Loader/loader'
 const Login = lazy(() => import('./auth/login'));
 const Dashboard = lazy(() => import('./Dashboard/index'));
-const Upload = lazy(() => import("./component/upload/index"));
+const Upload = lazy(() => import("./upload/index"));
 const Layout = lazy(() => import("./component/layout/index"));
 
 
