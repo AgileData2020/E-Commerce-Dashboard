@@ -7,8 +7,8 @@ import Loader from '../src/component/Loader/loader'
 const Login = lazy(() => import('./auth/login'));
 const Dashboard = lazy(() => import('./Dashboard/index'));
 const Upload = lazy(() => import("./upload/index"));
-const Layout = lazy(() => import("./component/layout/index"));
 
+const AdminLayout = lazy(() => import("./component/layout/layout"))
 
 
 
@@ -22,9 +22,9 @@ function App() {
   const ProtectedRoutes = ({ children, path }) => {
     if (login) {
       return (
-        <Layout>
+        <AdminLayout>
           {children}
-        </Layout>
+        </AdminLayout>
 
       )
     } else {
