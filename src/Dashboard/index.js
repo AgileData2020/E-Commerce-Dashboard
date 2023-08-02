@@ -4,9 +4,13 @@ import React from 'react'
 
 import CustomTable from '../component/customTable'
 import { Nav, Tab } from 'rsuite';
+
+import CustomeDrawer from '../component/customeDrawer';
 const Dashboard = () => {
 
     const [active, setActive] = React.useState('home');
+
+    const [openDrawer, setOpenDrawer] = React.useState(false);
     const Navbar = ({ active, onSelect, ...props }) => {
         return (
             <Nav {...props} activeKey={active} onSelect={onSelect} style={{ marginBottom: 50 }}>
@@ -23,16 +27,18 @@ const Dashboard = () => {
     return (
 
         <>
-            <h1>Rollup Data</h1>
+            <h1 onClick={() => setOpenDrawer(!openDrawer)}>Rollup Data</h1>
             <Navbar className='mar-no' appearance="subtle" active={active} onSelect={setActive} />
 
             <div className='tab-stybg'>
 
 
 
-                {active === 'home' && <CustomTable />}
+                {active === 'home' && <CustomTable setOpen={setOpenDrawer} />}
                 {active === 'news' && <h1>news</h1>}
             </div>
+
+            <CustomeDrawer setOpen={setOpenDrawer} open={openDrawer} />
         </>
 
 
