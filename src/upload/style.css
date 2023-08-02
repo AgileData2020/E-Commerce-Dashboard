@@ -1,20 +1,74 @@
+body {
+    background-color: #f8fafd;
+    border-top: solid 4px #4f22ed;
+}
 
-.chekbox{
-    color:transparent !important ;
-   width: 50px !important;
-   height: 50px !important;
-   border-radius: 15px !important;
-   background-color: white;
+.header-bg {
+    background-color: #fff;
+    width: 100%;
+    padding: 4px 11px 4px 14px;
+    box-shadow: 0px 0px 5px 0px #f5f3f3;
+    display: flow-root;
 }
-.chekbox:hover{
-    background-color: white;
+
+.pd-13 {
+    padding-top: 13px;
 }
-.chekbox span{
-    font-size: 30px !important;
-    padding: 0 6px;
-    font-weight: 900;
+
+.togal-right {
+    float: right;
 }
-.main-div-checkbox{
-    background-image:linear-gradient(#a2b5f5,#ffffff ) !important;
+
+.ms-30 {
+    margin-right: 25px;
+}
+
+.flot-left {
+    float: left;
+}
+
+.profile-pic {
+    border-radius: 100%;
+    width: 40px;
+    height: 40px;
+    padding: 2px;
+    border: solid 1px #d0c5c5;
+}
+
+.profile-detail {
+    padding-top: 7px;
+    padding-left: 5px;
+}
+
+.blue-text {
+    color: #4f22ed;
+}
+
+.upload-data {
+    text-align: center;
+    width: 500px;
+    margin: auto;
+    padding-top: 5%;
+}
+
+.rs-uploader-draggable .rs-uploader-trigger-customize .rs-uploader-trigger-btn {
+
+    background: #fff0;
 
 }
+.upload-area{cursor: pointer; }
+.upload-text {
+    color: #808080;
+    padding: 0px;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.upload-para{ font-size: 12px;  color: #808080; }
+.rs-uploader-draggable .rs-uploader-trigger-customize .rs-uploader-trigger-btn {
+   
+    border: 0px dashed var(--rs-uploader-dnd-border);
+   
+}
+.text-center{ text-align: center;}
+.btn-side{ padding-left: 20px !important; padding-right: 20px !important;}

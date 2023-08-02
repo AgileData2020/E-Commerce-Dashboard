@@ -1,14 +1,18 @@
 
 import React from 'react'
-
+import './style.css'
+import Sidenavebar from '../component/sidenvbar'
 
 
 const Dashboard = () => {
     return (
 
+<>
+<Sidenavebar />
 
-        <h1>Dashboard</h1>
 
+</>
+       
 
     )
 }
