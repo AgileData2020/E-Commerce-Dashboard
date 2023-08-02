@@ -1,17 +1,12 @@
-import React from "react";
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-// import { UseApiCall } from '../../../api/fetch/UseApiCall';
-import { useDispatch } from "react-redux";
 
-import { Navigate } from "react-router-dom";
-// import { AUTH } from "../../../api/fetch/ApiEndpoint";
-
+import axiosInstance from "../../../api/axiosInstance";
 export const loginUser = createAsyncThunk("v1/login", async (payload) => {
 
-    // const response = await UseApiCall(AUTH.LOGIN, payload);
-    // return response;
-    // console.log(payload, 'payload')
-    return payload
+    const response = await axiosInstance.get('/products');
+    return response;
+
 })
 
 export const sliceLogin = createSlice({
@@ -19,7 +14,7 @@ export const sliceLogin = createSlice({
     initialState: {
         email: "",
         token: "",
-        uuid: "",
+
     },
     extraReducers(builder) {
         /* login reducer */

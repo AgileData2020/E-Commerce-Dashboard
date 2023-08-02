@@ -1,35 +1,54 @@
-import React from 'react'
-import 'rsuite/dist/rsuite.min.css';
-// import {  FlexboxGrid } from 'rsuite';
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
-    Container,
-    Header,
-    Content,
-    Footer,
+
     Form,
     ButtonToolbar,
     Button,
-    Navbar,
-    Panel,
+    Message,
     FlexboxGrid,
     Input,
-    InputGroup, IconButton, Divider,
+    InputGroup,
+    IconButton,
+    useToaster
+
 } from 'rsuite';
 import './style.css'
 import EyeIcon from '@rsuite/icons/legacy/Eye';
 import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
 import { TiArrowRightOutline } from 'react-icons/ti';
-
-
-const styles = {
-    width: 300
-};
+import HelperClass from '../../helper';
+import { loginUser } from '../../redux/slices/auth/login';
+import { handleIsLoading } from '../../redux/slices/common';
 const Containerr = () => {
-    const [visible, setVisible] = React.useState(false);
-
+    const [visible, setVisible] = useState(false);
+    const [userName, setUserName] = useState(null);
+    const [password, setPassword] = useState(null);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const toaster = useToaster();
     const handleChange = () => {
         setVisible(!visible);
     };
+
+    const handleSubmit = (event) => {
+        // Handle the form submission here
+        if (event) {
+            // navigate('/upload')
+
+            dispatch(loginUser({ type: '1' }));
+            dispatch(handleIsLoading(false));
+
+
+            toaster.push(<Message showIcon type={'success'} closable>
+                The message appears on the .
+            </Message>, { placement: 'topEnd', duration: 5000 })
+        } else {
+            console.log('Form submitted with values:', 5555555555555555555555);
+        }
+    };
+
     return (
         <>
 
@@ -51,8 +70,8 @@ const Containerr = () => {
 
                             <FlexboxGrid justify='center'>
 
-                                <FlexboxGrid.Item className="item text-center"  colspan={20}>
-                               
+                                <FlexboxGrid.Item className="item text-center" colspan={20}>
+
                                     <img src="hydro.png" alt="logo" />
                                 </FlexboxGrid.Item>
                                 <FlexboxGrid.Item className="item" colspan={20}>
@@ -63,32 +82,32 @@ const Containerr = () => {
                                 </FlexboxGrid.Item>
                                 <FlexboxGrid>
                                     <FlexboxGrid.Item >
-                                        <Form >
+                                        <Form model={HelperClass.loginSchema()} onSubmit={(e) => handleSubmit(e)}>
                                             <Form.Group>
-                                                <Form.Control className='input1' name="name" placeholder='Email' />
+                                                <Form.Control name={'username'} onChange={(e) => setUserName(e)} className='input1' placeholder='User name' />
                                             </Form.Group>
                                             <Form.Group>
-                                                <InputGroup inside style={styles}>
-                                                    <Input className='input1' type={visible ? 'text' : 'password'} />
+                                                {/* <InputGroup inside style={styles}>
+                                                    <Input name={'password'} className='input1' type={visible ? 'text' : 'password'} />
                                                     <InputGroup.Button className='input_password ' onClick={handleChange}>
                                                         {visible ? <EyeIcon /> : <EyeSlashIcon />}
                                                     </InputGroup.Button>
-                                                </InputGroup>
-                                                {/* <Form.Control className='input1' name="password" type="password" autoComplete="off" placeholder='Password' /> */}
+                                                </InputGroup> */}
+                                                <Form.Control className='input1' onChange={(e) => setPassword(e)} name="password" type="password" autoComplete="off" placeholder='Password' />
                                             </Form.Group>
                                             <Form.Group>
 
-                                            <ButtonToolbar>
-                                                    <IconButton className='submit_button text-center margin-auto'  icon={<TiArrowRightOutline />} circle />
-                                            </ButtonToolbar> 
-                                           
-                                                <FlexboxGrid  className='col-space' >
+                                                <ButtonToolbar type="submit">
+                                                    <IconButton type="submit" className='submit_button text-center margin-auto' icon={<TiArrowRightOutline />} circle />
+                                                </ButtonToolbar>
+
+                                                <FlexboxGrid className='col-space' >
                                                     <FlexboxGrid.Item className="item text-center" colspan={24}>
-                                                    Don’t have an account?   <Button className='signup-button' appearance="link" style={{ textDecoration: 'none' }}> Sign up</Button>
+                                                        Don’t have an account?   <Button type="submit" className='signup-button' appearance="link" style={{ textDecoration: 'none' }}> Sign up</Button>
                                                     </FlexboxGrid.Item>
                                                 </FlexboxGrid>
 
-                                               
+
                                             </Form.Group>
                                         </Form>
                                     </FlexboxGrid.Item>
@@ -96,8 +115,8 @@ const Containerr = () => {
                             </FlexboxGrid>
                         </FlexboxGrid.Item>
                     </FlexboxGrid>
-                </div>
-            </div>
+                </div >
+            </div >
 
 
 
