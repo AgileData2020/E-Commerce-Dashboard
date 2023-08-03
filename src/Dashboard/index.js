@@ -1,7 +1,6 @@
 
 import React from 'react'
-// import './style.css'
-
+import './style.css'
 import CustomTable from '../component/customTable'
 import { Nav, Tab } from 'rsuite';
 
@@ -27,7 +26,7 @@ const Dashboard = () => {
     return (
 
         <>
-            <h1 onClick={() => setOpenDrawer(!openDrawer)}>Rollup Data</h1>
+            <h1 onClick={() => setOpenDrawer(!openDrawer)}>Jan 2023</h1>
             <Navbar className='mar-no' appearance="subtle" active={active} onSelect={setActive} />
 
             <div className='tab-stybg'>
