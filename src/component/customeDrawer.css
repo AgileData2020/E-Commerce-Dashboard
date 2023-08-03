@@ -1,0 +1,10 @@
+.drawer-bdy{ margin-top: 38px;}
+.rs-drawer-body {
+    height: 100%;
+    overflow: auto;
+    padding: 34px 24px;
+    position: relative;
+}
+.img-100{ width: 100%;}
+.charting-heading{ font-size: 20px; font-weight: bold;}
+.charting-para{ color: #8e8e8e; margin-bottom: 30px; font-size: 13px;}

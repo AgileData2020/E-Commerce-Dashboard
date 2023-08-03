@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import './style.css'
 import { Container, Header, Sidebar, Sidenav, Content, Navbar } from 'rsuite';
 import AngleLeftIcon from '@rsuite/icons/legacy/AngleLeft';
@@ -55,7 +54,7 @@ const Layout = ({ children }) => {
                                 <Nav.Menu
                                     eventKey="1"
                                     trigger="hover"
-                                    title="Rollpu"
+                                    title="Jan 2023"
                                     icon={<PlusIcon />}
                                     placement="rightStart"
                                 >
@@ -67,7 +66,7 @@ const Layout = ({ children }) => {
                                 <Nav.Menu
                                     eventKey="2"
                                     trigger="hover"
-                                    title="Outlets"
+                                    title="Fab 2023"
                                     icon={<PlusIcon />}
                                     placement="rightStart"
                                 >
@@ -81,7 +80,7 @@ const Layout = ({ children }) => {
                                 <Nav.Menu
                                     eventKey="4"
                                     trigger="hover"
-                                    title="High Pressure"
+                                    title="Mar 2023"
                                     icon={<PlusIcon />}
                                     placement="rightStart"
                                 >
@@ -93,7 +92,7 @@ const Layout = ({ children }) => {
                                 <Nav.Menu
                                     eventKey="5"
                                     trigger="hover"
-                                    title="Sheet"
+                                    title="Apr 2023"
                                     icon={<PlusIcon />}
                                     placement="rightStart"
                                 >
@@ -104,7 +103,7 @@ const Layout = ({ children }) => {
                                 <Nav.Menu
                                     eventKey="6"
                                     trigger="hover"
-                                    title="Plant"
+                                    title="May 2023"
                                     icon={<PlusIcon />}
                                     placement="rightStart"
                                 >
@@ -116,7 +115,7 @@ const Layout = ({ children }) => {
                                 <Nav.Menu
                                     eventKey="7"
                                     trigger="hover"
-                                    title="Liquids"
+                                    title="Jan 2023"
                                     icon={<PlusIcon />}
                                     placement="rightStart"
                                 >
@@ -128,7 +127,7 @@ const Layout = ({ children }) => {
                                 <Nav.Menu
                                     eventKey="8"
                                     trigger="hover"
-                                    title="FlowCal"
+                                    title="July 2023"
                                     icon={<PlusIcon />}
                                     placement="rightStart"
                                 >
@@ -155,13 +154,21 @@ const Layout = ({ children }) => {
                             <div className='flot-left ms-30'>
                                 <Badge>
                                     <Button icon={<PlusIcon />}>
-                                        <img src="notiicatin.png" /></Button>
+                                        <img src="/notiicatin.png" /></Button>
                                 </Badge>
                             </div>
                             <div className='flot-left'>
-                                <img className='profile-pic' src="profile-img.jpg" alt="logo" />
+                                <img className='profile-pic' src="/profile-img.jpg" alt="logo" />
                             </div>
-                            <div className='flot-left profile-detail'> Hello, Andrew!</div>
+                            <div className='flot-left profile-detail'> 
+    <Nav>    
+    <Nav.Menu  title="Hello, Andrew!">
+      <Nav.Item >Profile</Nav.Item>
+      <Nav.Item >Checkout</Nav.Item>
+      <Nav.Item >Logout</Nav.Item>     
+    </Nav.Menu>
+  </Nav>
+    </div>
 
                         </div>
                     </header>

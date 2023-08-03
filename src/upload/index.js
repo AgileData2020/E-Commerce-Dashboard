@@ -5,6 +5,8 @@ import { Badge, Button } from 'rsuite';
 import { Uploader } from 'rsuite';
 import { Progress } from 'rsuite';
 
+import { Nav } from 'rsuite';
+
 
 
 
@@ -29,7 +31,18 @@ function Upload() {
     <div className='flot-left'>
         <img className='profile-pic' src="profile-img.jpg" alt="logo" />
     </div>
-    <div className='flot-left profile-detail'> Hello, Andrew!</div>
+
+
+
+    <div className='flot-left profile-detail'> 
+    <Nav>    
+    <Nav.Menu  title="Hello, Andrew!">
+      <Nav.Item >Profile</Nav.Item>
+      <Nav.Item >Checkout</Nav.Item>
+      <Nav.Item >Logout</Nav.Item>     
+    </Nav.Menu>
+  </Nav>
+    </div>
 
 </div>
 </header>
