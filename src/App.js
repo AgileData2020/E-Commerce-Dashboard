@@ -1,5 +1,5 @@
 
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 import { routesPath } from './Routes';
 import { useSelector, UseSelector } from 'react-redux/es/hooks/useSelector';
@@ -11,16 +11,26 @@ const Upload = lazy(() => import("./upload/index"));
 const AdminLayout = lazy(() => import("./component/layout/layout"))
 
 
-
 function App() {
 
+  const [currentPatth, setCurrentPath] = useState('/')
 
   const isLoading = useSelector(state => state)
 
-  console.log(isLoading)
-  let login = true;
+  useEffect(() => {
+
+  }, [currentPatth]);
+
+
+
+
   const ProtectedRoutes = ({ children, path }) => {
-    if (login) {
+
+    setCurrentPath(path);
+
+    if (isLoading.login.token) {
+
+
       return (
         <AdminLayout>
           {children}
@@ -28,7 +38,7 @@ function App() {
 
       )
     } else {
-      // console.log(path, 'path')
+
       return < Navigate to="/" replace={true} />
 
     }
@@ -38,34 +48,42 @@ function App() {
 
   return (
 
-    // <Loader />
-
-    <Suspense fallback={
+    isLoading.commonData?.isLoading ?
       <Loader />
-    }>
-      <Routes>
+      :
+      <Suspense fallback={
+        <Loader />
+      }>
+        <Routes>
 
 
-        <Route path={routesPath.Login} element={<Login />}></Route>
+          <Route path={routesPath.Login} element={<Login />}></Route>
 
 
-        <Route path={routesPath.UploadData} element={<Upload />}></Route>
+          <Route path={routesPath.UploadData} element={
+            <ProtectedRoutes path="/upload">
 
-
-        <Route path={routesPath.Dashboard}
-          element={
-            <ProtectedRoutes path="/">
-
-              <Dashboard />
+              <Upload />
 
             </ProtectedRoutes>
 
-          }>
+          }></Route>
 
-        </Route>
-      </Routes>
 
-    </Suspense>
+          <Route path={routesPath.Dashboard}
+            element={
+              <ProtectedRoutes path="/Dashboard">
+
+                <Dashboard />
+
+              </ProtectedRoutes>
+
+            }>
+
+          </Route>
+        </Routes>
+
+      </Suspense>
   );
 }
 

@@ -10,50 +10,33 @@ import { Progress } from 'rsuite';
 
 function Upload() {
   const navigate = useNavigate();
+  const [selectedFile, setSelectedFile] = useState(null);
+  const handleFileSelect = (fileList) => {
+
+    console.log(fileList[0])
+    // setSelectedFile(event.target.files[0]);
+
+  }
   return (
     <>
- <header className='header-bg'>
 
+      <main>
+        <div className='upload-data'>
+          <Uploader className='upload-area' action='http://172.16.0.182:8000/file/upload/{file_type}' fileList={selectedFile} onChange={handleFileSelect} draggable>
+            <div style={{ alignItems: 'center', justifyContent: 'center' }}>
+              <img className='' src="uload-icon.png" alt="logo" />
+              <div className='upload-text'>Upload Data File</div>
+              <span>or <span className='blue-text'>browse</span>  your file to upload</span>
+              <p className='upload-para'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
+            </div>
+          </Uploader>
 
-<div className='togal-button'>
-    {/* <NavToggle expand={expand} onChange={() => setExpand(!expand)} /> */}
-</div>
+        </div>
+        <div className='text-center' style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <Button appearance="primary " className='btn-side'>Done</Button>
+        </div >
 
-<div className='togal-right pd-13'>
-    <div className='flot-left ms-30'>
-        <Badge>
-            <Button >
-                <img src="notiicatin.png" /></Button>
-        </Badge>
-    </div>
-    <div className='flot-left'>
-        <img className='profile-pic' src="profile-img.jpg" alt="logo" />
-    </div>
-    <div className='flot-left profile-detail'> Hello, Andrew!</div>
-
-</div>
-</header>
-<main>
-  <div className='upload-data'>
-<Uploader className='upload-area'  action="//jsonplaceholder.typicode.com/posts/" draggable>
-      <div style={{  alignItems: 'center', justifyContent: 'center'  }}>
-      <img className='' src="uload-icon.png" alt="logo" />
-        <div className='upload-text'>Upload Data File</div>
-        <span>or <span className='blue-text'>browse</span>  your file to upload</span>
-        <p className='upload-para'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,</p>
-      </div>
-    </Uploader>
-    <div className='progress'>
-  
-    <Progress.Line percent={100} status="success" />
-
-    </div>
-    </div>
-<div className='text-center'  style={{  alignItems: 'center', justifyContent: 'center'  }}>
-<Button appearance="primary " className='btn-side'>Done</Button>
-</div >
-   
-    </main>
+      </main>
     </>
   )
 }

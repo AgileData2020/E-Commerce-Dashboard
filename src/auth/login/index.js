@@ -32,20 +32,32 @@ const Containerr = () => {
         setVisible(!visible);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         // Handle the form submission here
         if (event) {
-            // navigate('/upload')
+            dispatch(handleIsLoading(true))
+            let payload = { 'username': userName, 'password': password }
 
-            dispatch(loginUser({ type: '1' }));
-            dispatch(handleIsLoading(false));
+            try {
+                await dispatch(loginUser(payload)).unwrap().then((result) => {
 
 
-            toaster.push(<Message showIcon type={'success'} closable>
-                The message appears on the .
-            </Message>, { placement: 'topEnd', duration: 5000 })
-        } else {
-            console.log('Form submitted with values:', 5555555555555555555555);
+                    dispatch(handleIsLoading(false));
+                    navigate('/upload');
+                    toaster.push(<Message showIcon type={'success'} closable>
+                        User login successfully
+                    </Message>, { placement: 'topEnd', duration: 5000 })
+                });
+
+
+                // handle result here
+            } catch (rejectedValueOrSerializedError) {
+                dispatch(handleIsLoading(false))
+                // handle error here
+            }
+
+
+
         }
     };
 
@@ -103,7 +115,7 @@ const Containerr = () => {
 
                                                 <FlexboxGrid className='col-space' >
                                                     <FlexboxGrid.Item className="item text-center" colspan={24}>
-                                                        Don’t have an account?   <Button type="submit" className='signup-button' appearance="link" style={{ textDecoration: 'none' }}> Sign up</Button>
+                                                        Don’t have an account?   <Button className='signup-button' appearance="link" style={{ textDecoration: 'none' }}> Sign up</Button>
                                                     </FlexboxGrid.Item>
                                                 </FlexboxGrid>
 
