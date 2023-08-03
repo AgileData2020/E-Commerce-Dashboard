@@ -27,8 +27,10 @@ function App() {
   const ProtectedRoutes = ({ children, path }) => {
 
     setCurrentPath(path);
+    let login = true;
 
-    if (isLoading.login.token) {
+    // isLoading.login.token
+    if (login) {
 
 
       return (

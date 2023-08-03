@@ -58,18 +58,25 @@ export default function CustomTable() {
       title: 'address',
     },
   ];
+
+  const handleRowClick = (rowData) => {
+    // Access the ID of the clicked row's data object
+    const { id } = rowData;
+    console.log('Clicked ID:', rowData);
+    // Now you can use the ID or perform any other actions
+  };
   return (
 
 
     <Table
       virtualized
-
+      onRowClick={handleRowClick}
       data={jsonData}
     >
       {columns.map((column) => (
         <Table.Column key={column.name} flexGrow={1} fixed={column.name == "id" && true} >
           <Table.HeaderCell>{column.title} {column.title === 'ID' && '🔏'} </Table.HeaderCell>
-          <Table.Cell dataKey={column.name} onClick={() => alert(column.name)} />
+          <Table.Cell dataKey={column.name} />
         </Table.Column>
       ))}
     </Table>
