@@ -72,8 +72,10 @@ const Containerr = () => {
                             <div className="the_page">
                                 <img src="bgimg.png" alt="logo" />
                                 <FlexboxGrid style={{ marginLeft: '15px' }}>
-                                    <FlexboxGrid.Item className="item" colspan={20}><h4 style={{ color: 'white' }}>Welcome to Hydrocarbon</h4></FlexboxGrid.Item>
-                                    <FlexboxGrid.Item colspan={16} ><p className='the_page_text'>The intelligence client Project admin board </p></FlexboxGrid.Item>
+                                    <FlexboxGrid.Item className="item" colspan={20}>
+                                        <div className='login-headign' style={{ color: 'white' }}>Welcome to Hydrocarbon</div>
+                                        </FlexboxGrid.Item>
+                                    <FlexboxGrid.Item colspan={16} ><div className='the_page_text'>The intelligence client Project admin board </div></FlexboxGrid.Item>
                                 </FlexboxGrid>
                             </div>
                         </FlexboxGrid.Item>

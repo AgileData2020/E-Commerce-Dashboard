@@ -1,5 +1,6 @@
-import { Table } from 'rsuite';
+import { IconButton, Table } from 'rsuite';
 import Button from 'rsuite/Button';
+import AdvancedAnalyticsIcon from '@rsuite/icons/AdvancedAnalytics';
 
 const { Column, HeaderCell, Cell } = Table;
 
@@ -94,8 +95,8 @@ export default function CustomTable({ setOpen }) {
         <Table.HeaderCell>Action</Table.HeaderCell>
         <Table.Cell>
           {(rowData) => (
-            <Button onClick={() => chartingView(rowData)} appearance="primary">
-              Action
+            <Button className='btn-non' onClick={() => chartingView(rowData)} >
+            <IconButton type="submit" className='' icon={<AdvancedAnalyticsIcon />}  />
             </Button>
           )}
         </Table.Cell>

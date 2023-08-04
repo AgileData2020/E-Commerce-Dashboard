@@ -8,3 +8,12 @@
 .img-100{ width: 100%;}
 .charting-heading{ font-size: 20px; font-weight: bold;}
 .charting-para{ color: #8e8e8e; margin-bottom: 30px; font-size: 13px;}
+.btn-non {
+    background: transparent;
+    padding: 0px;
+    margin: 0px;
+}
+.rs-btn-icon.rs-btn {
+    /* line-height: 16px; */
+    padding: 1px;
+}
