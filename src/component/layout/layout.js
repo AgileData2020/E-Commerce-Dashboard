@@ -8,6 +8,7 @@ import hydrocarbonIconMobile from '../../assets/img/hydro-mobile.png'
 import PlusIcon from '@rsuite/icons/Plus';
 import { Badge, Button } from 'rsuite';
 import { Nav, Tab } from 'rsuite';
+import { useNavigate } from 'react-router-dom';
 const headerStyles = {
     padding: 2,
     fontSize: 16,
@@ -31,9 +32,16 @@ const NavToggle = ({ expand, onChange }) => {
 
     );
 };
+
+
+
 const Layout = ({ children }) => {
     const [expand, setExpand] = useState(true);
-
+    const navigate = useNavigate();
+    const logoutUser = () => {
+        localStorage.clear();
+        navigate('/');
+    }
     return (
         <div className="show-fake-browser sidebar-page">
             <Container>
@@ -160,15 +168,15 @@ const Layout = ({ children }) => {
                             <div className='flot-left'>
                                 <img className='profile-pic' src="/profile-img.jpg" alt="logo" />
                             </div>
-                            <div className='flot-left profile-detail'> 
-    <Nav>    
-    <Nav.Menu  title="Hello, Andrew!">
-      <Nav.Item >Profile</Nav.Item>
-      <Nav.Item >Checkout</Nav.Item>
-      <Nav.Item >Logout</Nav.Item>     
-    </Nav.Menu>
-  </Nav>
-    </div>
+                            <div className='flot-left profile-detail'>
+                                <Nav>
+                                    <Nav.Menu title="Hello, Andrew!">
+                                        <Nav.Item >Profile</Nav.Item>
+                                        <Nav.Item >Checkout</Nav.Item>
+                                        <Nav.Item onClick={() => logoutUser()}>Logout</Nav.Item>
+                                    </Nav.Menu>
+                                </Nav>
+                            </div>
 
                         </div>
                     </header>
