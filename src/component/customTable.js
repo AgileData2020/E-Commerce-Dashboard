@@ -1,5 +1,7 @@
 import { IconButton, Table } from 'rsuite';
 import Button from 'rsuite/Button';
+import AdvancedAnalyticsIcon from '@rsuite/icons/AdvancedAnalytics';
+
 import { useState } from 'react';
 const { Column, HeaderCell, Cell } = Table;
 
@@ -2070,11 +2072,11 @@ export default function CustomTable({ setOpen }) {
 
     <Table
       virtualized
-      height={420}
+      height={450}
       onRowClick={handleRowClick}
       bordered
       cellBordered
-      autoHeight
+      // autoHeight={'100vh'}
       affixHeader
       affixHorizontalScrollbar
       data={flow_cal_raw_data}

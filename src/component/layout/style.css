@@ -1,6 +1,8 @@
 .sidenav-bar {
     background-color: #fff;
-    height: 98vh;
+    /* height: 98vh; */
+    /* position: sticky; */
+    top: 0;
 }
 
 main {
@@ -79,7 +81,7 @@ main {
 nav.rs-sidenav.rs-sidenav-subtle.rs-sidenav-collapse-in {
     background: #fff;
     overflow: auto;
-    height: 95%;
+    height: 80vh;
 }
 
 .rs-table-cell-header .rs-table-cell-content {
@@ -125,4 +127,12 @@ svg.rs-sidenav-item-icon.rs-icon {
 }
 ul#menu-\:rd\: {
     width: 137px;
+}
+
+.side-fixed{ position: sticky; top: 0;}
+.top-line{ background-color: #2b40d8; position: fixed; width: 100%; height: 5px; z-index: 99;}
+aside.sidenav-bar.rs-sidebar.rs-sidebar-collapse {
+    position: sticky;
+    top: 0;
+    height: 100vh;
 }

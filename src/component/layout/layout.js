@@ -44,8 +44,10 @@ const Layout = ({ children }) => {
     }
     return (
         <div className="show-fake-browser sidebar-page">
+            <div className='top-line'></div>
             <Container>
-                <Sidebar className='sidenav-bar' style={{ display: 'flex', flexDirection: 'column' }} width={expand ? 260 : 56} collapsible              >
+                <Sidebar className='sidenav-bar'  width={expand ? 260 : 56} collapsible              >
+                 <div className=' side-fixed'>
                     <Sidenav.Header>
                         <div style={headerStyles}>
 
@@ -147,7 +149,7 @@ const Layout = ({ children }) => {
                             </Nav>
                         </Sidenav.Body>
                     </Sidenav>
-
+                    </div>
                 </Sidebar>
 
                 <Container>

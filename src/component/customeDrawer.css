@@ -17,3 +17,8 @@
     /* line-height: 16px; */
     padding: 1px;
 }
+
+.drop-up {
+    position: absolute !important;
+    z-index: 999999999 !important;
+}
