@@ -3,7 +3,7 @@ import Button from 'rsuite/Button';
 import { useEffect, useState } from 'react';
 
 
-export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, active }) {
+export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, active, }) {
 
 
   const [sortColumn, setSortColumn] = useState();
@@ -11,6 +11,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
   const [loading, setLoading] = useState(false);
   const [tableColumnData, setTableColumnData] = useState([]);
   const [tableContent, setTableContent] = useState([]);
+
 
   const handleRowClick = (rowData) => {
 
@@ -67,7 +68,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
     <Table
       virtualized
-      height={800}
+      height={500}
       onRowClick={handleRowClick}
       bordered
       cellBordered
@@ -75,12 +76,12 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
       affixHeader
       affixHorizontalScrollbar
       data={tableBodyData}
-      loading={!tableBodyData ? true : false}
+      loading={tableHeaderData.length === 0 ? true : false}
 
     >
       {tableHeaderData.map((column, index) => (
         <>
-          <Table.Column key={column.Title} flexGrow={1} resizable>
+          <Table.Column key={column.Title + index} style={{ width: '200px' }} flexGrow={1} resizable>
             <Table.HeaderCell >{column.Title}  </Table.HeaderCell>
             <Table.Cell dataKey={column.data_key} />
             {/* <Cell>{column.name}</Cell> */}

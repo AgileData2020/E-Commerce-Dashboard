@@ -7,43 +7,65 @@ import { Nav, Tab } from 'rsuite';
 import axiosInstance from '../api/axiosInstance';
 import CustomeDrawer from '../component/customeDrawer';
 import { sheetEndPoint } from '../api/endPoints';
-import { handleIsLoading } from '../redux/slices/common';
+import HelperClass from '../helper';
+import { FlexboxGrid, Col } from 'rsuite';
+import Loader from '../component/Loader/loader';
 const Dashboard = () => {
 
     const [active, setActive] = useState('FlowCal Raw');
     const [openDrawer, setOpenDrawer] = useState(false);
     const [tableHeaderData, setTableHeaderData] = useState([]);
     const [tableBodyData, setTableBodyData] = useState([]);
+    const [isLoading, setLoading] = useState(false);
+    const [multiTableData, setMultiTableData] = useState([]);
 
     const Navbar = ({ active, onSelect, ...props }) => {
         return (
             <Nav {...props} activeKey={active} onSelect={onSelect} style={{ marginBottom: 50 }}>
-                <Nav.Item eventKey="FlowCal Raw" >
-                    Rollup
+                <Nav.Item eventKey="FlowCal Raw">
+                    FlowCal Raw
                 </Nav.Item>
-                <Nav.Item eventKey="news">Inlets</Nav.Item>
-                <Nav.Item eventKey="solutions">Outlets </Nav.Item>
-                <Nav.Item eventKey="products">Compressor Stations</Nav.Item>
-                <Nav.Item eventKey="about">High Pressure</Nav.Item>
+
+                <Nav.Item eventKey="Model CS">Model CS </Nav.Item>
+                <Nav.Item eventKey="Model Output">Model Output</Nav.Item>
+                <Nav.Item eventKey="Rollup">Rollup</Nav.Item>
+                <Nav.Item eventKey="Liquids">Liquids</Nav.Item>
+                <Nav.Item eventKey='Plant'>Plant</Nav.Item>
+                <Nav.Item eventKey='High Pressure'>High Pressure</Nav.Item>
+                <Nav.Item eventKey='Compressor Stations'>Compressor Stations</Nav.Item>
+                <Nav.Item eventKey='Outlets'>Outlets</Nav.Item>
+                <Nav.Item eventKey='Inlets'>Inlets</Nav.Item>
+
             </Nav>
         );
     };
 
     const getSheetData = async () => {
-        // dispatch(handleIsLoading(true))
+        setLoading(true)
         try {
             const response = await axiosInstance.get(sheetEndPoint.GET_SHEET + active);
             if (response.status === 200) {
-                dispatch(handleIsLoading(false))
-                const { flow_cal_raw_headers, flow_cal_raw_data } = response.data;
+                setLoading(false)
+                if (active === "FlowCal Raw") {
 
-                setTableHeaderData(flow_cal_raw_headers);
-                setTableBodyData(flow_cal_raw_data);
+                    const { headers, data } = response.data;
+
+                    setTableHeaderData(headers);
+                    setTableBodyData(data);
+
+
+                } else {
+
+                    setMultiTableData(HelperClass.sheetDataMaker(active, response.data))
+                }
+
             }
 
 
         } catch (error) {
-            dispatch(handleIsLoading(false))
+            setLoading(false)
+            console.log(error, 'error in dashboard component')
+
         }
     }
 
@@ -55,18 +77,61 @@ const Dashboard = () => {
     return (
 
         <>
-            <h1 onClick={() => setOpenDrawer(!openDrawer)}>Jan 2023</h1>
+            <h1>{active}</h1>
             <Navbar className='mar-no' appearance="subtle" active={active} onSelect={setActive} />
 
-            <div className='tab-stybg'>
+
+
+            {
+                isLoading ?
+                    <Loader />
+                    :
+
+                    <div className="show-grid">
+
+                        {
+                            active === "FlowCal Raw" ?
+                                <div className='tab-stybg'>
+                                    <h5>FlowCal Raw</h5>
+                                    <CustomTable active={active} tableData={multiTableData} tableHeaderData={tableHeaderData} tableBodyData={tableBodyData} setOpen={setOpenDrawer} />
+                                </div>
+                                :
+
+                                <FlexboxGrid justify="center" >
+                                    {
+
+
+                                        multiTableData.length > 0 &&
+                                        multiTableData?.map((item, index) =>
+                                            <FlexboxGrid.Item as={Col} colspan={12} md={12}>
+
+
+                                                <div className='tab-stybg' style={{ marginTop: '5px' }}>
+
+
+                                                    <h5>{item['table_' + parseInt(index + 1)]?.table_label}</h5>
+
+                                                    <CustomTable key={item['table_' + parseInt(index + 1)]?.table_label} active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers} tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
+
+                                                </div>
+                                            </FlexboxGrid.Item>
+
+                                        )
 
 
 
-                {<CustomTable active={active} tableHeaderData={tableHeaderData} tableBodyData={tableBodyData} setOpen={setOpenDrawer} />}
-                {active === 'news' && <h1>news</h1>}
-            </div>
+                                    }
 
-            <CustomeDrawer setOpen={setOpenDrawer} open={openDrawer} />
+
+                                </FlexboxGrid>
+
+
+                        }
+                    </div>
+            }
+
+
+            {/* <CustomeDrawer setOpen={setOpenDrawer} open={openDrawer} /> */}
         </>
 
 
