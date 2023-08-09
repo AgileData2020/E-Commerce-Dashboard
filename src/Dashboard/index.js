@@ -65,7 +65,6 @@ const Dashboard = () => {
 
             }
 
-
         } catch (error) {
             setLoading(false)
             console.log(error, 'error in dashboard component')
