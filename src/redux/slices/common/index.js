@@ -7,8 +7,6 @@ export const sliceCommon = createSlice({
     },
     reducers: {
         handleIsLoading: (state, action) => {
-
-            console.log('assssssssssssssssssssssssssssssssssssssssssssssssssssssssssss')
             state.isLoading = action.payload
         }
     }

@@ -27,7 +27,7 @@ const LightWeight = () => {
 
             [
                 {
-                    time: "2023-07-27", value: 3.353
+                    time: new Date("2023-07-27"), value: 3.353
 
                 },
                 {
