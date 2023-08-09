@@ -82,7 +82,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
       {tableHeaderData.map((column, index) => (
         <>
           <Table.Column key={column.Title + index} style={{ width: '200px' }} flexGrow={1} resizable>
-            <Table.HeaderCell >{column.Title}  </Table.HeaderCell>
+            <Table.HeaderCell >{column.Title}   </Table.HeaderCell>
             <Table.Cell dataKey={column.data_key} />
             {/* <Cell>{column.name}</Cell> */}
           </Table.Column>

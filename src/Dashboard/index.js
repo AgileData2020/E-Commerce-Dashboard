@@ -9,10 +9,14 @@ import CustomeDrawer from '../component/customeDrawer';
 import { sheetEndPoint } from '../api/endPoints';
 import HelperClass from '../helper';
 import { FlexboxGrid, Col } from 'rsuite';
+import { useSelector } from 'react-redux';
 import Loader from '../component/Loader/loader';
+import { setSheetActiveTab } from '../redux/slices/common';
 const Dashboard = () => {
-
-    const [active, setActive] = useState('FlowCal Raw');
+    const dispatch = useDispatch();
+    const activeTabs = useSelector(state => state.commonData.sheetActiveTab)
+    console.log(activeTabs, 'activeTabs')
+    const [active, setActive] = useState(activeTabs);
     const [openDrawer, setOpenDrawer] = useState(false);
     const [tableHeaderData, setTableHeaderData] = useState([]);
     const [tableBodyData, setTableBodyData] = useState([]);
@@ -73,12 +77,19 @@ const Dashboard = () => {
         getSheetData();
     }, [active]);
 
-    const dispatch = useDispatch();
+
+
+    const setActiveTabs = (e) => {
+
+
+        dispatch(setSheetActiveTab(e))
+
+    }
     return (
 
         <>
             <h1>{active}</h1>
-            <Navbar className='mar-no' appearance="subtle" active={active} onSelect={setActive} />
+            <Navbar className='mar-no' appearance="subtle" active={active} onSelect={setActiveTabs} />
 
 
 
@@ -103,7 +114,7 @@ const Dashboard = () => {
 
                                         multiTableData.length > 0 &&
                                         multiTableData?.map((item, index) =>
-                                            <FlexboxGrid.Item as={Col} colspan={12} md={12}>
+                                            <FlexboxGrid.Item as={Col} colspan={12} md={24}>
 
 
                                                 <div className='tab-stybg' style={{ marginTop: '5px' }}>

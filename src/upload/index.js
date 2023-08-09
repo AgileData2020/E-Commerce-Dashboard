@@ -31,7 +31,8 @@ function Upload() {
 
             }}
             onError={(error) => {
-              toaster.push(<Message type="error">Upload failed</Message>);
+
+              toaster.push(<Message type="error">{error.response.detail}</Message>);
 
             }}
             draggable>
