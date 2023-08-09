@@ -113,7 +113,7 @@ const Dashboard = () => {
 
                                         multiTableData.length > 0 &&
                                         multiTableData?.map((item, index) =>
-                                            <FlexboxGrid.Item as={Col} colspan={12} md={24}>
+                                            <FlexboxGrid.Item as={Col} colspan={24} md={24}>
 
 
                                                 <div className='tab-stybg' style={{ marginTop: '5px' }}>
