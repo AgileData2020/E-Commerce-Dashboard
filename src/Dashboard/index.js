@@ -10,7 +10,7 @@ import { sheetEndPoint } from '../api/endPoints';
 import { handleIsLoading } from '../redux/slices/common';
 const Dashboard = () => {
 
-    const [active, setActive] = useState('Rollup');
+    const [active, setActive] = useState('FlowCal Raw');
     const [openDrawer, setOpenDrawer] = useState(false);
     const [tableHeaderData, setTableHeaderData] = useState([]);
     const [tableBodyData, setTableBodyData] = useState([]);
@@ -18,7 +18,7 @@ const Dashboard = () => {
     const Navbar = ({ active, onSelect, ...props }) => {
         return (
             <Nav {...props} activeKey={active} onSelect={onSelect} style={{ marginBottom: 50 }}>
-                <Nav.Item eventKey="Rollup" >
+                <Nav.Item eventKey="FlowCal Raw" >
                     Rollup
                 </Nav.Item>
                 <Nav.Item eventKey="news">Inlets</Nav.Item>
