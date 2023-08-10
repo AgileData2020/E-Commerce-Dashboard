@@ -1,18 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 export const sliceCommon = createSlice({
     name: 'commonData',
     initialState: {
-        isLoading: false
+        isLoading: false,
+        sheetActiveTab: 'FlowCal Raw'
     },
     reducers: {
         handleIsLoading: (state, action) => {
-
-            console.log('assssssssssssssssssssssssssssssssssssssssssssssssssssssssssss')
             state.isLoading = action.payload
+        },
+
+        setSheetActiveTab: (state, action) => {
+            state.sheetActiveTab = action.payload
         }
     }
 })
-export const { handleIsLoading } = sliceCommon.actions
+export const { handleIsLoading, setSheetActiveTab } = sliceCommon.actions
 
 export default sliceCommon.reducer;

@@ -8,8 +8,7 @@ import {
     Button,
     Message,
     FlexboxGrid,
-    Input,
-    InputGroup,
+
     IconButton,
     useToaster
 
@@ -40,20 +39,21 @@ const Containerr = () => {
 
             try {
                 await dispatch(loginUser(payload)).unwrap().then((result) => {
-
-
                     dispatch(handleIsLoading(false));
                     navigate('/upload');
                     toaster.push(<Message showIcon type={'success'} closable>
                         User login successfully
                     </Message>, { placement: 'topEnd', duration: 5000 })
                 });
-
-
-                // handle result here
             } catch (rejectedValueOrSerializedError) {
                 dispatch(handleIsLoading(false))
-                // handle error here
+                if (rejectedValueOrSerializedError.response.status === 401) {
+
+                    toaster.push(<Message showIcon type={'error'} closable>
+                        {rejectedValueOrSerializedError?.response?.data?.detail}
+                    </Message>, { placement: 'topEnd', duration: 5000 })
+                }
+
             }
 
 
