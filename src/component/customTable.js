@@ -1,7 +1,7 @@
 import { IconButton, Table } from 'rsuite';
 import Button from 'rsuite/Button';
 import AdvancedAnalyticsIcon from '@rsuite/icons/AdvancedAnalytics';
-
+import { Dropdown } from 'rsuite';
 import { useState } from 'react';
 const { Column, HeaderCell, Cell } = Table;
 
@@ -2094,14 +2094,32 @@ export default function CustomTable({ setOpen }) {
         </>
       ))}
 
-      <Table.Column width={100} fixed="right">
+      <Table.Column class="table-ss"  fixed="right">
         <Table.HeaderCell>Action</Table.HeaderCell>
-        <Table.Cell>
-          {(rowData) => (
+        <Table.Cell class="table-ss">
+
+        <div className="dropdown ">
+  <span>Mouse over me</span>
+  <div className="dropdown-content">
+  <p>Hello World!</p>
+   <p>Hello World!</p>
+  </div>
+</div>
+          {/* <Dropdown title="GitHub">
+          
+            <Dropdown.Item>Your profile</Dropdown.Item>
+            <Dropdown.Item>Your stars</Dropdown.Item>
+            <Dropdown.Item>Your Gists</Dropdown.Item>           
+            <Dropdown.Item>Help</Dropdown.Item>
+            <Dropdown.Item>Settings</Dropdown.Item>
+            <Dropdown.Item divider />
+            <Dropdown.Item>Sign out</Dropdown.Item>
+          </Dropdown> */}
+          {/* {(rowData) => (
             <Button className='btn-non' onClick={() => chartingView(rowData)} >
             <IconButton type="submit" className='' icon={<AdvancedAnalyticsIcon />}  />
             </Button>
-          )}
+          )} */}
         </Table.Cell>
       </Table.Column>
     </Table>
