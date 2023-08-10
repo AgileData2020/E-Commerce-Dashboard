@@ -98,7 +98,7 @@ const Dashboard = () => {
                     <Loader />
                     :
 
-                    <div className="show-grid">
+                    <div className="show-grid-custom">
 
                         {
                             active === "FlowCal Raw" ?
