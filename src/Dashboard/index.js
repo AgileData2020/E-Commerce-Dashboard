@@ -12,6 +12,7 @@ import { FlexboxGrid, Col } from 'rsuite';
 import { useSelector } from 'react-redux';
 import Loader from '../component/Loader/loader';
 import { setSheetActiveTab } from '../redux/slices/common';
+
 const Dashboard = () => {
     const dispatch = useDispatch();
     const activeTabs = useSelector(state => state.commonData.sheetActiveTab)
@@ -101,9 +102,11 @@ const Dashboard = () => {
 
                         {
                             active === "FlowCal Raw" ?
+
                                 <div className='tab-stybg'>
                                     <h5>FlowCal Raw</h5>
                                     <CustomTable active={active} tableData={multiTableData} tableHeaderData={tableHeaderData} tableBodyData={tableBodyData} setOpen={setOpenDrawer} />
+
                                 </div>
                                 :
 
@@ -116,7 +119,7 @@ const Dashboard = () => {
                                             <FlexboxGrid.Item as={Col} colspan={24} md={24}>
 
 
-                                                <div className='tab-stybg' style={{ marginTop: '5px' }}>
+                                                <div className='tab-stybg' style={{ marginTop: '5px', }}>
 
 
                                                     <h5>{item['table_' + parseInt(index + 1)]?.table_label}</h5>

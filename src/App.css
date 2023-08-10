@@ -36,3 +36,6 @@
     transform: rotate(360deg);
   }
 }
+.dx-datagrid .dx-row > td {
+  border: 1px solid #ccc !important;
+}

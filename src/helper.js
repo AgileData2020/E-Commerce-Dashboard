@@ -36,7 +36,36 @@ const HelperClass = {
         }
     },
 
+    getTableColumns: (tableHeaderData) => {
 
+
+
+        let tableColumnHeaders = [];
+
+        tableHeaderData?.forEach(element => {
+            tableColumnHeaders.push(element.data_key)
+        });
+
+        return tableColumnHeaders;
+    },
+
+    tableHeightDecider: (dataLength) => {
+
+
+        if (dataLength.length >= 100) {
+
+            return 500;
+        } else if (dataLength.length <= 4) {
+            return 200;
+        } else if (dataLength.length == 1) {
+
+            return 100
+        } else {
+
+            return 400;
+        }
+
+    },
 };
 
 // Export the object

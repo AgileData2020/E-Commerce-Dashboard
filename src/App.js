@@ -1,4 +1,5 @@
 
+import 'devextreme/dist/css/dx.light.css';
 import { lazy, Suspense, useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 import { routesPath } from './Routes';
