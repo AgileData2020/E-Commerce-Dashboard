@@ -79,7 +79,7 @@ const LightWeight = () => {
         // dataset = dataset.filter((data, index) => index === 0 || data.time !== dataset[index - 1].time);
         // Create a new chart instance
         const chart = createChart(chartContainerRef.current, {
-            width: 400,
+          
             height: 400,
         });
 

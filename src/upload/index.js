@@ -36,7 +36,7 @@ function Upload() {
 
             }}
             draggable>
-            <div style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <div className='mt-20p' style={{ alignItems: 'center', justifyContent: 'center' }}>
               <img className='' src="uload-icon.png" alt="logo" />
               <div className='upload-text'>Upload Data File</div>
               <span>or <span className='blue-text'>browse</span>  your file to upload</span>

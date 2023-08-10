@@ -8,3 +8,37 @@
 .img-100{ width: 100%;}
 .charting-heading{ font-size: 20px; font-weight: bold;}
 .charting-para{ color: #8e8e8e; margin-bottom: 30px; font-size: 13px;}
+.btn-non {
+    background: transparent;
+    padding: 0px;
+    margin: 0px;
+}
+.rs-btn-icon.rs-btn {
+    /* line-height: 16px; */
+    padding: 1px;
+}
+
+.drop-up {
+    position: absolute !important;
+    z-index: 999999999 !important;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  .table-ss{ position: absolute;}

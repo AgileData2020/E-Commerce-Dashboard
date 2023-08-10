@@ -1,4 +1,4 @@
-import { Table } from 'rsuite';
+import { IconButton, Table } from 'rsuite';
 import Button from 'rsuite/Button';
 import { useEffect, useState } from 'react';
 import DataGrid, { Column, Pager, Paging, Scrolling, Sorting, LoadPanel, SearchPanel } from 'devextreme-react/data-grid';
@@ -24,33 +24,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
 
     <>
-      {/* <Table
-          virtualized
-          height={500}
-          onRowClick={handleRowClick}
-          bordered
-          cellBordered
-          // autoHeight
-          affixHeader
-          affixHorizontalScrollbar
-          data={tableBodyData}
-          loading={tableHeaderData.length === 0 ? true : false}
 
-        >
-          {tableHeaderData.map((column, index) => (
-            <>
-              <Table.Column key={column.Title + index} style={{ width: '200px' }} flexGrow={1} resizable>
-                <Table.HeaderCell >{column.Title}   </Table.HeaderCell>
-                <Table.Cell dataKey={column.data_key} />
-              
-              </Table.Column>
-
-
-            </>
-          ))}
-
-          
-        </Table> */}
 
 
       <DataGrid
