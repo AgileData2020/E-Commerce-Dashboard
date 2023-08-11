@@ -174,7 +174,7 @@ const Layout = ({ children }) => {
                                 </Badge> */}
                             </div>
                             <div className='flot-left'>
-                                <img className='profile-pic' src="/profile-img.jpg" alt="logo" />
+                                <img className='profile-pic' src="/profile-circle.png" alt="logo" />
                             </div>
                             <div className='flot-left profile-detail'>
                                 <Nav>
