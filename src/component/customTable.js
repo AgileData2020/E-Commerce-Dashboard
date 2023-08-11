@@ -2,6 +2,7 @@ import { IconButton, Table } from 'rsuite';
 import Button from 'rsuite/Button';
 import { useEffect, useState } from 'react';
 import DataGrid, { Column, Pager, Paging, Scrolling, Sorting, LoadPanel, SearchPanel } from 'devextreme-react/data-grid';
+import jwt_decode from "jwt-decode";
 import HelperClass from '../helper';
 export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, active, }) {
 
@@ -16,7 +17,9 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
     // Now you can use the ID or perform any other actions
   };
+  var decoded = jwt_decode(localStorage.getItem('token'));
 
+  console.log(decoded.first_name);
   const chartingView = (rowData) => {
     // setOpen(true)
   }

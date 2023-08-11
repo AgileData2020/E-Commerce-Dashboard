@@ -25,8 +25,10 @@ export const loginUser = createAsyncThunk("v1/login", async (payload, { rejectWi
 export const sliceLogin = createSlice({
     name: 'login',
     initialState: {
-
-        token: "",
+        user_id: '',
+        first_name: '',
+        last_name: '',
+        token: '',
 
     },
     extraReducers(builder) {
@@ -36,8 +38,12 @@ export const sliceLogin = createSlice({
         })
             .addCase(loginUser.fulfilled, (state, action) => {
 
-                state.token = action.payload
-                console.log(action, 'actionactionactionaction')
+                state.token = action.payload;
+                var decoded = jwt_decode(action.payload);
+                state.first_name = decoded.first_name;
+                state.last_name = decoded.last_name;
+                state.user_id = decoded.id;
+
 
             })
             .addCase(loginUser.rejected, (state, action) => {
