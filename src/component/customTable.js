@@ -35,7 +35,8 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
         wordWrapEnabled={true}
         showColumnLines={true}
         showRowLines={true}
-        columnResizingMode={'nextColumn'}
+        allowColumnResizing={true}
+        columnResizingMode={'widget'}
       >
         {/* <SearchPanel visible={true} highlightCaseSensitive={true} width="95%" class="mx-auto" /> */}
         <Scrolling mode="virtual" />
