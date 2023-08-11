@@ -44,7 +44,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
 
         {tableHeaderData.map(column => (
-          <Column key={column.data_key} dataField={column.data_key} caption={column.data_key}
+          <Column key={column.data_key} alignment="left" dataField={column.data_key} caption={column.data_key}
             cellRender={cellData => {
               const cellValue = cellData.value;
               let backgroundColor = 'transparent'; // Default background color
