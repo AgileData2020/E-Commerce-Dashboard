@@ -1,7 +1,7 @@
 import { IconButton, Table } from 'rsuite';
 import Button from 'rsuite/Button';
 import { useEffect, useState } from 'react';
-import DataGrid, { Column, Pager, Paging, Scrolling, Sorting, LoadPanel, SearchPanel } from 'devextreme-react/data-grid';
+import DataGrid, { Column, Pager, Paging, HeaderFilter, Scrolling, Sorting, LoadPanel, SearchPanel } from 'devextreme-react/data-grid';
 import HelperClass from '../helper';
 export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, active, }) {
 
@@ -22,6 +22,8 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
   }
 
 
+
+  const colorCondition = true;
   return (
 
 
@@ -34,11 +36,18 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
         dataSource={tableBodyData}
         // defaultColumns={HelperClass.getTableColumns(tableHeaderData)}
         showBorders={true}
-        wordWrapEnabled={true}
+        width="100%"
+        // wordWrapEnabled={true}
+        scrolling={{
+          mode: "virtual",
+          showScrollbar: "always",
+          useNative: true // or false, depending on your needs
+        }}
         showColumnLines={true}
         showRowLines={true}
         allowColumnResizing={true}
-        columnResizingMode={'widget'}
+        columnResizingMode={'next'}
+        columnAutoWidth={true}
       >
         {/* <SearchPanel visible={true} highlightCaseSensitive={true} width="95%" class="mx-auto" /> */}
         <Scrolling mode="virtual" />
@@ -46,7 +55,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
 
         {tableHeaderData.map(column => (
-          <Column key={column.data_key} dataField={column.data_key} caption={column.data_key}
+          <Column alignment="left" maxWidth={300} key={column.data_key} dataField={column.data_key} caption={column.data_key}
             cellRender={cellData => {
               const cellValue = cellData.value;
               let backgroundColor = 'transparent'; // Default background color
@@ -54,7 +63,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
               if (column.data_key === 'N2') {
                 // Apply conditional cell color for the "Age" column
                 // backgroundColor = cellValue >= 18 ? 'green' : 'red';
-                color = cellValue >= 18 ? 'black' : 'red';
+                color = cellValue >= 1 ? 'black' : 'black';
 
               }
               if (cellData.value === "") {
@@ -73,11 +82,14 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
               return (
                 <div style={cellStyles}>
-                  {cellValue}
+                  {typeof (cellValue) === 'number' ? cellValue.toFixed(2) : cellValue}
                 </div>
               );
             }}
-          />
+          >
+
+
+          </Column>
         ))}
       </DataGrid>
 
