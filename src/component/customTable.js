@@ -46,7 +46,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
         showColumnLines={true}
         showRowLines={true}
         allowColumnResizing={true}
-        columnResizingMode={'next'}
+        columnResizingMode={'widget'}
         columnAutoWidth={true}
       >
         {/* <SearchPanel visible={true} highlightCaseSensitive={true} width="95%" class="mx-auto" /> */}
