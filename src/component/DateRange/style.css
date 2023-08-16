@@ -1,0 +1,26 @@
+.Date_Range_picker .MuiInputBase-root {
+    border-radius: 20px !important;
+    overflow-y: hidden !important;
+    height: 50px !important;
+    width: 100% !important;
+    
+
+}
+
+.MuiFormLabel-root {
+    font-size: 1rem !important;
+}
+
+.css-8wfwvd-MuiTypography-root-MuiMultiInputDateRangeField-separator {
+    display: none !important;
+}
+
+.Date_Range_picker {
+    padding-top: 2px !important;
+} 
+
+.css-10e3ze8-MuiStack-root{
+    width: 50% !important;
+    height: 60px !important;
+    overflow-y: hidden !important;
+}
