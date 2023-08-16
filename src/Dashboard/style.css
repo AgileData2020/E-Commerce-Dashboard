@@ -1,0 +1,28 @@
+body {
+    background-color: #f8fafd;
+   
+}
+.header-bg {
+    background-color: #fff;
+    width: 100%;
+    padding: 4px 11px 4px 14px;
+    box-shadow: 0px 0px 5px 0px #f5f3f3;
+    display: flow-root;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+  
+}
+.side-fixed{ position: sticky; top: 0;}
+aside.sidenav-bar.rs-sidebar.rs-sidebar-collapse {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+.rs-table-affix-header {
+    top: 67px !important;
+}
+.rs-table-cell-content {
+    font-size: 13px !important;
+    font-weight: 500 !important;
+}
