@@ -1,0 +1,125 @@
+body {}
+
+.main_div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f8fafd;
+}
+
+.show-grid {
+    height: 400px;
+    width: 830px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 11px rgb(211 211 211 / 27%);
+}
+
+/* .the_page{
+    height: 490px;
+    width: 330px;
+    z-index: 1;
+    position: absolute;
+    top: 50%;
+    left: 39%;
+    transform: translate(-50%,-50%);
+    background-color: #1b32d5;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+} */
+
+.the_page {
+    height: 490px;
+    width: 330px;
+    z-index: 1;
+    position: absolute;
+    /* top: 50%;
+    left: 39%; */
+    transform: translate(-50%, -50%);
+    background-color: #1b32d5;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    margin-left: 250px;
+    margin-top: 190px;
+}
+
+.the_page img {
+    height: 200px;
+    margin-top: 10px;
+
+}
+
+.the_page_text {
+    color: white;
+    font-weight: 5px;
+    font-size: 20px;
+    line-height: 25px;
+
+}
+
+.input1 {
+    padding: 12px;
+}
+
+.input_password:hover {
+    background-color: white !important;
+}
+
+.input_password:active {
+    background-color: white !important;
+}
+
+.input_password {
+    height: 42px !important;
+}
+
+.submit_button {
+    background-color: #1b32d5;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer
+}
+
+.submit_button:hover {
+    background-color: #3d4fd7;
+    color: #f8fafd;
+
+}
+
+.text-center {
+    text-align: center;
+}
+
+.margin-auto {
+    text-align: center;
+    margin: auto;
+    display: block;
+}
+
+.pd-13 {
+    padding: 13px;
+}
+
+.signup-button {
+    text-decoration: none;
+    padding: 0px;
+    margin: 0px;
+    margin-top: -8px;
+}
+
+.col-space {
+    margin-top: 20px;
+}
+
+.login-headign {
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.the_page_text {
+    font-size: 15px;
+    line-height: 19px;
+}
