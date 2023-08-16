@@ -1,51 +1,48 @@
-import logo from './logo.svg';
-import { lazy, Suspense } from 'react';
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
-import { routesPath } from './Routes';
 
-// import { Circles } from 'react-loader-spinner'; later we remove after testing
-// import LoadingOverlay from "react-loading-overlay"; later we remove after testing
+import 'devextreme/dist/css/dx.light.css';
+import './App.css'
+import { lazy, Suspense, useState, useEffect } from 'react';
+import { Routes, Route, Navigate } from "react-router-dom";
+import { routesPath } from './Routes';
+import { useSelector, UseSelector } from 'react-redux/es/hooks/useSelector';
 import Loader from '../src/component/Loader/loader'
 const Login = lazy(() => import('./auth/login'));
 const Dashboard = lazy(() => import('./Dashboard/index'));
-const Upload = lazy(() => import("./component/upload/index"));
-const Layout = lazy(() => import("./component/layout/index"));
+const Upload = lazy(() => import("./upload/index"));
 
-
+const AdminLayout = lazy(() => import("./component/layout/layout"))
 
 
 function App() {
 
-  // Later we remove after testing
-  // const Loader = () => {
+  const [currentPatth, setCurrentPath] = useState('/')
 
-  //   return (
-  //     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '85vh' }}>
-  //       <div>
-  //         <LoadingOverlay
-  //           text={"Loading..."}
-  //           active={true}
-  //           spinner={<Circles color="#1b32d5" />}
-  //         />
-  //       </div>
-  //     </div>
-  //   )
-  // }
-  let login = true;
+  const isLoading = useSelector(state => state)
+
+  useEffect(() => {
+
+  }, [currentPatth]);
+
+
+
+
   const ProtectedRoutes = ({ children, path }) => {
 
+    setCurrentPath(path);
+    let login = true;
 
-
-
+    // isLoading.login.token
     if (login) {
+
+
       return (
-        <Layout>
+        <AdminLayout>
           {children}
-        </Layout>
+        </AdminLayout>
 
       )
     } else {
-      // console.log(path, 'path')
+
       return < Navigate to="/" replace={true} />
 
     }
@@ -55,34 +52,42 @@ function App() {
 
   return (
 
-
-
-    <Suspense fallback={
+    isLoading.commonData?.isLoading ?
       <Loader />
-    }>
-      <Routes>
+      :
+      <Suspense fallback={
+        <Loader />
+      }>
+        <Routes>
 
 
-        <Route path={routesPath.Login} element={<Login />}></Route>
+          <Route path={routesPath.Login} element={<Login />}></Route>
 
 
-        <Route path={routesPath.UploadData} element={<Upload />}></Route>
+          <Route path={routesPath.UploadData} element={
+            <ProtectedRoutes path="/upload">
 
-
-        <Route path={routesPath.Dashboard}
-          element={
-            <ProtectedRoutes path="/">
-
-              <Dashboard />
+              <Upload />
 
             </ProtectedRoutes>
 
-          }>
+          }></Route>
 
-        </Route>
-      </Routes>
 
-    </Suspense>
+          <Route path={routesPath.Dashboard}
+            element={
+              <ProtectedRoutes path="/Dashboard">
+
+                <Dashboard />
+
+              </ProtectedRoutes>
+
+            }>
+
+          </Route>
+        </Routes>
+
+      </Suspense>
   );
 }
 
