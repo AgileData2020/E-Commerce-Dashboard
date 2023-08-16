@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+.dx-datagrid .dx-row > td {
+  border: 1px solid #ccc !important;
+}
+.dx-header-row{
+  background: #fcfcfc !important;
+    color: black !important;
+    font-weight: 600 !important;
+}

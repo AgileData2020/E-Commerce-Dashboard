@@ -1,129 +1,141 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import { TextField, Typography, Box, Paper, Grid, InputLabel, InputAdornment, OutlinedInput, IconButton, FormControl, Button, Link } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import EastOutlinedIcon from '@mui/icons-material/EastOutlined';
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../api/endPoints';
 import { useDispatch } from 'react-redux';
+import {
+
+    Form,
+    ButtonToolbar,
+    Button,
+    Message,
+    FlexboxGrid,
+
+    IconButton,
+    useToaster
+
+} from 'rsuite';
+import './style.css'
+import EyeIcon from '@rsuite/icons/legacy/Eye';
+import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
+import { TiArrowRightOutline } from 'react-icons/ti';
+import HelperClass from '../../helper';
 import { loginUser } from '../../redux/slices/auth/login';
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-}));
-
-
-const Login = () => {
-    const [showPassword, setShowPassword] = React.useState(false);
+import { handleIsLoading } from '../../redux/slices/common';
+const Containerr = () => {
+    const [visible, setVisible] = useState(false);
+    const [userName, setUserName] = useState(null);
+    const [password, setPassword] = useState(null);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event) => {
-        event.preventDefault();
+    const toaster = useToaster();
+    const handleChange = () => {
+        setVisible(!visible);
     };
 
-    const dispatch = useDispatch()
-    const submitLoginForm = () => {
-        navigate('/upload')
-        dispatch(loginUser({ test: 'text' }))
-    }
+    const handleSubmit = async (event) => {
+        // Handle the form submission here
+        if (event) {
+            dispatch(handleIsLoading(true))
+            let payload = { 'username': userName, 'password': password }
+
+            try {
+                await dispatch(loginUser(payload)).unwrap().then((result) => {
+                    dispatch(handleIsLoading(false));
+                    navigate('/upload');
+                    toaster.push(<Message showIcon type={'success'} closable>
+                        User login successfully
+                    </Message>, { placement: 'topEnd', duration: 5000 })
+                });
+            } catch (rejectedValueOrSerializedError) {
+                dispatch(handleIsLoading(false))
+                if (rejectedValueOrSerializedError.response.status === 401) {
+
+                    toaster.push(<Message showIcon type={'error'} closable>
+                        {rejectedValueOrSerializedError?.response?.data?.detail}
+                    </Message>, { placement: 'topEnd', duration: 5000 })
+                }
+
+            }
+
+
+
+        }
+    };
+
     return (
         <>
-            <Box sx={{ width: "100%", backgroundColor: '#1930d2', height: '100vh' }}>
-                <Box sx={{
-                    backgroundColor: '#fff', width: "400px", height: "650px", background: "#1b32d5", position: "absolute",
-                    top: "50%", left: { xl: "30%", md: '30%', sm: '20%' }, transform: "translate(-50%,-50%)",
-                    display: { xs: "none", sm: "none", md: "block", lg: "block", },
-                    zIndex: 1, boxShadow: 15
-                }}>
 
-                    <img src="bgimg.png" alt="hydro" style={{ width: '240px', }} />
-                    <Box sx={{ padding: '40px' }}>
-                        <Typography variant="h5" sx={{ fontWeight: 'bold', textAlign: 'center', color: '#fff' }}>Welcome to Hydrocarbon.</Typography>
-                        <Typography variant="subtitle1" sx={{ textAlign: "left", color: '#fff', }} >The itenlligence client Project admin board </Typography>
-                    </Box>
-                </Box>
-                <Box sx={{
-                    position: "absolute",
-                    top: "50%",
-                    left: "50%",
-                    transform: "translate(-50%, -50%)", border: '1px solid black', width: '80%', backgroundColor: '#ffffff',
+            <div className='main_div'>
 
-                }}>
-                    <Grid container spacing={0} sx={{ marginBottom: "10px" }}>
-                        <Grid item xs={6}></Grid>
-                        <Grid item xs={12} md={6}>
-                            <Box sx={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                alignItems: 'center',
-                                justifyContent: 'center', height: '100%',
-                                position: 'relative',
-                            }}>
-                                <Grid container >
-                                    <Grid item xs={8}>
-                                        <img src="hydro.png" alt="hydro" style={{ width: '300px', height: '100%' }} />
-                                    </Grid>
-                                    <Grid item xs={8} sx={{ marginLeft: '12px' }}>
-                                        <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'left' }}>Login</Typography>
-                                        {/*Typography variant="body1" sx={{ textAlign: "justify" }} >Lorem ipsum is simply dummy text of the Printing and typesetting industry </Typography> */}
-                                    </Grid>
+                <div className="show-grid">
+                    <FlexboxGrid >
+                        <FlexboxGrid.Item className="item" colspan={12}>
+                            <div className="the_page">
+                                <img src="bgimg.png" alt="logo" />
+                                <FlexboxGrid style={{ marginLeft: '15px' }}>
+                                    <FlexboxGrid.Item className="item" colspan={20}>
+                                        <div className='login-headign' style={{ color: 'white' }}>Welcome to Hydrocarbon</div>
+                                    </FlexboxGrid.Item>
+                                    <FlexboxGrid.Item colspan={16} ><div className='the_page_text'>The intelligence client Project admin board </div></FlexboxGrid.Item>
+                                </FlexboxGrid>
+                            </div>
+                        </FlexboxGrid.Item>
 
-                                    <Grid item xs={8} sx={{ marginTop: 2 }}>
-                                        <FormControl sx={{ m: 1, width: "100%" }} variant="outlined">
-                                            <TextField id="outlined-basic" label="Email" type='Email' sx={{ width: '100%', }}></TextField>
-                                        </FormControl>
-                                    </Grid>
-                                    <Grid item xs={8} sx={{ marginTop: 2 }}>
-                                        <FormControl sx={{ m: 1, width: "100%" }} variant="outlined">
-                                            <InputLabel htmlFor="outlined-adornment-password" >Password</InputLabel>
-                                            <OutlinedInput
-                                                id="outlined-adornment-password"
-                                                type={showPassword ? 'text' : 'password'}
-                                                endAdornment={
-                                                    <InputAdornment position="end">
-                                                        <IconButton
-                                                            aria-label="toggle password visibility"
-                                                            onClick={handleClickShowPassword}
-                                                            onMouseDown={handleMouseDownPassword}
-                                                            edge="end"
-                                                        >
-                                                            {!showPassword ? <VisibilityOff /> : <Visibility />}
-                                                        </IconButton>
-                                                    </InputAdornment>
-                                                }
-                                                label="Password"
-                                            />
-                                        </FormControl>
+                        <FlexboxGrid.Item className='pd-13' colspan={12} >
 
-                                    </Grid>
-                                    <Grid item xs={8} >
-                                        <Box sx={{ textAlign: 'right' }}>
-                                            <Link href="#" sx={{ textDecoration: 'none', color: '#7e7e7e', }}> Forget Password?</Link>
-                                        </Box>
-                                    </Grid>
-                                    <Grid item xs={5}>
-                                        <IconButton aria-label="delete" size="large" onClick={() => submitLoginForm()} sx={{
-                                            marginTop: '5px', float: "right", backgroundColor: '#1b32d5', color: '#fff', ":hover":
-                                                { backgroundColor: '#1b32d5', },
+                            <FlexboxGrid justify='center'>
 
-                                        }}>
-                                            <EastOutlinedIcon fontSize="inherit" />
-                                        </IconButton>
-                                    </Grid>
-                                </Grid>
-                            </Box>
-                        </Grid>
-                    </Grid>
-                </Box>
+                                <FlexboxGrid.Item className="item text-center" colspan={20}>
 
-            </Box>
+                                    <img src="hydro.png" alt="logo" />
+                                </FlexboxGrid.Item>
+                                <FlexboxGrid.Item className="item" colspan={20}>
+
+
+                                </FlexboxGrid.Item>
+                                <FlexboxGrid.Item className="item" colspan={20}>
+                                </FlexboxGrid.Item>
+                                <FlexboxGrid>
+                                    <FlexboxGrid.Item >
+                                        <Form model={HelperClass.loginSchema()} onSubmit={(e) => handleSubmit(e)}>
+                                            <Form.Group>
+                                                <Form.Control name={'username'} onChange={(e) => setUserName(e)} className='input1' placeholder='User name' />
+                                            </Form.Group>
+                                            <Form.Group>
+                                                {/* <InputGroup inside style={styles}>
+                                                    <Input name={'password'} className='input1' type={visible ? 'text' : 'password'} />
+                                                    <InputGroup.Button className='input_password ' onClick={handleChange}>
+                                                        {visible ? <EyeIcon /> : <EyeSlashIcon />}
+                                                    </InputGroup.Button>
+                                                </InputGroup> */}
+                                                <Form.Control className='input1' onChange={(e) => setPassword(e)} name="password" type="password" autoComplete="off" placeholder='Password' />
+                                            </Form.Group>
+                                            <Form.Group>
+
+                                                <ButtonToolbar type="submit">
+                                                    <IconButton type="submit" className='submit_button text-center margin-auto' icon={<TiArrowRightOutline />} circle />
+                                                </ButtonToolbar>
+
+                                                <FlexboxGrid className='col-space' >
+                                                    <FlexboxGrid.Item className="item text-center" colspan={24}>
+                                                        Don’t have an account?   <Button className='signup-button' appearance="link" style={{ textDecoration: 'none' }}> Sign up</Button>
+                                                    </FlexboxGrid.Item>
+                                                </FlexboxGrid>
+
+
+                                            </Form.Group>
+                                        </Form>
+                                    </FlexboxGrid.Item>
+                                </FlexboxGrid>
+                            </FlexboxGrid>
+                        </FlexboxGrid.Item>
+                    </FlexboxGrid>
+                </div >
+            </div >
+
+
+
         </>
     )
 }
 
-export default Login
+export default Containerr
