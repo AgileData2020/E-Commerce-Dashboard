@@ -82,7 +82,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
               return (
                 <div style={cellStyles}>
-                  {typeof (cellValue) === 'number' ? cellValue.toFixed(2) : cellValue}
+                  {cellValue}
                 </div>
               );
             }}
