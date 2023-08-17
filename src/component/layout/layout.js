@@ -61,7 +61,7 @@ const Layout = ({ children }) => {
                     <header className='header-bg'>
 
 
-                        <div className=''>
+                        <div className='togal-buttons'>
                       <div className='flot-left mob-logo'><img src={hydrocarbonIconMobile} alt="logo" /></div>  
                       <div className='flot-left'> <NavToggle expand={expand} onChange={() => setExpand(!expand)} /></div>
                          

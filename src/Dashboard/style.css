@@ -5,7 +5,7 @@ body {
 .header-bg {
     background-color: #fff;
     width: 100%;
-    padding: 4px 11px 4px 14px;
+    padding: 0px 6px 8px 5px;
     box-shadow: 2px 2px 6px 0px #b1b1b12e;
     display: flow-root;
     position: sticky;

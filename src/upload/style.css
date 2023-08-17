@@ -5,7 +5,7 @@ body {
 .header-bg {
     background-color: #fff;
     width: 100%;
-    padding: 4px 11px 4px 14px;
+    padding: 0px 6px 8px 5px;
     box-shadow: 2px 2px 6px 0px #b1b1b12e;
     display: flow-root;
     position: sticky;
@@ -50,7 +50,7 @@ body {
     text-align: center;
     width: 500px;
     margin: auto;
-    padding-top: 15%;
+    padding-top: 10%;
 }
 
 .rs-uploader-draggable .rs-uploader-trigger-customize .rs-uploader-trigger-btn {
@@ -58,7 +58,10 @@ body {
     background: #fff0;
 
 }
-.upload-area{cursor: pointer; }
+.upload-area{cursor: pointer;
+    border: dotted 5px #ebebeb;
+    padding: 17px;
+    border-radius: 29px; }
 .upload-text {
     color: #808080;
     padding: 0px;
@@ -75,3 +78,5 @@ body {
 .text-center{ text-align: center;}
 .btn-side{ padding-left: 20px !important; padding-right: 20px !important;}
 .mt-20p{ margin-top: 20%;}
+
+/*  */
