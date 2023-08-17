@@ -7,7 +7,7 @@ const axiosInstance = axios.create({
     timeout: 10000, // Set the timeout for requests (in milliseconds)
 
     headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`, // Replace this with your actual token
+        // Replace this with your actual token
         'Content-Type': 'multipart/form-data',
     },
 });

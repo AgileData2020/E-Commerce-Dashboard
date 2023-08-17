@@ -55,7 +55,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
 
         {tableHeaderData.map(column => (
-          <Column alignment="left" maxWidth={300} key={column.data_key} dataField={column.data_key} caption={column.data_key}
+          <Column alignment="left" maxWidth={300} key={column.data_key} dataField={column.data_key} caption={column.data_key === 'Unnamed' ? '' : column.data_key}
             cellRender={cellData => {
               const cellValue = cellData.value;
               let backgroundColor = 'transparent'; // Default background color
