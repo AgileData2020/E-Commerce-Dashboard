@@ -1,10 +1,10 @@
 .drawer-bdy{ margin-top: 38px;}
-.rs-drawer-body {
+/* .rs-drawer-body {
     height: 100%;
     overflow: auto;
     padding: 34px 24px;
     position: relative;
-}
+} */
 .img-100{ width: 100%;}
 .charting-heading{ font-size: 20px; font-weight: bold;}
 .charting-para{ color: #8e8e8e; margin-bottom: 30px; font-size: 13px;}
@@ -42,3 +42,19 @@
     display: block;
   }
   .table-ss{ position: absolute;}
+
+  /*  */
+
+  .rs-drawer-body {
+    height: auto;
+    overflow: auto;
+    padding: 5px 5px;
+    position: relative;
+}
+.rs-drawer-left.rs-drawer-xs, .rs-drawer-right.rs-drawer-xs {
+  width: 270px;
+}
+.dx-theme-generic-typography .dx-font-xl, .dx-theme-generic-typography h1 {
+  font-weight: 600;
+  font-size: 18px;
+}

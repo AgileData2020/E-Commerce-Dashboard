@@ -54,7 +54,7 @@ const HelperClass = {
 
         if (dataLength.length >= 100) {
 
-            return 500;
+            return 600;
         } else if (dataLength.length <= 4) {
             return 200;
         } else if (dataLength.length == 1) {
@@ -62,7 +62,7 @@ const HelperClass = {
             return 100
         } else {
 
-            return 400;
+            return 600;
         }
 
     },

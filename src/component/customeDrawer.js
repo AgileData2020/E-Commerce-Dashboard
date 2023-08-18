@@ -1,22 +1,134 @@
 import React from 'react';
 import './customeDrawer.css'
-import { Drawer, ButtonToolbar, Button, Placeholder } from 'rsuite';
+import { Drawer, ButtonToolbar, Button, Placeholder, Nav, Sidenav,Sidebar } from 'rsuite';
+import PlusIcon from '@rsuite/icons/Plus';
+import hydrocarbonIcon from '../assets/img/hydloogo.png';
+import hydrocarbonIconMobile from '../assets/img/hydro-mobile.png'
 import LightWeight from './lightWeights/lightWeight';
+const headerStyles = {
+    padding: 2,
+    fontSize: 16,
+    color: ' #fff',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden'
+};
 const CustomeDrawer = ({ open, setOpen }) => {
     return (
         <>
 
 
-            <Drawer open={open} onClose={() => setOpen(false)}>
+            <Drawer  size={'xs'}  placement={'left'} open={open} onClose={() => setOpen(false)}>
                 <Drawer.Body>
-                    <div className='drawer-bdy'>
-                        <div className='charting-heading'>Jan 2023</div>
-                        <div>Metor Number: 1011</div>
-                        {/* <p className='charting-para'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimten book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</p> */}
-                        {/* <img className='img-100' src="/charting.png" alt="charting" /> */}
+      
+                       
+                           
+                   
+                
+                <Sidebar className='sidenav-bar'  collapsible>
+                    <div className='side-fixed'>
+                    <Sidenav.Header>
+                            <div style={headerStyles}>
 
-                        <LightWeight />
+                                <img src={hydrocarbonIcon} alt="logo" />
+
+
+                            </div>
+                        </Sidenav.Header>
+                        <Sidenav expanded={true} defaultOpenKeys={['3']} appearance="subtle">
+                            <Sidenav.Body>
+                                <Nav>
+
+
+                                    <Nav.Menu
+                                        eventKey="1"
+                                        trigger="hover"
+                                        title="Jan 2023"
+                                        icon={<PlusIcon />}
+                                        placement="rightStart"
+                                    >
+                                        <Nav.Item eventKey="3-1">Balance</Nav.Item>
+                                        <Nav.Item eventKey="3-2">Model</Nav.Item>
+
+                                    </Nav.Menu>
+
+                                    <Nav.Menu
+                                        eventKey="2"
+                                        trigger="hover"
+                                        title="Fab 2023"
+                                        icon={<PlusIcon />}
+                                        placement="rightStart"
+                                    >
+                                        <Nav.Item eventKey="3-1">Balance</Nav.Item>
+                                        <Nav.Item eventKey="3-2">Model</Nav.Item>
+
+                                    </Nav.Menu>
+
+
+
+                                    <Nav.Menu
+                                        eventKey="4"
+                                        trigger="hover"
+                                        title="Mar 2023"
+                                        icon={<PlusIcon />}
+                                        placement="rightStart"
+                                    >
+                                        <Nav.Item eventKey="3-1">Balance</Nav.Item>
+                                        <Nav.Item eventKey="3-2">Model</Nav.Item>
+
+                                    </Nav.Menu>
+
+                                    <Nav.Menu
+                                        eventKey="5"
+                                        trigger="hover"
+                                        title="Apr 2023"
+                                        icon={<PlusIcon />}
+                                        placement="rightStart"
+                                    >
+                                        <Nav.Item eventKey="3-1">Balance</Nav.Item>
+                                        <Nav.Item eventKey="3-2">Model</Nav.Item>
+
+                                    </Nav.Menu>
+                                    <Nav.Menu
+                                        eventKey="6"
+                                        trigger="hover"
+                                        title="May 2023"
+                                        icon={<PlusIcon />}
+                                        placement="rightStart"
+                                    >
+                                        <Nav.Item eventKey="3-1">Balance</Nav.Item>
+                                        <Nav.Item eventKey="3-2">Model</Nav.Item>
+
+                                    </Nav.Menu>
+
+                                    <Nav.Menu
+                                        eventKey="7"
+                                        trigger="hover"
+                                        title="Jan 2023"
+                                        icon={<PlusIcon />}
+                                        placement="rightStart"
+                                    >
+                                        <Nav.Item eventKey="3-1">Balance</Nav.Item>
+                                        <Nav.Item eventKey="3-2">Model</Nav.Item>
+
+                                    </Nav.Menu>
+
+                                    <Nav.Menu
+                                        eventKey="8"
+                                        trigger="hover"
+                                        title="July 2023"
+                                        icon={<PlusIcon />}
+                                        placement="rightStart"
+                                    >
+                                        <Nav.Item eventKey="3-1">Balance</Nav.Item>
+                                        <Nav.Item eventKey="3-2">Model</Nav.Item>
+
+                                    </Nav.Menu>
+
+                                </Nav>
+                            </Sidenav.Body>
+                        </Sidenav>
                     </div>
+                </Sidebar> 
 
                 </Drawer.Body>
 
