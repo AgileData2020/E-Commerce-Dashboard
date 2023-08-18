@@ -44,3 +44,8 @@
     color: black !important;
     font-weight: 600 !important;
 }
+
+.dx-datagrid-headers .cls {
+    background-color: blue;
+    color: white !important;
+}

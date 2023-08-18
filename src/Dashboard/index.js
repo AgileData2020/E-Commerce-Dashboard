@@ -16,7 +16,7 @@ import { setSheetActiveTab } from '../redux/slices/common';
 const Dashboard = () => {
     const dispatch = useDispatch();
     const activeTabs = useSelector(state => state.commonData.sheetActiveTab)
-    console.log(activeTabs, 'activeTabs')
+
     const [active, setActive] = useState(activeTabs);
     const [openDrawer, setOpenDrawer] = useState(false);
     const [tableHeaderData, setTableHeaderData] = useState([]);
@@ -47,6 +47,8 @@ const Dashboard = () => {
 
     const getSheetData = async () => {
         setLoading(true)
+
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
         try {
             const response = await axiosInstance.get(sheetEndPoint.GET_SHEET + active);
             if (response.status === 200) {
@@ -124,7 +126,7 @@ const Dashboard = () => {
 
                                                     <h5>{item['table_' + parseInt(index + 1)]?.table_label}</h5>
 
-                                                    <CustomTable key={item['table_' + parseInt(index + 1)]?.table_label} active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers} tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
+                                                    <CustomTable tableLabel={item['table_' + parseInt(index + 1)]?.table_label} key={item['table_' + parseInt(index + 1)]?.table_label} active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers} tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
 
                                                 </div>
                                             </FlexboxGrid.Item>
