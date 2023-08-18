@@ -1,9 +1,10 @@
 import { IconButton, Table } from 'rsuite';
 import Button from 'rsuite/Button';
 import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import DataGrid, { Column, Pager, Paging, HeaderFilter, Scrolling, Sorting, LoadPanel, SearchPanel } from 'devextreme-react/data-grid';
 import HelperClass from '../helper';
-export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, active, }) {
+export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, active, tableLabel }) {
 
 
 
@@ -22,8 +23,11 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
   }
 
 
+  const activeTabs = useSelector(state => state.commonData.sheetActiveTab)
 
-  const colorCondition = true;
+
+
+
   return (
 
 
@@ -49,6 +53,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
         columnResizingMode={'widget'}
         columnAutoWidth={true}
       >
+
         {/* <SearchPanel visible={true} highlightCaseSensitive={true} width="95%" class="mx-auto" /> */}
         <Scrolling mode="virtual" />
         <LoadPanel enabled={true} />
@@ -56,8 +61,10 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
         {tableHeaderData.map(column => (
           <Column
+            cssClass={(activeTabs === 'Rollup' && tableLabel === 'Rollup Component Volume' || tableLabel === 'Rollup Component Heating Content') ? 'cls' : ''}
             alignment="left"
-            maxWidth={300} key={column.data_key}
+            maxWidth={300}
+            key={column.data_key}
             dataField={column.data_key}
             caption={column.data_key === 'Unnamed' ? '' : column.data_key}
             fixed={column.data_key === 'Serial Number' ? true : false}
@@ -91,6 +98,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
                 </div>
               );
             }}
+
           >
 
 

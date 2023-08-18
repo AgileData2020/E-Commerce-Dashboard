@@ -126,7 +126,7 @@ const Dashboard = () => {
 
                                                     <h5>{item['table_' + parseInt(index + 1)]?.table_label}</h5>
 
-                                                    <CustomTable key={item['table_' + parseInt(index + 1)]?.table_label} active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers} tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
+                                                    <CustomTable tableLabel={item['table_' + parseInt(index + 1)]?.table_label} key={item['table_' + parseInt(index + 1)]?.table_label} active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers} tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
 
                                                 </div>
                                             </FlexboxGrid.Item>
