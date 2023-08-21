@@ -26,8 +26,17 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
   const activeTabs = useSelector(state => state.commonData.sheetActiveTab)
 
 
+  const fixedColumnArray = ['Serial Number', 'Meter Name', 'Meter Number', 'Name'];
 
+  const handleRowPrepared = (e) => {
 
+    console.log(e.data, 'e.rowType')
+    if (e.rowType === 'data') {
+      const backgroundColor = (e.data.Mcf === 'Inlet Comp' || e.data.Mcf === 'Outlet Comp' || (e.data.Mcf === null && !e.data['Serial Number'])) ? '#3059D1' : '';
+      e.rowElement.style.backgroundColor = backgroundColor;
+
+    }
+  };
   return (
 
 
@@ -38,6 +47,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
       <DataGrid
         height={HelperClass.tableHeightDecider(tableBodyData)}
         dataSource={tableBodyData}
+        onRowPrepared={handleRowPrepared}
         // defaultColumns={HelperClass.getTableColumns(tableHeaderData)}
         showBorders={true}
         width="100%"
@@ -67,7 +77,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
             key={column.data_key}
             dataField={column.data_key}
             caption={column.data_key === 'Unnamed' ? '' : column.data_key}
-            fixed={column.data_key === 'Serial Number' ? true : false}
+            fixed={fixedColumnArray.includes(column.data_key) ? true : false}
             cellRender={cellData => {
               const cellValue = cellData.value;
               let backgroundColor = 'transparent'; // Default background color
