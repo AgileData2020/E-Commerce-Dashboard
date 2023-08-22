@@ -30,7 +30,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
   const handleRowPrepared = (e) => {
 
-    console.log(e.data, 'e.rowType')
+
     if (e.rowType === 'data') {
       const backgroundColor = (e.data.Mcf === 'Inlet Comp' || e.data.Mcf === 'Outlet Comp' || (e.data.Mcf === null && !e.data['Serial Number'])) ? '#3059D1' : '';
       e.rowElement.style.backgroundColor = backgroundColor;
