@@ -27,20 +27,22 @@ const Dashboard = () => {
     const Navbar = ({ active, onSelect, ...props }) => {
         return (
             <Nav {...props} activeKey={active} onSelect={onSelect} style={{ marginBottom: 50 }}>
+
+
+
+                <Nav.Item eventKey='Inlets'>Inlets</Nav.Item>
+                <Nav.Item eventKey='Outlets'>Outlets</Nav.Item>
+
+                <Nav.Item eventKey='Compressor Stations'>Compressor Stations</Nav.Item>
+                <Nav.Item eventKey='High Pressure'>High Pressure</Nav.Item>
+                <Nav.Item eventKey='Plant'>Plant</Nav.Item>
+                <Nav.Item eventKey="Liquids">Liquids</Nav.Item>
+                <Nav.Item eventKey="Rollup">Rollup</Nav.Item>
                 <Nav.Item eventKey="FlowCal Raw">
                     FlowCal Raw
                 </Nav.Item>
-
-                <Nav.Item eventKey="Model CS">Model CS </Nav.Item>
                 <Nav.Item eventKey="Model Output">Model Output</Nav.Item>
-                <Nav.Item eventKey="Rollup">Rollup</Nav.Item>
-                <Nav.Item eventKey="Liquids">Liquids</Nav.Item>
-                <Nav.Item eventKey='Plant'>Plant</Nav.Item>
-                <Nav.Item eventKey='High Pressure'>High Pressure</Nav.Item>
-                <Nav.Item eventKey='Compressor Stations'>Compressor Stations</Nav.Item>
-                <Nav.Item eventKey='Outlets'>Outlets</Nav.Item>
-                <Nav.Item eventKey='Inlets'>Inlets</Nav.Item>
-
+                <Nav.Item eventKey="Model CS">Model CS </Nav.Item>
             </Nav>
         );
     };

@@ -5,7 +5,7 @@ export const sliceCommon = createSlice({
     name: 'commonData',
     initialState: {
         isLoading: false,
-        sheetActiveTab: 'FlowCal Raw'
+        sheetActiveTab: 'Inlets'
     },
     reducers: {
         handleIsLoading: (state, action) => {
