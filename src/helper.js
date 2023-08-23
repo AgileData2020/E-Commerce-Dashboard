@@ -32,7 +32,6 @@ const HelperClass = {
         } else if (type === 'Outlets') {
             return data.outlets;
         } else if (type === 'Inlets') {
-            console.log(data.inlets, 'data.inlets')
             return data.inlets;
         } else if (type === 'Validation') {
             return data.validation;

@@ -24,7 +24,7 @@ const Dashboard = () => {
     const [isLoading, setLoading] = useState(false);
     const [multiTableData, setMultiTableData] = useState([]);
 
-    const singleTable = ["Validation", "Envelope", "FlowCal Raw", "FlowCal", 'H2O Adjust', 'Receiptpoints', "FlowCal Data"]
+    const singleTable = ["Envelope", "FlowCal Raw", "FlowCal", 'H2O Adjust', 'Receiptpoints', "FlowCal Data"]
 
     const Navbar = ({ active, onSelect, ...props }) => {
         if (activeTabs.currentFile === 'balance_with_model') {
@@ -115,7 +115,7 @@ const Dashboard = () => {
 
     }
 
-    const tableArrangements = ['Inlets 1', 'Inlets 3', 'Outlets 3', 'Outlets 1', 'Outlets', 'Inlets'];
+    const tableArrangements = ['Inlets 1', 'Inlets 3', 'Outlets 3', 'Outlets 1', 'Outlets', 'Inlets', 'Input Table 1', 'Validation Input Table', 'Model Input'];
     return (
 
         <>
@@ -135,13 +135,13 @@ const Dashboard = () => {
                             singleTable.includes(active) ?
 
                                 <div className='tab-stybg'>
-                                    <h5>FlowCal Raw</h5>
+                                    <h5>{active}</h5>
                                     <CustomTable active={active} tableData={multiTableData} tableHeaderData={tableHeaderData} tableBodyData={tableBodyData} setOpen={setOpenDrawer} />
 
                                 </div>
                                 :
 
-                                <FlexboxGrid justify="center" >
+                                <FlexboxGrid justify="left" >
                                     {
 
 
@@ -155,7 +155,9 @@ const Dashboard = () => {
 
                                                     <h5>{item['table_' + parseInt(index + 1)]?.table_label}</h5>
 
-                                                    <CustomTable tableLabel={item['table_' + parseInt(index + 1)]?.table_label} key={item['table_' + parseInt(index + 1)]?.table_label} active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers} tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
+                                                    <CustomTable tableLabel={item['table_' + parseInt(index + 1)]?.table_label} key={item['table_' + parseInt(index + 1)]?.table_label}
+                                                        active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers}
+                                                        tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
 
                                                 </div>
                                             </FlexboxGrid.Item>
