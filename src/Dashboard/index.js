@@ -115,7 +115,7 @@ const Dashboard = () => {
 
     }
 
-    const tableArrangements = ['Inlets 1', 'Inlets 3', 'Outlets 3', 'Outlets 1', 'Outlets', 'Inlets', 'Input Table 1', 'Validation Input Table', 'Model Input'];
+    const tableArrangements = ['Inlets 1', 'Inlets 3', 'Outlets 3', 'Outlets 1', 'Outlets', 'Inlets', 'Composition Data', 'Validation Input Table', 'Model Input'];
     return (
 
         <>

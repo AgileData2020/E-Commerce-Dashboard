@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DataGrid, { Column, Pager, Paging, HeaderFilter, Scrolling, Sorting, LoadPanel, SearchPanel } from 'devextreme-react/data-grid';
 import HelperClass from '../helper';
+
 export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, active, tableLabel }) {
 
 
@@ -27,7 +28,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
 
   const fixedColumnArray = ['Serial Number', 'Meter Name', 'Meter Number', 'Name'];
-
+  const fixedColumnArrayRaw = ['Meter Name', 'Meter Number', 'Name'];
   const handleRowPrepared = (e) => {
 
     // console.log(e.key?.nan === 'Pressure' ? Object.values(e.key) : '', 'dsssss')
@@ -43,6 +44,19 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
 
 
+  const headerCellRender = (data) => {
+    const isSpecialHeader = data?.column?.caption === '999';
+    console.log(isSpecialHeader, 'columnName')
+    if (isSpecialHeader && tableLabel === 'Composition Data') {
+      return (
+        <th>
+          <span style={{ background: '#ffc7ce', padding: '20px', color: '#9c0006' }} >{data?.column?.caption}</span>
+        </th>
+      );
+    }
+    return <th>{data?.column?.caption}</th>;
+  };
+
 
   return (
 
@@ -55,8 +69,9 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
         height={HelperClass.tableHeightDecider(tableBodyData)}
         dataSource={tableBodyData}
         // onCellPrepared={onCellPrepared}
-        onRowPrepared={handleRowPrepared}
+        // onRowPrepared={handleRowPrepared}
         // defaultColumns={HelperClass.getTableColumns(tableHeaderData)}
+
         showBorders={true}
         width="100%"
         // wordWrapEnabled={true}
@@ -77,32 +92,39 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
         <LoadPanel enabled={true} />
 
 
-        {tableHeaderData.map(column => (
+        {tableHeaderData.map((column, index) =>
           <Column
-
-            cssClass={((activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Component Volume' || tableLabel === 'Rollup Component Heating Content') || activeTabs.sheetActiveTab === 'Validation' || activeTabs.sheetActiveTab === 'FlowCal Data' || activeTabs.sheetActiveTab === 'Envelope') ? 'cls' : ''}
+            headerCellRender={headerCellRender}
+            // cssClass={((activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Component Volume' || tableLabel === 'Rollup Component Heating Content') || activeTabs.sheetActiveTab === 'Validation' || activeTabs.sheetActiveTab === 'FlowCal Data' || activeTabs.sheetActiveTab === 'Envelope') ? 'cls' : ''}
             alignment="left"
             maxWidth={300}
             key={column.data_key}
             dataField={column.data_key.replaceAll('.', '_')}
-            caption={column.data_key === 'Unnamed' ? '' : column.data_key.replaceAll('_', '.')}
-            fixed={fixedColumnArray.includes(column.data_key) ? true : false}
+            caption={column.data_key.search('Unnamed') != -1 ? '' : column.data_key.replaceAll('_', '.')}
+            fixed={(activeTabs.sheetActiveTab === 'FlowCal Raw' && activeTabs.currentFile === 'model_interface') ? fixedColumnArrayRaw.includes(column.data_key) ? true : false : fixedColumnArray.includes(column.data_key) ? true : false}
             cellRender={cellData => {
 
-              console.log(cellData, 'cellData')
-              console.log(cellData.key?.nan == 'Pressure' ? console.log('final', cellData.value < 25 && cellData.value) : 'nop', 'dsssss')
+
+              // console.log(cellData.key?. == 'InletComp' ? console.log('final', cellData.value < 100 && cellData.value) : cellData.key, 'dsssss')
+
               const cellValue = cellData.value;
               let backgroundColor = 'transparent'; // Default background color
               let color = "black"
-              if (column.data_key === 'C1' && activeTabs.currentFile === 'model_interface') {
+              if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'C1' && activeTabs.currentFile === 'model_interface') {
                 // Apply conditional cell color for the "Age" column
                 backgroundColor = cellValue < 70 ? 'red' : 'white';
-                color = cellValue < 70 ? 'white' : 'black';
+                color = cellValue < 70 ? '#ffc000' : 'black';
 
               }
-              else if (column.data_key === 'C6' && activeTabs.currentFile === 'model_interface') {
+              if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'N2' && activeTabs.currentFile === 'model_interface') {
+                // Apply conditional cell color for the "Age" column
+                backgroundColor = cellValue > 3 ? '#ffc7ce' : 'white';
+                color = cellValue > 3 ? '#9c0006' : 'black';
+
+              }
+              else if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'C6' && activeTabs.currentFile === 'model_interface') {
                 backgroundColor = cellValue > 1 ? 'red' : 'white';
-                color = cellValue > 1 ? 'white' : 'black';
+                color = cellValue > 1 ? '#ffc000' : 'black';
 
               }
               else if (column.data_key === 'MW' && activeTabs.currentFile === 'model_interface') {
@@ -112,24 +134,38 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
               }
               else if (column.data_key === 'Is 2ϕ' && activeTabs.currentFile === 'model_interface') {
 
-                // console.log(cellValue, 'cellValue')
                 backgroundColor = cellValue === 'True' ? '#f4b083' : 'white';
-
-                // color = (cellValue < 86 || cellValue > 114) ? 'black' : 'black';
-
               }
 
-              else if (column.data_key === 'Unnamed 3' && activeTabs.currentFile === 'model_interface') {
-
-                // typeof ((cellValue)) === 'string' && console.log(cellValue.split(')'), 'sddddddddddddddddddddddddddddd')
-
-                // backgroundColor = cellValue === 'True' ? '#f4b083' : 'white';
-
-                // color = (cellValue < 86 || cellValue > 114) ? 'black' : 'black';
-
-              } else if (cellData.key?.nan == 'Pressure' && cellData.value < 25) {
+              else if (cellData.key?.Unnamed === 'Pressure' && cellData.value < 25 && tableLabel === 'Composition Data') {
                 backgroundColor = '#ffc7ce';
                 color = '#9c0006'
+              }
+              else if ((cellData.key?.Mcf === 'Inlet Comp' || cellData.key?.Mcf === 'Outlet Comp') && (cellData.value < 200 && cellValue > 0)) {
+                backgroundColor = '#4472c4';
+                color = 'white'
+              }
+
+              else if ((cellData.key?.Mcf === null && tableLabel === 'Outlets 1') && (cellData.value < 200 && cellValue > 0)) {
+                backgroundColor = '#4472c4';
+                color = 'white'
+              }
+
+              else if ((tableLabel === 'Validation Input Table' && cellData.key?.Unnamed === null)) {
+                backgroundColor = (cellValue != null && cellValue < 99.98 || cellValue > 100.2) ? '#fef2cb' : 'white';
+                color = (cellValue < 99.98 || cellValue > 100.2) ? 'red' : 'black';
+              }
+              else if ((tableLabel === 'Model Input' && cellData.key?.Unnamed?.search('Hypo') != -1) && cellData.key?.Unnamed != null) {
+                backgroundColor = cellValue > 0 ? '#dadada' : 'white';
+                color = cellValue > 0 ? 'black' : 'black';
+              }
+
+              else if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'Unnamed 3' && activeTabs.currentFile === 'model_interface') {
+                if (typeof (cellValue) === 'string') {
+                  // backgroundColor = cellValue.includes('(') ? 'red' : 'white';
+                  color = cellValue.includes('(') ? 'red' : 'black';
+                }
+
               }
 
               const cellStyles = {
@@ -152,7 +188,11 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
 
           </Column>
-        ))}
+
+        )
+        }
+
+
       </DataGrid>
 
     </>

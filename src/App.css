@@ -49,3 +49,8 @@
     background-color: blue;
     color: white !important;
 }
+.custom-header{
+  background-color: #61dafb !important;
+  padding: '10px' !important;
+  color: 'red' !important;
+}
