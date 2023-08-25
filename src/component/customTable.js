@@ -46,7 +46,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
   const headerCellRender = (data) => {
     const isSpecialHeader = data?.column?.caption === '999';
-    console.log(isSpecialHeader, 'columnName')
+
     if (isSpecialHeader && tableLabel === 'Composition Data') {
       return (
         <th>
@@ -57,7 +57,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
     return <th>{data?.column?.caption}</th>;
   };
 
-
+  const borderStyle = ['Pliny WB', 'Cypress WB', 'Golden WB', 'Bluto WB', 'Lowe WB', 'Tribute WB', 'Nailed it WB', 'Oasis WB', 'Olifant WB', 'Abigail WB']
   return (
 
 
@@ -96,6 +96,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
           <Column
             headerCellRender={headerCellRender}
             // cssClass={((activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Component Volume' || tableLabel === 'Rollup Component Heating Content') || activeTabs.sheetActiveTab === 'Validation' || activeTabs.sheetActiveTab === 'FlowCal Data' || activeTabs.sheetActiveTab === 'Envelope') ? 'cls' : ''}
+            cssClass={activeTabs.sheetActiveTab === 'Model CS' && (borderStyle.includes(column.data_key) ? 'cls' : 'clss')}
             alignment="left"
             maxWidth={300}
             key={column.data_key}
@@ -167,6 +168,10 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
                 }
 
               }
+              else if (activeTabs.sheetActiveTab === 'Rollup' && column.data_key === 'C6+' && activeTabs.currentFile === 'balance_with_model' && tableLabel === 'Rollup') {
+                backgroundColor = cellValue > 1 ? '#ffc7ce' : 'white';
+                color = cellValue > 1 ? '#9c0006' : 'black';
+              }
 
               const cellStyles = {
                 backgroundColor,
@@ -193,7 +198,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
         }
 
 
-      </DataGrid>
+      </DataGrid >
 
     </>
   )

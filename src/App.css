@@ -36,21 +36,33 @@
     transform: rotate(360deg);
   }
 }
-.dx-datagrid .dx-row > td {
+/* .dx-datagrid .dx-row > td {
   border: 1px solid #ccc !important;
-}
+} */
 .dx-header-row{
   background: #fcfcfc !important;
     color: black !important;
     font-weight: 600 !important;
 }
 
-.dx-datagrid-headers .cls {
+/* .dx-datagrid-headers .cls {
     background-color: blue;
     color: white !important;
-}
+} */
 .custom-header{
   background-color: #61dafb !important;
   padding: '10px' !important;
   color: 'red' !important;
+}
+
+.dx-datagrid .cls{
+ border: 1px solid #ccc !important;
+ border-right-width: 2px !important;
+border-right-color:black !important;
+}
+
+.dx-datagrid .clss{
+ border: 1px solid #ccc !important;
+ border-left-width: 2px !important;
+border-left-color:black !important;
 }
