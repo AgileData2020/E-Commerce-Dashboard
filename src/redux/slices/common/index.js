@@ -5,7 +5,9 @@ export const sliceCommon = createSlice({
     name: 'commonData',
     initialState: {
         isLoading: false,
-        sheetActiveTab: 'FlowCal Raw'
+        sheetActiveTab: 'Inlets',
+        currentFile: '',
+        tabNames: []
     },
     reducers: {
         handleIsLoading: (state, action) => {
@@ -14,9 +16,18 @@ export const sliceCommon = createSlice({
 
         setSheetActiveTab: (state, action) => {
             state.sheetActiveTab = action.payload
+        },
+
+        getLatestFile: (state, action) => {
+            state.currentFile = action.payload;
+        },
+        getTabsName: (state, action) => {
+            state.tabNames = action.payload;
         }
+
+
     }
 })
-export const { handleIsLoading, setSheetActiveTab } = sliceCommon.actions
+export const { handleIsLoading, setSheetActiveTab, getLatestFile, getTabsName } = sliceCommon.actions
 
 export default sliceCommon.reducer;

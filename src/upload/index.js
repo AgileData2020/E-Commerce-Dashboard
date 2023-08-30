@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import './style.css'
 import { useNavigate } from 'react-router-dom';
-
+import { useDispatch } from 'react-redux';
 import { Uploader, useToaster, Message } from 'rsuite';
 
 import { sheetEndPoint } from '../api/endPoints';
-
+import { getLatestFile, setSheetActiveTab, getTabsName } from '../redux/slices/common';
 
 
 
@@ -14,7 +14,7 @@ function Upload() {
   const navigate = useNavigate();
   const toaster = useToaster();
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const dispatch = useDispatch();
   return (
     <>
 
@@ -27,7 +27,14 @@ function Upload() {
             headers={{ Authorization: `Bearer ${localStorage.getItem('token')}` }}
             onSuccess={(response, file) => {
               toaster.push(<Message type="success">Uploaded successfully</Message>);
-              navigate('/dashboard');
+
+              if (response?.excel_file) {
+
+                dispatch(getLatestFile(response?.excel_file));
+                dispatch(getTabsName(response?.sheet_names))
+                response?.excel_file === 'balance_with_model' ? dispatch(setSheetActiveTab(response?.sheet_names[0])) : dispatch(setSheetActiveTab(response?.sheet_names[0]))
+                navigate('/dashboard');
+              }
 
             }}
             onError={(error) => {

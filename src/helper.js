@@ -28,11 +28,25 @@ const HelperClass = {
         } else if (type === "High Pressure") {
             return data.high_pressure;
         } else if (type === "Compressor Stations") {
-            return data.compressor_stations
+            return data.compressor_stations;
         } else if (type === 'Outlets') {
-            return data.outlets
-        } else {
-            return data.inlets
+            return data.outlets;
+        } else if (type === 'Inlets') {
+            return data.inlets;
+        } else if (type === 'Validation') {
+            return data.validation;
+        }
+        else if (type === 'Input') {
+
+            return data.input;
+        }
+        else if (type === 'Output') {
+
+            return data['output'];
+        }
+        else if (type === 'Volumes') {
+
+            return data['volume'];
         }
     },
 
