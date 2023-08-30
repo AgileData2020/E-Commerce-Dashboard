@@ -4,6 +4,7 @@ import './App.css'
 import { lazy, Suspense, useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from "react-router-dom";
 import { routesPath } from './Routes';
+import { useNavigate } from 'react-router-dom';
 import { useSelector, UseSelector } from 'react-redux/es/hooks/useSelector';
 import Loader from '../src/component/Loader/loader'
 const Login = lazy(() => import('./auth/login'));
@@ -15,6 +16,7 @@ const AdminLayout = lazy(() => import("./component/layout/layout"))
 
 function App() {
 
+  const navigate = useNavigate();
   const [currentPatth, setCurrentPath] = useState('/')
 
   const isLoading = useSelector(state => state)
@@ -32,16 +34,17 @@ function App() {
     let login = true;
 
     // isLoading.login.token
-    if (login) {
+    if (isLoading.login.token) {
 
-
+      console.log(isLoading.login.token, 'isLoading')
       return (
         <AdminLayout>
           {children}
         </AdminLayout>
 
       )
-    } else {
+    }
+    else {
 
       return < Navigate to="/" replace={true} />
 

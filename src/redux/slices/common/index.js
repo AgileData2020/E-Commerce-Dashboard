@@ -6,7 +6,8 @@ export const sliceCommon = createSlice({
     initialState: {
         isLoading: false,
         sheetActiveTab: 'Inlets',
-        currentFile: ''
+        currentFile: '',
+        tabNames: []
     },
     reducers: {
         handleIsLoading: (state, action) => {
@@ -18,12 +19,15 @@ export const sliceCommon = createSlice({
         },
 
         getLatestFile: (state, action) => {
-            state.currentFile = action.payload
+            state.currentFile = action.payload;
+        },
+        getTabsName: (state, action) => {
+            state.tabNames = action.payload;
         }
 
 
     }
 })
-export const { handleIsLoading, setSheetActiveTab, getLatestFile } = sliceCommon.actions
+export const { handleIsLoading, setSheetActiveTab, getLatestFile, getTabsName } = sliceCommon.actions
 
 export default sliceCommon.reducer;

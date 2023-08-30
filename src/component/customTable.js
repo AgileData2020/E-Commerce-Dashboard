@@ -58,6 +58,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
   };
 
   const borderStyle = ['Pliny WB', 'Cypress WB', 'Golden WB', 'Bluto WB', 'Lowe WB', 'Tribute WB', 'Nailed it WB', 'Oasis WB', 'Olifant WB', 'Abigail WB']
+
   return (
 
 
@@ -96,7 +97,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
           <Column
             headerCellRender={headerCellRender}
             // cssClass={((activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Component Volume' || tableLabel === 'Rollup Component Heating Content') || activeTabs.sheetActiveTab === 'Validation' || activeTabs.sheetActiveTab === 'FlowCal Data' || activeTabs.sheetActiveTab === 'Envelope') ? 'cls' : ''}
-            cssClass={activeTabs.sheetActiveTab === 'Model CS' && (borderStyle.includes(column.data_key) ? 'cls' : 'clss')}
+            cssClass={activeTabs.sheetActiveTab === 'Model CS' && (borderStyle.includes(column.data_key) ? 'customBorder' : 'clss')}
             alignment="left"
             maxWidth={300}
             key={column.data_key}

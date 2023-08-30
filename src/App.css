@@ -45,22 +45,22 @@
     font-weight: 600 !important;
 }
 
-/* .dx-datagrid-headers .cls {
+.dx-datagrid-headers .cls {
     background-color: blue;
     color: white !important;
-} */
+}
 .custom-header{
   background-color: #61dafb !important;
   padding: '10px' !important;
   color: 'red' !important;
 }
 
-.dx-datagrid .cls{
+.dx-datagrid .customBorder{
  border: 1px solid #ccc !important;
  border-right-width: 2px !important;
 border-right-color:black !important;
-}
-
+} 
+ 
 .dx-datagrid .clss{
  border: 1px solid #ccc !important;
  border-left-width: 2px !important;

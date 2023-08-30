@@ -15,7 +15,9 @@ import { setSheetActiveTab } from '../redux/slices/common';
 
 const Dashboard = () => {
     const dispatch = useDispatch();
-    const activeTabs = useSelector(state => state.commonData)
+    const activeTabs = useSelector(state => state.commonData);
+
+
 
     const [active, setActive] = useState(activeTabs.sheetActiveTab);
     const [openDrawer, setOpenDrawer] = useState(false);
@@ -27,51 +29,20 @@ const Dashboard = () => {
     const singleTable = ["Envelope", "FlowCal Raw", "FlowCal", 'H2O Adjust', 'Receiptpoints', "FlowCal Data"]
 
     const Navbar = ({ active, onSelect, ...props }) => {
-        if (activeTabs.currentFile === 'balance_with_model') {
-            return (
-
-
-                <Nav {...props} activeKey={active} onSelect={onSelect} style={{ marginBottom: 50 }}>
+        return (
+            <Nav {...props} activeKey={active} onSelect={onSelect} style={{ marginBottom: 50 }}>
 
 
 
-                    <Nav.Item eventKey='Inlets'>Inlets</Nav.Item>
-                    <Nav.Item eventKey='Outlets'>Outlets</Nav.Item>
+                {
+                    activeTabs?.tabNames.map((item, index) =>
+                        <Nav.Item key={item} eventKey={item}>{item}</Nav.Item>
 
-                    <Nav.Item eventKey='Compressor Stations'>Compressor Stations</Nav.Item>
-                    <Nav.Item eventKey='High Pressure'>High Pressure</Nav.Item>
-                    <Nav.Item eventKey='Plant'>Plant</Nav.Item>
-                    <Nav.Item eventKey="Liquids">Liquids</Nav.Item>
-                    <Nav.Item eventKey="Rollup">Rollup</Nav.Item>
-                    <Nav.Item eventKey="FlowCal">FlowCal</Nav.Item>
-                    <Nav.Item eventKey="Model Output">Model Output</Nav.Item>
-                    <Nav.Item eventKey="Model CS">Model CS </Nav.Item>
-                    <Nav.Item eventKey="FlowCal Raw">FlowCal Raw</Nav.Item>
+                    )
+                }
 
-                </Nav>
-            );
-        } else {
-            return (
-
-
-                <Nav {...props} activeKey={active} onSelect={onSelect} style={{ marginBottom: 50 }}>
-
-
-
-                    <Nav.Item eventKey='Validation'>Validation</Nav.Item>
-                    <Nav.Item eventKey='Input'>Input</Nav.Item>
-                    <Nav.Item eventKey='Output'>Output</Nav.Item>
-                    <Nav.Item eventKey='Volumes'>Volumes</Nav.Item>
-                    <Nav.Item eventKey='H2O Adjust'>H2O Adjust</Nav.Item>
-                    <Nav.Item eventKey="Receiptpoints">Receiptpoints</Nav.Item>
-                    <Nav.Item eventKey="FlowCal Data">Flowcal Data</Nav.Item>
-                    <Nav.Item eventKey="Envelope">Envelope</Nav.Item>
-                    <Nav.Item eventKey="FlowCal Raw"> FlowCal Raw</Nav.Item>
-
-
-                </Nav>
-            );
-        }
+            </Nav>
+        )
     };
 
     const getSheetData = async () => {

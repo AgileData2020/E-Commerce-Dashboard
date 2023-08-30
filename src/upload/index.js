@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Uploader, useToaster, Message } from 'rsuite';
 
 import { sheetEndPoint } from '../api/endPoints';
-import { getLatestFile, setSheetActiveTab } from '../redux/slices/common';
+import { getLatestFile, setSheetActiveTab, getTabsName } from '../redux/slices/common';
 
 
 
@@ -31,7 +31,8 @@ function Upload() {
               if (response?.excel_file) {
 
                 dispatch(getLatestFile(response?.excel_file));
-                response?.excel_file === 'balance_with_model' ? dispatch(setSheetActiveTab('Inlets')) : dispatch(setSheetActiveTab('Validation'))
+                dispatch(getTabsName(response?.sheet_names))
+                response?.excel_file === 'balance_with_model' ? dispatch(setSheetActiveTab(response?.sheet_names[0])) : dispatch(setSheetActiveTab(response?.sheet_names[0]))
                 navigate('/dashboard');
               }
 

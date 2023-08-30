@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 
     Form,
@@ -30,6 +30,12 @@ const Containerr = () => {
     const handleChange = () => {
         setVisible(!visible);
     };
+    const isLoading = useSelector(state => state);
+    useLayoutEffect(() => {
+        if (localStorage.getItem('token')) {
+            navigate('/upload');
+        }
+    })
 
     const handleSubmit = async (event) => {
         // Handle the form submission here
