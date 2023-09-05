@@ -2,9 +2,11 @@ import { IconButton, Table } from 'rsuite';
 import Button from 'rsuite/Button';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import DataGrid, { Column, Pager, Paging, HeaderFilter, Scrolling, Sorting, LoadPanel, SearchPanel } from 'devextreme-react/data-grid';
+import DataGrid, { Column, Pager, Paging, Export, HeaderFilter, Scrolling, Sorting, LoadPanel, SearchPanel, Editing } from 'devextreme-react/data-grid';
 import HelperClass from '../helper';
-
+import { Workbook } from 'exceljs';
+import { saveAs } from 'file-saver-es';
+import { exportDataGrid } from 'devextreme/excel_exporter';
 export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, active, tableLabel }) {
 
 
@@ -41,7 +43,13 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
     }
   };
 
+  const handleRowUpdated = (e) => {
+    // e.data contains the updated row data
+    console.log('Row updated:', e.data);
 
+    // You can call your custom function or perform any other action here
+    // For example, you might want to make an API call to save the changes to the server.
+  };
 
 
   const headerCellRender = (data) => {
@@ -57,6 +65,23 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
     return <th>{data?.column?.caption}</th>;
   };
 
+
+  const onExporting = (e) => {
+    const workbook = new Workbook();
+    const worksheet = workbook.addWorksheet(tableLabel);
+
+    exportDataGrid({
+      component: e.component,
+      worksheet,
+      autoFilterEnabled: true,
+    }).then(() => {
+      workbook.csv.writeBuffer().then((buffer) => {
+        saveAs(new Blob([buffer], { type: 'application/octet-stream' }), `${tableLabel}.csv`);
+      });
+    });
+    e.cancel = true;
+  }
+
   const borderStyle = ['Pliny WB', 'Cypress WB', 'Golden WB', 'Bluto WB', 'Lowe WB', 'Tribute WB', 'Nailed it WB', 'Oasis WB', 'Olifant WB', 'Abigail WB']
 
   return (
@@ -69,10 +94,11 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
       <DataGrid
         height={HelperClass.tableHeightDecider(tableBodyData)}
         dataSource={tableBodyData}
+        onExporting={onExporting}
         // onCellPrepared={onCellPrepared}
         // onRowPrepared={handleRowPrepared}
         // defaultColumns={HelperClass.getTableColumns(tableHeaderData)}
-
+        onRowUpdated={handleRowUpdated}
         showBorders={true}
         width="100%"
         // wordWrapEnabled={true}
@@ -94,6 +120,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
 
         {tableHeaderData.map((column, index) =>
+
           <Column
             headerCellRender={headerCellRender}
             // cssClass={((activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Component Volume' || tableLabel === 'Rollup Component Heating Content') || activeTabs.sheetActiveTab === 'Validation' || activeTabs.sheetActiveTab === 'FlowCal Data' || activeTabs.sheetActiveTab === 'Envelope') ? 'cls' : ''}
@@ -195,10 +222,21 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
           </Column>
 
+
+
+
+
         )
         }
 
-
+        <Editing
+          mode="row"
+          fixed={false}
+          allowUpdating={true}
+        // allowAdding={true}
+        // allowDeleting={true}
+        />
+        <Export enabled={true} formats={['csv']} />
       </DataGrid >
 
     </>

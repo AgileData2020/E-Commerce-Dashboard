@@ -10,11 +10,12 @@
     "@mui/styled-engine-sc": "^5.12.0",
     "@mui/x-date-pickers-pro": "^6.9.1",
     "@reduxjs/toolkit": "^1.9.5",
-  
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
     "devextreme": "^23.1.4",
     "devextreme-react": "^23.1.4",
+    "exceljs": "^4.3.0",
+    "file-saver-es": "^2.0.5",
     "jwt-decode": "^3.1.2",
     "lightweight-charts": "^4.0.1",
     "react": "^18.2.0",
