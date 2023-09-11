@@ -7,7 +7,8 @@ export const sliceCommon = createSlice({
         isLoading: false,
         sheetActiveTab: 'Inlets',
         currentFile: '',
-        tabNames: []
+        tabNames: [],
+        collapseable: true,
     },
     reducers: {
         handleIsLoading: (state, action) => {
@@ -23,11 +24,21 @@ export const sliceCommon = createSlice({
         },
         getTabsName: (state, action) => {
             state.tabNames = action.payload;
-        }
+        },
 
+        setCollapse: (state, action) => {
+            console.log(action.payload == 1)
+
+            if (action.payload == 1) {
+                state.collapseable = false;
+            } else {
+                state.collapseable = !state.collapseable;
+            }
+
+        }
 
     }
 })
-export const { handleIsLoading, setSheetActiveTab, getLatestFile, getTabsName } = sliceCommon.actions
+export const { handleIsLoading, setSheetActiveTab, getLatestFile, getTabsName, setCollapse } = sliceCommon.actions
 
 export default sliceCommon.reducer;

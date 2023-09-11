@@ -12,9 +12,10 @@ import { FlexboxGrid, Col } from 'rsuite';
 import { useSelector } from 'react-redux';
 import Loader from '../component/Loader/loader';
 import { setSheetActiveTab } from '../redux/slices/common';
-
+import Upload from '../upload';
 const Dashboard = () => {
     const dispatch = useDispatch();
+
     const activeTabs = useSelector(state => state.commonData);
 
 
@@ -45,9 +46,13 @@ const Dashboard = () => {
         )
     };
 
-    const getSheetData = async () => {
-        setLoading(true)
+    let avoid_Re_rendering = false
 
+    const getSheetData = async () => {
+        if (avoid_Re_rendering) { return }
+
+        avoid_Re_rendering = true;
+        setLoading(true)
         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
         try {
             const response = await axiosInstance.get(sheetEndPoint.GET_SHEET + active);
@@ -73,9 +78,13 @@ const Dashboard = () => {
         }
     }
 
+
     useEffect(() => {
-        getSheetData();
-    }, [active]);
+        if (!activeTabs?.collapseable && tableHeaderData.length === 0) {
+            getSheetData();
+        }
+
+    }, []);
 
 
 
@@ -90,69 +99,85 @@ const Dashboard = () => {
     return (
 
         <>
-            <h1>{active}</h1>
-            <Navbar className='mar-no' appearance="subtle" active={active} onSelect={setActiveTabs} />
-
+            {/* <h1>{active}</h1> */}
 
 
             {
-                isLoading ?
-                    <Loader />
+
+                activeTabs?.collapseable ?
+                    <Upload />
+
                     :
 
-                    <div className="show-grid-custom">
+                    <>
+
+
+                        <Navbar className='mar-no' appearance="subtle" active={active} onSelect={setActiveTabs} />
+
+
 
                         {
-                            singleTable.includes(active) ?
-
-                                <div className='tab-stybg'>
-                                    <h5>{active}</h5>
-                                    <CustomTable active={active} tableData={multiTableData} tableHeaderData={tableHeaderData} tableBodyData={tableBodyData} setOpen={setOpenDrawer} />
-
-                                </div>
+                            isLoading ?
+                                <Loader />
                                 :
 
-                                <FlexboxGrid justify="left" >
+                                <div className="show-grid-custom">
+
                                     {
+                                        singleTable.includes(active) ?
+
+                                            <div className='tab-stybg'>
+                                                <h5>{active}</h5>
+
+                                                <CustomTable active={active} tableData={multiTableData} tableHeaderData={tableHeaderData} tableBodyData={tableBodyData} setOpen={setOpenDrawer} />
+
+                                            </div>
+                                            :
+
+                                            <FlexboxGrid justify="start" >
+                                                {
 
 
-                                        multiTableData?.length > 0 &&
-                                        multiTableData?.map((item, index) =>
-                                            <FlexboxGrid.Item as={Col} colspan={24} md={tableArrangements.includes(item['table_' + parseInt(index + 1)]?.table_label) ? 24 : tableArrangements.includes(active) ? 24 : 12}>
+                                                    multiTableData?.length > 0 &&
+                                                    multiTableData?.map((item, index) =>
+                                                        <FlexboxGrid.Item as={Col} colspan={24} md={tableArrangements.includes(item['table_' + parseInt(index + 1)]?.table_label) ? 24 : tableArrangements.includes(active) ? 24 : 12}>
 
 
-                                                <div className='tab-stybg' style={{ marginTop: '5px', }}>
+                                                            <div className='tab-stybg' style={{ marginTop: '5px', }}>
 
 
-                                                    <h5>{item['table_' + parseInt(index + 1)]?.table_label}</h5>
+                                                                <h5>{item['table_' + parseInt(index + 1)]?.table_label}</h5>
 
-                                                    <CustomTable tableLabel={item['table_' + parseInt(index + 1)]?.table_label} key={item['table_' + parseInt(index + 1)]?.table_label}
-                                                        active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers}
-                                                        tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
+                                                                <CustomTable tableLabel={item['table_' + parseInt(index + 1)]?.table_label} key={item['table_' + parseInt(index + 1)]?.table_label}
+                                                                    active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers}
+                                                                    tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
 
-                                                </div>
-                                            </FlexboxGrid.Item>
+                                                            </div>
+                                                        </FlexboxGrid.Item>
 
-                                        )
+                                                    )
 
+
+
+                                                }
+
+
+                                            </FlexboxGrid>
 
 
                                     }
-
-
-                                </FlexboxGrid>
-
-
+                                </div>
                         }
-                    </div>
+
+                    </>
             }
 
 
-            {/* <CustomeDrawer setOpen={setOpenDrawer} open={openDrawer} /> */}
+
         </>
 
 
     )
 }
 
-export default Dashboard
+export default React.memo(Dashboard)

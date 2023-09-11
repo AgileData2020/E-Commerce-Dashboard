@@ -33,10 +33,8 @@ function App() {
     setCurrentPath(path);
     let login = true;
 
-    // isLoading.login.token
     if (isLoading.login.token) {
 
-      console.log(isLoading.login.token, 'isLoading')
       return (
         <AdminLayout>
           {children}
@@ -67,7 +65,7 @@ function App() {
           <Route path={routesPath.Login} element={<Login />}></Route>
 
 
-          <Route path={routesPath.UploadData} element={
+          <Route path={routesPath.UploadData + '/:file?'} element={
             <ProtectedRoutes path="/upload">
 
               <Upload />

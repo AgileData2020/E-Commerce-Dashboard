@@ -33,7 +33,6 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
   const fixedColumnArrayRaw = ['Meter Name', 'Meter Number', 'Name'];
   const handleRowPrepared = (e) => {
 
-    // console.log(e.key?.nan === 'Pressure' ? Object.values(e.key) : '', 'dsssss')
 
     if (e.rowType === 'data' && activeTabs.currentFile !== 'model_interface') {
       const backgroundColor = (e.data.Mcf === 'Inlet Comp' || e.data.Mcf === 'Outlet Comp' || e.data.Unnamed === null) ? '#3059D1' : '';
@@ -229,14 +228,16 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
         )
         }
 
-        <Editing
+        {/* <Editing
           mode="row"
           fixed={false}
           allowUpdating={true}
         // allowAdding={true}
         // allowDeleting={true}
-        />
-        <Export enabled={true} formats={['csv']} />
+        /> */}
+        {/* <Export enabled={true} formats={['csv']} >
+
+        </Export> */}
       </DataGrid >
 
     </>

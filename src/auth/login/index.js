@@ -33,7 +33,7 @@ const Containerr = () => {
     const isLoading = useSelector(state => state);
     useLayoutEffect(() => {
         if (localStorage.getItem('token')) {
-            navigate('/upload');
+            navigate('/upload/file');
         }
     })
 
@@ -46,7 +46,7 @@ const Containerr = () => {
             try {
                 await dispatch(loginUser(payload)).unwrap().then((result) => {
                     dispatch(handleIsLoading(false));
-                    navigate('/upload');
+                    navigate('/upload/' + 'file');
                     toaster.push(<Message showIcon type={'success'} closable>
                         User login successfully
                     </Message>, { placement: 'topEnd', duration: 5000 })
