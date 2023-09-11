@@ -27,7 +27,7 @@ const Dashboard = () => {
     const [isLoading, setLoading] = useState(false);
     const [multiTableData, setMultiTableData] = useState([]);
 
-    const singleTable = ["Envelope", "FlowCal Raw", "FlowCal", 'H2O Adjust', 'Receiptpoints', "FlowCal Data"]
+    const singleTable = ["Envelope", "FlowCal Raw", "FlowCal", 'H2O Adjust', 'ReceiptPoints', "FlowCal Data"]
 
     const Navbar = ({ active, onSelect, ...props }) => {
         return (
@@ -57,9 +57,13 @@ const Dashboard = () => {
         try {
             const response = await axiosInstance.get(sheetEndPoint.GET_SHEET + active);
             if (response.status === 200) {
+
                 setLoading(false)
                 if (singleTable.includes(active)) {
+
+
                     const { headers, data } = response.data;
+
                     setTableHeaderData(headers);
                     setTableBodyData(data);
 
