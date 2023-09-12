@@ -29,7 +29,7 @@ const NavToggle = ({ expand, onChange }) => {
         <Navbar appearance="subtle" className="nav-toggle">
 
 
-            <Nav pullLeft>
+            <Nav >
                 <Nav.Item onClick={onChange} style={{ width: 56, textAlign: 'center' }}>
                     {expand ? <AngleLeftIcon /> : <AngleRightIcon />}
                 </Nav.Item>
