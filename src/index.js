@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import store from './redux/store/store';
 import { Provider } from 'react-redux'
+
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
 import { persistStore } from 'redux-persist';
@@ -18,11 +19,13 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate persistor={persistor}>
+
         <BrowserRouter>
 
           <App />
 
         </BrowserRouter>
+
       </PersistGate>
     </Provider>
   </React.StrictMode>

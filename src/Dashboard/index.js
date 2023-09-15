@@ -20,7 +20,7 @@ const Dashboard = () => {
 
 
 
-    const [active, setActive] = useState(activeTabs.sheetActiveTab);
+    const [active, setActive] = useState(activeTabs?.sheetActiveTab);
     const [openDrawer, setOpenDrawer] = useState(false);
     const [tableHeaderData, setTableHeaderData] = useState([]);
     const [tableBodyData, setTableBodyData] = useState([]);
@@ -69,7 +69,6 @@ const Dashboard = () => {
 
 
                 } else {
-
                     setMultiTableData(HelperClass.sheetDataMaker(active, response.data))
                 }
 
@@ -88,12 +87,13 @@ const Dashboard = () => {
             getSheetData();
         }
 
-    }, []);
+    }, [active]);
 
 
 
     const setActiveTabs = (e) => {
 
+        setActive(e)
 
         dispatch(setSheetActiveTab(e))
 
@@ -103,7 +103,7 @@ const Dashboard = () => {
     return (
 
         <>
-            {/* <h1>{active}</h1> */}
+            <h1>{active}</h1>
 
 
             {
@@ -144,7 +144,7 @@ const Dashboard = () => {
 
                                                     multiTableData?.length > 0 &&
                                                     multiTableData?.map((item, index) =>
-                                                        <FlexboxGrid.Item as={Col} colspan={24} md={tableArrangements.includes(item['table_' + parseInt(index + 1)]?.table_label) ? 24 : tableArrangements.includes(active) ? 24 : 12}>
+                                                        <FlexboxGrid.Item key={item['table_' + parseInt(index + 1)]?.table_label} as={Col} colspan={24} md={tableArrangements.includes(item['table_' + parseInt(index + 1)]?.table_label) ? 24 : tableArrangements.includes(active) ? 24 : 12}>
 
 
                                                             <div className='tab-stybg' style={{ marginTop: '5px', }}>

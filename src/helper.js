@@ -32,6 +32,8 @@ const HelperClass = {
         } else if (type === 'Outlets') {
             return data.outlets;
         } else if (type === 'Inlets') {
+
+            console.log(data.inlets, 'data.inlets')
             return data.inlets;
         } else if (type === 'Validation') {
             return data.validation;
@@ -66,12 +68,12 @@ const HelperClass = {
     tableHeightDecider: (dataLength) => {
 
 
-        if (dataLength.length >= 100) {
+        if (dataLength?.length >= 100) {
 
             return 600;
-        } else if (dataLength.length <= 4) {
+        } else if (dataLength?.length <= 4) {
             return 200;
-        } else if (dataLength.length == 1) {
+        } else if (dataLength?.length == 1) {
 
             return 100
         } else {

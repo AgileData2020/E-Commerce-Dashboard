@@ -2,57 +2,29 @@
 
 import './App.css';
 import axiosInstance from './api/axiosInstance';
-import { lazy, Suspense, useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from "react-router-dom";
+import { lazy, Suspense } from 'react';
+import { Routes, Route } from "react-router-dom";
 import { useToaster, Message } from 'rsuite';
 import { routesPath } from './Routes';
 
-import { useNavigate } from 'react-router-dom';
+import PrivateRoute from './routes/PrivateRoute';
+
 import { useSelector, UseSelector } from 'react-redux/es/hooks/useSelector';
 import Loader from '../src/component/Loader/loader'
 const Login = lazy(() => import('./auth/login'));
 const Dashboard = lazy(() => import('./Dashboard/index'));
 const Upload = lazy(() => import("./upload/index"));
 
-const AdminLayout = lazy(() => import("./component/layout/layout"));
+
 
 
 function App() {
 
-  const navigate = useNavigate();
-  const toaster = useToaster();
-  const [currentPatth, setCurrentPath] = useState('/')
 
+  const toaster = useToaster();
   const isLoading = useSelector(state => state)
 
-  useEffect(() => {
 
-  }, [currentPatth]);
-
-
-
-
-  const ProtectedRoutes = ({ children, path }) => {
-
-    setCurrentPath(path);
-    let login = true;
-
-    if (isLoading.login.token) {
-
-      return (
-        <AdminLayout>
-          {children}
-        </AdminLayout>
-
-      )
-    }
-    else {
-
-      return < Navigate to="/" replace={true} />
-
-    }
-
-  }
 
   //  axios intercepter for handeling api reauest
   axiosInstance.interceptors.response.use(
@@ -90,38 +62,12 @@ function App() {
     isLoading.commonData?.isLoading ?
       <Loader />
       :
-      <Suspense fallback={
-        <Loader />
-      }>
+      <Suspense fallback={<Loader />}>
         <Routes>
-
-
           <Route path={routesPath.Login} element={<Login />}></Route>
-
-
-          <Route path={routesPath.UploadData + '/:file?'} element={
-            <ProtectedRoutes path="/upload">
-
-              <Upload />
-
-            </ProtectedRoutes>
-
-          }></Route>
-
-
-          <Route path={routesPath.Dashboard}
-            element={
-              <ProtectedRoutes path="/Dashboard">
-
-                <Dashboard />
-
-              </ProtectedRoutes>
-
-            }>
-
-          </Route>
+          <Route path={routesPath.UploadData + '/:file?'} element={<PrivateRoute Component={Upload} roles={['admin']} />} />
+          <Route path={routesPath.Dashboard} element={<PrivateRoute Component={Dashboard} roles={['admin']} />} />
         </Routes>
-
       </Suspense>
   );
 }

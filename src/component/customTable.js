@@ -1,5 +1,6 @@
 import { IconButton, Table } from 'rsuite';
 import Button from 'rsuite/Button';
+import FileDownloadIcon from '@rsuite/icons/FileDownload';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import DataGrid, { Column, Pager, Paging, Export, HeaderFilter, Scrolling, Sorting, LoadPanel, SearchPanel, Editing } from 'devextreme-react/data-grid';
@@ -7,6 +8,8 @@ import HelperClass from '../helper';
 import { Workbook } from 'exceljs';
 import { saveAs } from 'file-saver-es';
 import { exportDataGrid } from 'devextreme/excel_exporter';
+import 'devextreme/dist/css/dx.common.css';
+import 'devextreme/dist/css/dx.light.css';
 export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, active, tableLabel }) {
 
 
@@ -83,6 +86,14 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
   const borderStyle = ['Pliny WB', 'Cypress WB', 'Golden WB', 'Bluto WB', 'Lowe WB', 'Tribute WB', 'Nailed it WB', 'Oasis WB', 'Olifant WB', 'Abigail WB']
 
+
+  const customExportButton = () => {
+    return (
+      <button className="custom-export-button">
+        <img src={<FileDownloadIcon />} alt="Custom Icon" />
+      </button>
+    );
+  };
   return (
 
 
@@ -94,6 +105,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
         height={HelperClass.tableHeightDecider(tableBodyData)}
         dataSource={tableBodyData}
         onExporting={onExporting}
+
         // onCellPrepared={onCellPrepared}
         // onRowPrepared={handleRowPrepared}
         // defaultColumns={HelperClass.getTableColumns(tableHeaderData)}
@@ -235,9 +247,9 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
         // allowAdding={true}
         // allowDeleting={true}
         /> */}
-        {/* <Export enabled={true} formats={['csv']} >
+        <Export enabled={true} formats={['csv']} exportRender={customExportButton} >
 
-        </Export> */}
+        </Export>
       </DataGrid >
 
     </>
