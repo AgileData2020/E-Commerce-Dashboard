@@ -38,7 +38,10 @@ function App() {
       if (error.response) {
         // The request was made, and the server responded with a status code
         if (error.response.status === 500) {
-          toaster.push(<Message type="error">{error.response.data.detail}</Message>);
+          toaster.push(<Message showIcon type={'error'} closable>
+            {error.response.data.detail}
+          </Message>, { placement: 'topEnd', duration: 5000 })
+
         }
 
         console.error('Status Code:', error.response.status);

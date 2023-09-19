@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Uploader, useToaster, Message } from 'rsuite';
 
 import { sheetEndPoint } from '../api/endPoints';
-import { getLatestFile, setSheetActiveTab, getTabsName, setCollapse } from '../redux/slices/common';
+import { getLatestFile, setSheetActiveTab, getTabsName, setCollapse, getcurrentFileID } from '../redux/slices/common';
 
 
 
 
 function Upload() {
-  const getCommoanData = useSelector(state => state.commonData);
+
   const navigate = useNavigate();
   const toaster = useToaster();
   const [selectedFile, setSelectedFile] = useState(null);
@@ -29,13 +29,17 @@ function Upload() {
             fileList={selectedFile}
             headers={{ Authorization: `Bearer ${localStorage.getItem('token')}` }}
             onSuccess={(response, file) => {
+
+
+              console.log(response, 'response')
               toaster.push(<Message type="success">Uploaded successfully</Message>);
 
-              if (response?.excel_file) {
+              if (response?.sheet_names?.length > 0) {
 
+                dispatch(getcurrentFileID(response?.id))
                 dispatch(getLatestFile(response?.excel_file));
                 dispatch(getTabsName(response?.sheet_names))
-                dispatch(setSheetActiveTab(response?.sheet_names[0]));
+                dispatch(setSheetActiveTab(response?.sheet_names[0].data_key));
                 dispatch(setCollapse(1));
                 navigate('/dashboard');
               }
@@ -43,7 +47,11 @@ function Upload() {
             }}
             onError={(error) => {
 
-              toaster.push(<Message type="error">{error.response.detail}</Message>);
+              if (error?.response?.message) {
+                toaster.push(<Message type="error">{error?.response?.message}</Message>);
+              } else {
+                toaster.push(<Message type="error">{error?.message}</Message>);
+              }
 
             }}
             draggable>

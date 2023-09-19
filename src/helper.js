@@ -13,51 +13,11 @@ const HelperClass = {
 
 
     sheetDataMaker: (type, data) => {
-
-
-        if (type === 'Model CS') {
-            return data.model_cs;
-        } else if (type === "Model Output") {
-            return data.model_output;
-        } else if (type === "Rollup") {
-            return data.rollup;
-        } else if (type === 'Liquids') {
-            return data.liquids;
-        } else if (type === 'Plant') {
-            return data.plant;
-        } else if (type === "High Pressure") {
-            return data.high_pressure;
-        } else if (type === "Compressor Stations") {
-            return data.compressor_stations;
-        } else if (type === 'Outlets') {
-            return data.outlets;
-        } else if (type === 'Inlets') {
-
-            console.log(data.inlets, 'data.inlets')
-            return data.inlets;
-        } else if (type === 'Validation') {
-            return data.validation;
-        }
-        else if (type === 'Input') {
-
-            return data.input;
-        }
-        else if (type === 'Output') {
-
-            return data['output'];
-        }
-        else if (type === 'Volumes') {
-
-            return data['volume'];
-        }
+        return data[type];
     },
 
     getTableColumns: (tableHeaderData) => {
-
-
-
         let tableColumnHeaders = [];
-
         tableHeaderData?.forEach(element => {
             tableColumnHeaders.push(element.data_key)
         });

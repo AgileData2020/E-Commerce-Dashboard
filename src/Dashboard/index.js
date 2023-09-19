@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
+import { useToaster, Message } from 'rsuite';
 import './style.css';
 import { useDispatch } from 'react-redux';
 import CustomTable from '../component/customTable'
@@ -15,7 +16,7 @@ import { setSheetActiveTab } from '../redux/slices/common';
 import Upload from '../upload';
 const Dashboard = () => {
     const dispatch = useDispatch();
-
+    const toaster = useToaster();
     const activeTabs = useSelector(state => state.commonData);
 
 
@@ -37,7 +38,7 @@ const Dashboard = () => {
 
                 {
                     activeTabs?.tabNames.map((item, index) =>
-                        <Nav.Item key={item} eventKey={item}>{item}</Nav.Item>
+                        <Nav.Item key={item?.data_key} eventKey={item?.data_key}>{item?.title}</Nav.Item>
 
                     )
                 }
@@ -48,6 +49,7 @@ const Dashboard = () => {
 
     let avoid_Re_rendering = false
 
+
     const getSheetData = async () => {
         if (avoid_Re_rendering) { return }
 
@@ -55,10 +57,11 @@ const Dashboard = () => {
         setLoading(true)
         axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
         try {
-            const response = await axiosInstance.get(sheetEndPoint.GET_SHEET + active);
+            const response = await axiosInstance.get(sheetEndPoint.GET_SHEET + activeTabs?.currentFileID + '/' + activeTabs?.sheetActiveTab);
             if (response.status === 200) {
 
                 setLoading(false)
+                setActive(activeTabs?.sheetActiveTab)
                 if (singleTable.includes(active)) {
 
 
@@ -76,7 +79,14 @@ const Dashboard = () => {
 
         } catch (error) {
             setLoading(false)
-            console.log(error, 'error in dashboard component')
+
+            if (error?.response?.status === 400) {
+                toaster.push(<Message type="error">{error.response?.data?.detail}</Message>);
+
+            } else {
+                toaster.push(<Message type="error">{error?.message}</Message>);
+            }
+            console.log(error.response?.data?.detail, 'error in dashboard component')
 
         }
     }
@@ -87,23 +97,22 @@ const Dashboard = () => {
             getSheetData();
         }
 
-    }, [active]);
+    }, [active, activeTabs?.currentFileID]);
 
 
 
     const setActiveTabs = (e) => {
 
         setActive(e)
-
         dispatch(setSheetActiveTab(e))
 
     }
 
-    const tableArrangements = ['Inlets 1', 'Inlets 3', 'Outlets 3', 'Outlets 1', 'Outlets', 'Inlets', 'Composition Data', 'Validation Input Table', 'Model Input'];
+    const tableArrangements = ['Inlets 1', 'Inlets 2', 'Inlets 4', 'Inlets 3', 'Outlets 3', 'Outlets 1', 'Outlets 2', 'Outlets 4', 'Inlets', 'Composition Data', 'Validation Input Table', 'Model Input'];
     return (
 
         <>
-            <h1>{active}</h1>
+            {/* <h1>{active}</h1> */}
 
 
             {
@@ -128,45 +137,37 @@ const Dashboard = () => {
                                 <div className="show-grid-custom">
 
                                     {
-                                        singleTable.includes(active) ?
-
-                                            <div className='tab-stybg'>
-                                                <h5>{active}</h5>
-
-                                                <CustomTable active={active} tableData={multiTableData} tableHeaderData={tableHeaderData} tableBodyData={tableBodyData} setOpen={setOpenDrawer} />
-
-                                            </div>
-                                            :
-
-                                            <FlexboxGrid justify="start" >
-                                                {
 
 
-                                                    multiTableData?.length > 0 &&
-                                                    multiTableData?.map((item, index) =>
-                                                        <FlexboxGrid.Item key={item['table_' + parseInt(index + 1)]?.table_label} as={Col} colspan={24} md={tableArrangements.includes(item['table_' + parseInt(index + 1)]?.table_label) ? 24 : tableArrangements.includes(active) ? 24 : 12}>
+                                        <FlexboxGrid justify="start">
+                                            {
 
 
-                                                            <div className='tab-stybg' style={{ marginTop: '5px', }}>
+                                                multiTableData?.length > 0 &&
+                                                multiTableData?.map((item, index) =>
+                                                    <FlexboxGrid.Item key={item['table_' + parseInt(index + 1)]?.table_label} as={Col} colspan={24} md={tableArrangements.includes(item['table_' + parseInt(index + 1)]?.table_label) ? 24 : tableArrangements.includes(active) ? 24 : 12}>
 
 
-                                                                <h5>{item['table_' + parseInt(index + 1)]?.table_label}</h5>
+                                                        <div className='tab-stybg' style={{ marginTop: '5px', }}>
 
-                                                                <CustomTable tableLabel={item['table_' + parseInt(index + 1)]?.table_label} key={item['table_' + parseInt(index + 1)]?.table_label}
-                                                                    active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers}
-                                                                    tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
 
-                                                            </div>
-                                                        </FlexboxGrid.Item>
+                                                            <h5>{item['table_' + parseInt(index + 1)]?.table_label}</h5>
 
-                                                    )
+                                                            <CustomTable tableLabel={item['table_' + parseInt(index + 1)]?.table_label} key={item['table_' + parseInt(index + 1)]?.table_label}
+                                                                active={active} tableData={multiTableData} tableHeaderData={item['table_' + parseInt(index + 1)]?.headers}
+                                                                tableBodyData={item['table_' + parseInt(index + 1)]?.data} setOpen={setOpenDrawer} />
+
+                                                        </div>
+                                                    </FlexboxGrid.Item>
+
+                                                )
 
 
 
-                                                }
+                                            }
 
 
-                                            </FlexboxGrid>
+                                        </FlexboxGrid>
 
 
                                     }

@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Message, useToaster } from 'rsuite';
 
-const CustomMessage = ({ type, content, duration }) => {
+
+
+
+
+function CustomMessage({ type, content, duration }) {
+
+    useEffect(() => {
+
+    })
     const toaster = useToaster();
-    // Display the message using the Message component
-    toaster.push(<Message showIcon type={'success'} closable>
-        The message appears on the .
-    </Message>, { placement: 'topEnd', duration: 5000 })
+    return (
+        // Display the message using the Message component
+        // toaster.push(<Message showIcon type={'success'} closable>
+        //     The message appears on the .
+        // </Message>, { placement: 'topEnd', duration: 5000 })
+        <h1>saaaaaaaaaaaaaaaaaaaa</h1>
+    )
 
 };
 

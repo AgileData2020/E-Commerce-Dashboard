@@ -4,7 +4,8 @@ module.exports = {
         Register: '/register'
     },
     sheetEndPoint: {
-        Upload: '/file/upload',
-        GET_SHEET: '/file/get_sheet/'
+        Upload: '/hydro_file/upload_file/',
+        GET_SHEET: '/hydro_file/get_file_sheet_by_id/',
+        GET_ALL_SHEETS: '/hydro_file/get_files_info/',
     }
 }

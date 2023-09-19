@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
 import {
 
     Form,
@@ -9,7 +8,6 @@ import {
     Button,
     Message,
     FlexboxGrid,
-
     IconButton,
     useToaster
 
@@ -56,10 +54,16 @@ const Containerr = () => {
                 });
             } catch (rejectedValueOrSerializedError) {
                 dispatch(handleIsLoading(false))
-                if (rejectedValueOrSerializedError.response.status === 401) {
+                if (rejectedValueOrSerializedError.response?.status === 401) {
 
                     toaster.push(<Message showIcon type={'error'} closable>
                         {rejectedValueOrSerializedError?.response?.data?.detail}
+                    </Message>, { placement: 'topEnd', duration: 5000 })
+                }
+                else {
+
+                    toaster.push(<Message showIcon type={'error'} closable>
+                        {rejectedValueOrSerializedError.message}
                     </Message>, { placement: 'topEnd', duration: 5000 })
                 }
 

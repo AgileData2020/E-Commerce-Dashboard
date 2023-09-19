@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
+import { sheetEndPoint } from '../../api/endPoints';
+import { useToaster, Message } from 'rsuite';
 import './style.css';
 import { Container, IconButton, Content, Navbar } from 'rsuite';
 import AngleLeftIcon from '@rsuite/icons/legacy/AngleLeft';
 import AngleRightIcon from '@rsuite/icons/legacy/AngleRight';
-
+import ArowBackIcon from '@rsuite/icons/ArowBack';
+import axiosInstance from '../../api/axiosInstance';
 import FileUploadIcon from '@rsuite/icons/FileUpload';
 import hydrocarbonIconMobile from '../../assets/img/hydro-mobile.png'
-
-
-
+import { setCollapse } from '../../redux/slices/common';
 import { Nav } from 'rsuite';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CustomeDrawer from '../customeDrawer';
-import { setCollapse } from '../../redux/slices/common';
 
 const headerStyles = {
     padding: 2,
@@ -43,8 +43,14 @@ const NavToggle = ({ expand, onChange }) => {
 
 const Layout = ({ children }) => {
     const [expand, setExpand] = useState(false);
+    const [isLoading, setLoading] = useState(false);
+
+
+    const [fileData, setFilesData] = useState([])
     const { file } = useParams();
     const navigate = useNavigate();
+
+    const toaster = useToaster();
     const logoutUser = () => {
         localStorage.clear();
         navigate('/');
@@ -55,7 +61,33 @@ const Layout = ({ children }) => {
     const userInfo = useSelector(state => state);
 
 
+    console.log(userInfo?.commonData?.collapseable, 'userInfo')
+    const getAllSheetData = async () => {
 
+        setLoading(true);
+        setExpand(!expand)
+        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
+        try {
+            const response = await axiosInstance.get(sheetEndPoint.GET_ALL_SHEETS);
+            if (response.status === 200) {
+
+                setLoading(false);
+                setFilesData(response.data)
+
+
+            }
+
+        } catch (error) {
+            setLoading(false)
+
+            if (error?.response?.status === 400) {
+                toaster.push(<Message type="error">{error.response?.data?.detail}</Message>);
+
+            } else {
+                toaster.push(<Message type="error">{error?.message}</Message>);
+            }
+        }
+    }
 
     return (
         <div className="show-fake-browser sidebar-page">
@@ -64,14 +96,14 @@ const Layout = ({ children }) => {
 
             <Container>
 
-                <CustomeDrawer open={expand} setOpen={setExpand} />
+                <CustomeDrawer open={expand} setOpen={setExpand} fileData={fileData} />
                 <Container>
                     <header className='header-bg'>
 
 
                         <div className='togal-buttons'>
                             <div className='flot-left mob-logo'><img src={hydrocarbonIconMobile} alt="logo" /></div>
-                            <div className='flot-left'> <NavToggle expand={expand} onChange={() => setExpand(!expand)} /></div>
+                            <div className='flot-left'> <NavToggle expand={expand} onChange={() => getAllSheetData()} /></div>
 
 
                         </div>
@@ -80,10 +112,17 @@ const Layout = ({ children }) => {
                             <div className='flot-left ms-30'>
                                 {
                                     !file &&
-                                    <IconButton onClick={() => dispatch(setCollapse())} appearance="primary" title='Upload new file' icon={<FileUploadIcon />}>
+                                        userInfo?.commonData?.collapseable ?
+                                        <IconButton onClick={() => dispatch(setCollapse())} appearance="primary" title='back to sheet' icon={<ArowBackIcon />}>
 
-                                        upload
-                                    </IconButton>
+                                            Back
+
+                                        </IconButton> :
+
+                                        <IconButton onClick={() => dispatch(setCollapse())} appearance="primary" title='Upload new file' icon={<FileUploadIcon />}>
+
+                                            Upload
+                                        </IconButton>
                                 }
 
                             </div>
