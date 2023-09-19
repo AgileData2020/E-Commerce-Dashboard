@@ -114,7 +114,6 @@ const Layout = ({ children }) => {
                                     !file &&
                                         userInfo?.commonData?.collapseable ?
                                         <IconButton onClick={() => dispatch(setCollapse())} appearance="primary" title='back to sheet' icon={<ArowBackIcon />}>
-
                                             Back
 
                                         </IconButton> :
@@ -132,8 +131,7 @@ const Layout = ({ children }) => {
                             <div className='flot-left profile-detail'>
                                 <Nav>
                                     <Nav.Menu title={userInfo?.login?.first_name + " " + userInfo?.login?.last_name}>
-                                        {/* <Nav.Item >Profile</Nav.Item>
-                                        <Nav.Item >Checkout</Nav.Item> */}
+
                                         <Nav.Item onClick={() => logoutUser()}>Logout</Nav.Item>
                                     </Nav.Menu>
                                 </Nav>
