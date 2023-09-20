@@ -79,6 +79,9 @@ const Dashboard = () => {
 
         } catch (error) {
             setLoading(false)
+            setTableHeaderData([]);
+            setTableBodyData([]);
+            setMultiTableData([])
 
             if (error?.response?.status === 400) {
                 toaster.push(<Message type="error">{error.response?.data?.detail}</Message>);

@@ -29,9 +29,6 @@ function Upload() {
             fileList={selectedFile}
             headers={{ Authorization: `Bearer ${localStorage.getItem('token')}` }}
             onSuccess={(response, file) => {
-
-
-              console.log(response, 'response')
               toaster.push(<Message type="success">Uploaded successfully</Message>);
 
               if (response?.sheet_names?.length > 0) {
