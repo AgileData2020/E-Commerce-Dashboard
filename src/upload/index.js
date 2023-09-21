@@ -44,8 +44,8 @@ function Upload() {
             }}
             onError={(error) => {
 
-              if (error?.response?.message) {
-                toaster.push(<Message type="error">{error?.response?.message}</Message>);
+              if (error?.response?.detail) {
+                toaster.push(<Message type="error">{error?.response?.detail}</Message>);
               } else {
                 toaster.push(<Message type="error">{error?.message}</Message>);
               }

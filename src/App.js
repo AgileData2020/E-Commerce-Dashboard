@@ -50,6 +50,9 @@ function App() {
         // The request was made, but no response was received
         console.error('Request made but no response received:', error.request);
       } else {
+        toaster.push(<Message showIcon type={'error'} closable>
+          {error.response.data.detail}
+        </Message>, { placement: 'topEnd', duration: 5000 })
         // Something happened in setting up the request that triggered an error
         console.error('Error setting up the request:', error.message);
       }

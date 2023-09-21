@@ -15,14 +15,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import CustomeDrawer from '../customeDrawer';
 
-const headerStyles = {
-    padding: 2,
-    fontSize: 16,
-
-    color: ' #fff',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden'
-};
 
 const NavToggle = ({ expand, onChange }) => {
     return (
@@ -57,11 +49,7 @@ const Layout = ({ children }) => {
     }
 
     const dispatch = useDispatch();
-
     const userInfo = useSelector(state => state);
-
-
-    console.log(userInfo?.commonData?.collapseable, 'userInfo')
     const getAllSheetData = async () => {
 
         setLoading(true);
@@ -72,7 +60,8 @@ const Layout = ({ children }) => {
             if (response.status === 200) {
 
                 setLoading(false);
-                setFilesData(response.data)
+                setFilesData(response.data);
+
 
 
             }
@@ -112,16 +101,18 @@ const Layout = ({ children }) => {
                             <div className='flot-left ms-30'>
                                 {
                                     !file &&
+                                    (
                                         userInfo?.commonData?.collapseable ?
-                                        <IconButton onClick={() => dispatch(setCollapse())} appearance="primary" title='back to sheet' icon={<ArowBackIcon />}>
-                                            Back
+                                            <IconButton onClick={() => dispatch(setCollapse())} appearance="primary" title='back to sheet' icon={<ArowBackIcon />}>
+                                                Back
 
-                                        </IconButton> :
+                                            </IconButton> :
 
-                                        <IconButton onClick={() => dispatch(setCollapse())} appearance="primary" title='Upload new file' icon={<FileUploadIcon />}>
+                                            <IconButton onClick={() => dispatch(setCollapse())} appearance="primary" title='Upload new file' icon={<FileUploadIcon />}>
 
-                                            Upload
-                                        </IconButton>
+                                                Upload
+                                            </IconButton>
+                                    )
                                 }
 
                             </div>
