@@ -66,3 +66,6 @@ border-right-color:black !important;
  border-left-width: 2px !important;
 border-left-color:black !important;
 }
+.rs-container {
+    display:contents !important;
+}
