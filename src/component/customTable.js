@@ -135,13 +135,13 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
           <Column
             headerCellRender={headerCellRender}
             // cssClass={((activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Component Volume' || tableLabel === 'Rollup Component Heating Content') || activeTabs.sheetActiveTab === 'Validation' || activeTabs.sheetActiveTab === 'FlowCal Data' || activeTabs.sheetActiveTab === 'Envelope') ? 'cls' : ''}
-            cssClass={activeTabs.sheetActiveTab === 'model_cs' && (borderStyle.includes(column.data_key) ? 'customBorder' : 'clss')}
+            cssClass={activeTabs.sheetActiveTab === 'Model CS' && (borderStyle.includes(column.data_key) ? 'customBorder' : 'clss')}
             alignment="left"
             maxWidth={300}
             key={column.data_key}
             dataField={column.data_key.replaceAll('.', '_')}
             caption={column.data_key.search('Unnamed') != -1 ? '' : column.data_key.replaceAll('_', '.')}
-            fixed={(activeTabs.sheetActiveTab === 'flowcal_raw' && activeTabs.currentFile === 'model_interface') ? fixedColumnArrayRaw.includes(column.data_key) ? true : false : fixedColumnArray.includes(column.data_key) ? true : false}
+            fixed={(activeTabs.sheetActiveTab === 'FlowCal Raw' && activeTabs.currentFile === 'model_interface') ? fixedColumnArrayRaw.includes(column.data_key) ? true : false : fixedColumnArray.includes(column.data_key) ? true : false}
             cellRender={cellData => {
 
 
@@ -150,19 +150,19 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
               const cellValue = cellData.value;
               let backgroundColor = 'transparent'; // Default background color
               let color = "black"
-              if (activeTabs.sheetActiveTab === 'receiptpoints' && column.data_key === 'C1' && activeTabs.currentFile === 'model_interface') {
+              if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'C1' && activeTabs.currentFile === 'model_interface') {
                 // Apply conditional cell color for the "Age" column
                 backgroundColor = cellValue < 70 ? 'red' : 'white';
                 color = cellValue < 70 ? '#ffc000' : 'black';
 
               }
-              if (activeTabs.sheetActiveTab === 'receiptpoints' && column.data_key === 'N2' && activeTabs.currentFile === 'model_interface') {
+              if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'N2' && activeTabs.currentFile === 'model_interface') {
                 // Apply conditional cell color for the "Age" column
                 backgroundColor = cellValue > 3 ? '#ffc7ce' : 'white';
                 color = cellValue > 3 ? '#9c0006' : 'black';
 
               }
-              else if (activeTabs.sheetActiveTab === 'receiptpoints' && column.data_key === 'C6' && activeTabs.currentFile === 'model_interface') {
+              else if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'C6' && activeTabs.currentFile === 'model_interface') {
                 backgroundColor = cellValue > 1 ? 'red' : 'white';
                 color = cellValue > 1 ? '#ffc000' : 'black';
 
@@ -177,7 +177,7 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
                 backgroundColor = cellValue === 'True' ? '#f4b083' : 'white';
               }
 
-              else if (cellData.key?.Unnamed === 'pressure' && cellData.value < 25 && tableLabel === 'Composition Data') {
+              else if (cellData.key?.Unnamed === 'Pressure' && cellData.value < 25 && tableLabel === 'Composition Data') {
                 backgroundColor = '#ffc7ce';
                 color = '#9c0006'
               }
@@ -200,14 +200,14 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
                 color = cellValue > 0 ? 'black' : 'black';
               }
 
-              else if (activeTabs.sheetActiveTab === 'receiptpoints' && column.data_key === 'Unnamed 3' && activeTabs.currentFile === 'model_interface') {
+              else if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'Unnamed 3' && activeTabs.currentFile === 'model_interface') {
                 if (typeof (cellValue) === 'string') {
                   // backgroundColor = cellValue.includes('(') ? 'red' : 'white';
                   color = cellValue.includes('(') ? 'red' : 'black';
                 }
 
               }
-              else if (activeTabs.sheetActiveTab === 'rollup' && column.data_key === 'C6+' && activeTabs.currentFile === 'balance_with_model' && tableLabel === 'Rollup') {
+              else if (activeTabs.sheetActiveTab === 'Rollup' && column.data_key === 'C6+' && activeTabs.currentFile === 'balance_with_model' && tableLabel === 'Rollup') {
                 backgroundColor = cellValue > 1 ? '#ffc7ce' : 'white';
                 color = cellValue > 1 ? '#9c0006' : 'black';
               }

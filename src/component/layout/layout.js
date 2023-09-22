@@ -85,14 +85,16 @@ const Layout = ({ children }) => {
 
             <Container>
 
-                <CustomeDrawer open={expand} setOpen={setExpand} fileData={fileData} />
+                <CustomeDrawer open={expand} setOpen={setExpand} fileData={fileData} fileParams={file} />
                 <Container>
                     <header className='header-bg'>
 
 
                         <div className='togal-buttons'>
                             <div className='flot-left mob-logo'><img src={hydrocarbonIconMobile} alt="logo" /></div>
-                            <div className='flot-left'> <NavToggle expand={expand} onChange={() => getAllSheetData()} /></div>
+
+
+                            {<div className='flot-left'> <NavToggle expand={expand} onChange={() => getAllSheetData()} /></div>}
 
 
                         </div>

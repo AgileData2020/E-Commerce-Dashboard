@@ -5,6 +5,7 @@ import { getLatestFile, setSheetActiveTab, getTabsName, setCollapse, getcurrentF
 import { Drawer, Nav, Sidenav, Sidebar } from 'rsuite';
 import PlusIcon from '@rsuite/icons/Plus';
 import hydrocarbonIcon from '../assets/img/hydloogo.png';
+import { useNavigate } from 'react-router-dom';
 
 const headerStyles = {
     padding: 2,
@@ -15,19 +16,20 @@ const headerStyles = {
 };
 
 
-const CustomeDrawer = ({ open, setOpen, fileData }) => {
+const CustomeDrawer = ({ open, setOpen, fileData, fileParams }) => {
 
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     //   currentUseCase for dispaching and show data on dashboard of current file click from sidebar 
     const currentUseCase = (currentItem) => {
-
+        setOpen(!open);
         dispatch(getcurrentFileID(currentItem?.id));
         dispatch(getLatestFile(currentItem?.excel_file));
         dispatch(getTabsName(currentItem?.sheet_names));
         dispatch(setSheetActiveTab(currentItem.sheet_names[0].data_key));
         dispatch(setCollapse(1));
-        setOpen(!open);
+
+        fileData && navigate('/dashboard');
     }
 
 
@@ -70,7 +72,7 @@ const CustomeDrawer = ({ open, setOpen, fileData }) => {
                                                 {
                                                     fileData.map((item) =>
 
-                                                        <Nav.Item onClick={() => currentUseCase(item)} key={item?.id} eventKey={item?.id}>{item?.excel_file?.replaceAll('_', ' ')?.toUpperCase()}</Nav.Item>
+                                                        <Nav.Item onClick={() => currentUseCase(item)} key={item?.id} eventKey={item?.id}>{item?.file_key?.replaceAll('_', ' ')?.toUpperCase()}</Nav.Item>
                                                     )
                                                 }
 
