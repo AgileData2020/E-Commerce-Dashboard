@@ -66,6 +66,33 @@ border-right-color:black !important;
  border-left-width: 2px !important;
 border-left-color:black !important;
 }
+
+.dx-datagrid-headers .headerBgRollup{
+    background-color: #44546A;
+    color: white !important;
+}
+
+.dx-datagrid-headers .Rollup_Component_Volume {
+    background-color: #2F5597;
+    color: white !important;
+}
+
+.dx-datagrid-headers .Rollup_Component_Heating_Content {
+    background-color: #385724;
+    color: white !important;
+}
+
+ .dx-datagrid-headers .Rollup_Component_Liquid {
+    background-color: #8FAADC;
+    color: white !important;
+}
+
+ .dx-datagrid-headers .Rollup_Compressibility {
+    background-color: #843C0B;
+    color: white !important;
+}
+
+
 .rs-container {
     display:contents !important;
 }

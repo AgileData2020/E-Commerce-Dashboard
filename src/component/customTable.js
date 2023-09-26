@@ -94,6 +94,28 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
       </button>
     );
   };
+
+
+  const rollUpHeader = (data_key) => {
+    if (activeTabs.sheetActiveTab === 'model_cs') {
+      return borderStyle.includes(data_key) ? 'customBorder' : 'clss'
+    } else if (activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup') {
+      return 'headerBgRollup'
+    } else if (activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Component Volume') {
+      return 'Rollup_Component_Volume'
+    } else if (activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Component Heating Content') {
+
+      return 'Rollup_Component_Heating_Content'
+    }
+    else if (activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Component Liquid') {
+
+      return 'Rollup_Component_Liquid'
+    } else if (activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Compressibility') {
+      return 'Rollup_Compressibility'
+    }
+  }
+
+
   return (
 
 
@@ -108,11 +130,9 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
         // onCellPrepared={onCellPrepared}
         // onRowPrepared={handleRowPrepared}
-        // defaultColumns={HelperClass.getTableColumns(tableHeaderData)}
         onRowUpdated={handleRowUpdated}
         showBorders={true}
         width="100%"
-        // wordWrapEnabled={true}
         scrolling={{
           mode: "virtual",
           showScrollbar: "always",
@@ -134,35 +154,34 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
 
           <Column
             headerCellRender={headerCellRender}
-            // cssClass={((activeTabs.sheetActiveTab === 'rollup' && tableLabel === 'Rollup Component Volume' || tableLabel === 'Rollup Component Heating Content') || activeTabs.sheetActiveTab === 'Validation' || activeTabs.sheetActiveTab === 'FlowCal Data' || activeTabs.sheetActiveTab === 'Envelope') ? 'cls' : ''}
-            cssClass={activeTabs.sheetActiveTab === 'Model CS' && (borderStyle.includes(column.data_key) ? 'customBorder' : 'clss')}
+            cssClass={rollUpHeader(column.data_key)}
             alignment="left"
             maxWidth={300}
             key={column.data_key}
             dataField={column.data_key.replaceAll('.', '_')}
             caption={column.data_key.search('Unnamed') != -1 ? '' : column.data_key.replaceAll('_', '.')}
-            fixed={(activeTabs.sheetActiveTab === 'FlowCal Raw' && activeTabs.currentFile === 'model_interface') ? fixedColumnArrayRaw.includes(column.data_key) ? true : false : fixedColumnArray.includes(column.data_key) ? true : false}
+            fixed={(activeTabs.sheetActiveTab === 'flowcal_raw' && activeTabs.currentFile === 'model_interface') ? fixedColumnArrayRaw.includes(column.data_key) ? true : false : fixedColumnArray.includes(column.data_key) ? true : false}
             cellRender={cellData => {
 
 
-              // console.log(cellData.key?. == 'InletComp' ? console.log('final', cellData.value < 100 && cellData.value) : cellData.key, 'dsssss')
+
 
               const cellValue = cellData.value;
               let backgroundColor = 'transparent'; // Default background color
               let color = "black"
-              if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'C1' && activeTabs.currentFile === 'model_interface') {
+              if (activeTabs.sheetActiveTab === 'receiptpoints' && column.data_key === 'C1' && activeTabs.currentFile === 'model_interface') {
                 // Apply conditional cell color for the "Age" column
                 backgroundColor = cellValue < 70 ? 'red' : 'white';
                 color = cellValue < 70 ? '#ffc000' : 'black';
 
               }
-              if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'N2' && activeTabs.currentFile === 'model_interface') {
+              if (activeTabs.sheetActiveTab === 'receiptpoints' && column.data_key === 'N2' && activeTabs.currentFile === 'model_interface') {
                 // Apply conditional cell color for the "Age" column
                 backgroundColor = cellValue > 3 ? '#ffc7ce' : 'white';
                 color = cellValue > 3 ? '#9c0006' : 'black';
 
               }
-              else if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'C6' && activeTabs.currentFile === 'model_interface') {
+              else if (activeTabs.sheetActiveTab === 'receiptpoints' && column.data_key === 'C6' && activeTabs.currentFile === 'model_interface') {
                 backgroundColor = cellValue > 1 ? 'red' : 'white';
                 color = cellValue > 1 ? '#ffc000' : 'black';
 
@@ -200,14 +219,14 @@ export default function CustomTable({ setOpen, tableHeaderData, tableBodyData, a
                 color = cellValue > 0 ? 'black' : 'black';
               }
 
-              else if (activeTabs.sheetActiveTab === 'Receiptpoints' && column.data_key === 'Unnamed 3' && activeTabs.currentFile === 'model_interface') {
+              else if (activeTabs.sheetActiveTab === 'receiptpoints' && column.data_key === 'Unnamed 3' && activeTabs.currentFile === 'model_interface') {
                 if (typeof (cellValue) === 'string') {
                   // backgroundColor = cellValue.includes('(') ? 'red' : 'white';
                   color = cellValue.includes('(') ? 'red' : 'black';
                 }
 
               }
-              else if (activeTabs.sheetActiveTab === 'Rollup' && column.data_key === 'C6+' && activeTabs.currentFile === 'balance_with_model' && tableLabel === 'Rollup') {
+              else if (activeTabs.sheetActiveTab === 'rollup' && column.data_key === 'C6+' && activeTabs.currentFile === 'balance_with_model' && tableLabel === 'Rollup') {
                 backgroundColor = cellValue > 1 ? '#ffc7ce' : 'white';
                 color = cellValue > 1 ? '#9c0006' : 'black';
               }

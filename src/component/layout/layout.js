@@ -72,8 +72,10 @@ const Layout = ({ children }) => {
             if (error?.response?.status === 400) {
                 toaster.push(<Message type="error">{error.response?.data?.detail}</Message>);
 
+            } else if (error?.response?.status === 404) {
+                toaster.push(<Message type="error">{error.response?.data?.detail}</Message>);
             } else {
-                toaster.push(<Message type="error">{error?.message}</Message>);
+                toaster.push(<Message type="error">{error.message}</Message>);
             }
         }
     }

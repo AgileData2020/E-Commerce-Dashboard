@@ -25,6 +25,7 @@ const HelperClass = {
         return tableColumnHeaders;
     },
 
+
     tableHeightDecider: (dataLength) => {
 
 
