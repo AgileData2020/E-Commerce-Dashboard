@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/E-Commerce-Dashboard/static/css/main.5e16af88.css",
+    "main.js": "/E-Commerce-Dashboard/static/js/main.ee62bcf9.js",
+    "static/css/966.efbb7da7.chunk.css": "/E-Commerce-Dashboard/static/css/966.efbb7da7.chunk.css",
+    "static/js/966.af25ba50.chunk.js": "/E-Commerce-Dashboard/static/js/966.af25ba50.chunk.js",
+    "static/css/330.cf0bceac.chunk.css": "/E-Commerce-Dashboard/static/css/330.cf0bceac.chunk.css",
+    "static/js/330.d4246978.chunk.js": "/E-Commerce-Dashboard/static/js/330.d4246978.chunk.js",
+    "static/js/724.535fe9f3.chunk.js": "/E-Commerce-Dashboard/static/js/724.535fe9f3.chunk.js",
+    "static/js/558.dbe420c9.chunk.js": "/E-Commerce-Dashboard/static/js/558.dbe420c9.chunk.js",
+    "static/js/787.bab0a13c.chunk.js": "/E-Commerce-Dashboard/static/js/787.bab0a13c.chunk.js",
+    "static/js/211.3a9f49b5.chunk.js": "/E-Commerce-Dashboard/static/js/211.3a9f49b5.chunk.js",
+    "static/js/649.8bb00dff.chunk.js": "/E-Commerce-Dashboard/static/js/649.8bb00dff.chunk.js",
+    "static/js/146.7d3b7b2e.chunk.js": "/E-Commerce-Dashboard/static/js/146.7d3b7b2e.chunk.js",
+    "static/js/529.0df6f334.chunk.js": "/E-Commerce-Dashboard/static/js/529.0df6f334.chunk.js",
+    "static/media/profile-circle.png": "/E-Commerce-Dashboard/static/media/profile-circle.724e3acdb464cc690534.png",
+    "static/media/dxicons.woff": "/E-Commerce-Dashboard/static/media/dxicons.88c9febb051d9204a743.woff",
+    "static/media/dxicons.ttf": "/E-Commerce-Dashboard/static/media/dxicons.dee5683ec0edb6c19034.ttf",
+    "static/media/dxicons.woff2": "/E-Commerce-Dashboard/static/media/dxicons.52cf573f82922400fd7f.woff2",
+    "static/media/bgimg.png": "/E-Commerce-Dashboard/static/media/bgimg.8fcbe1cfc5fa364123d2.png",
+    "index.html": "/E-Commerce-Dashboard/index.html",
+    "main.5e16af88.css.map": "/E-Commerce-Dashboard/static/css/main.5e16af88.css.map",
+    "main.ee62bcf9.js.map": "/E-Commerce-Dashboard/static/js/main.ee62bcf9.js.map",
+    "966.efbb7da7.chunk.css.map": "/E-Commerce-Dashboard/static/css/966.efbb7da7.chunk.css.map",
+    "966.af25ba50.chunk.js.map": "/E-Commerce-Dashboard/static/js/966.af25ba50.chunk.js.map",
+    "330.cf0bceac.chunk.css.map": "/E-Commerce-Dashboard/static/css/330.cf0bceac.chunk.css.map",
+    "330.d4246978.chunk.js.map": "/E-Commerce-Dashboard/static/js/330.d4246978.chunk.js.map",
+    "724.535fe9f3.chunk.js.map": "/E-Commerce-Dashboard/static/js/724.535fe9f3.chunk.js.map",
+    "558.dbe420c9.chunk.js.map": "/E-Commerce-Dashboard/static/js/558.dbe420c9.chunk.js.map",
+    "787.bab0a13c.chunk.js.map": "/E-Commerce-Dashboard/static/js/787.bab0a13c.chunk.js.map",
+    "211.3a9f49b5.chunk.js.map": "/E-Commerce-Dashboard/static/js/211.3a9f49b5.chunk.js.map",
+    "649.8bb00dff.chunk.js.map": "/E-Commerce-Dashboard/static/js/649.8bb00dff.chunk.js.map",
+    "146.7d3b7b2e.chunk.js.map": "/E-Commerce-Dashboard/static/js/146.7d3b7b2e.chunk.js.map",
+    "529.0df6f334.chunk.js.map": "/E-Commerce-Dashboard/static/js/529.0df6f334.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5e16af88.css",
+    "static/js/main.ee62bcf9.js"
+  ]
+}
