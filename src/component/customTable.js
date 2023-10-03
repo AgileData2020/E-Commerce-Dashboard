@@ -3,7 +3,7 @@ import Button from 'rsuite/Button';
 import FileDownloadIcon from '@rsuite/icons/FileDownload';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import DataGrid, { Column, Pager, Paging, Export, HeaderFilter, Scrolling, Sorting, LoadPanel, SearchPanel, Editing } from 'devextreme-react/data-grid';
+import DataGrid, { Column } from 'devextreme-react/data-grid';
 import 'devextreme/dist/css/dx.common.css';
 import 'devextreme/dist/css/dx.light.css';
 import { FlexboxGrid } from 'rsuite';
