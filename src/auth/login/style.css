@@ -8,7 +8,7 @@ body {}
     background-color: #f8fafd;
 }
 
-.show-grid {
+.show-grid-auth {
     height: 400px;
     width: 830px;
     background-color: white;
@@ -16,18 +16,7 @@ body {}
     box-shadow: 0px 0px 11px rgb(211 211 211 / 27%);
 }
 
-/* .the_page{
-    height: 490px;
-    width: 330px;
-    z-index: 1;
-    position: absolute;
-    top: 50%;
-    left: 39%;
-    transform: translate(-50%,-50%);
-    background-color: #1b32d5;
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
-} */
+
 
 .the_page {
     height: 490px;

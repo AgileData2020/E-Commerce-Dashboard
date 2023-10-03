@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import './customeDrawer.css';
-import { useDispatch } from 'react-redux';
-import { getLatestFile, setSheetActiveTab, getTabsName, setCollapse, getcurrentFileID } from '../redux/slices/common';
 import { Drawer, Nav, Sidenav, Sidebar } from 'rsuite';
-import PlusIcon from '@rsuite/icons/Plus';
-import hydrocarbonIcon from '../assets/img/hydloogo.png';
 import { useNavigate } from 'react-router-dom';
-
+import { routesPath } from '../Routes';
 const headerStyles = {
     padding: 2,
     fontSize: 16,
@@ -16,27 +12,23 @@ const headerStyles = {
 };
 
 
-const CustomeDrawer = ({ open, setOpen, fileData, fileParams }) => {
+const CustomeDrawer = ({ open, setOpen }) => {
 
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [currentPage, setCurrentPage] = useState('')
     //   currentUseCase for dispaching and show data on dashboard of current file click from sidebar 
-    const currentUseCase = (currentItem) => {
-        setOpen(!open);
-        dispatch(getcurrentFileID(currentItem?.id));
-        dispatch(getLatestFile(currentItem?.excel_file));
-        dispatch(getTabsName(currentItem?.sheet_names));
-        dispatch(setSheetActiveTab(currentItem.sheet_names[0].data_key));
-        dispatch(setCollapse(1));
 
-        fileData && navigate('/dashboard');
+    const setPage = (path) => {
+        setOpen((open) => !open);
+        navigate(path);
+
     }
 
 
     return (
         <>
 
-            <Drawer size={'xs'} placement={'left'} open={open} onClose={() => setOpen(false)}>
+            <Drawer size={'xs'} placement={'left'} backdrop={false} open={open} onClose={() => setOpen(false)}>
                 <Drawer.Body>
 
 
@@ -48,39 +40,22 @@ const CustomeDrawer = ({ open, setOpen, fileData, fileParams }) => {
                             <Sidenav.Header>
                                 <div style={headerStyles}>
 
-                                    <img src={hydrocarbonIcon} alt="logo" />
+                                    <h1 onClick={() => setPage(routesPath.Dashboard)} style={{ color: '#2d64aa', cursor: 'pointer' }}>Fake Store</h1>
 
 
                                 </div>
                             </Sidenav.Header>
+
                             <Sidenav expanded={true} defaultOpenKeys={['3']} appearance="subtle">
                                 <Sidenav.Body>
                                     <Nav>
-                                        {
+                                        <Nav.Item onClick={() => setPage(routesPath.Revenue_analysis)} eventKey={4}>Revenue Analytics</Nav.Item>
 
+                                    </Nav>
 
+                                    <Nav>
+                                        <Nav.Item style={{ background: '#f9f9f9' }} onClick={() => setPage(routesPath.Inventory)} eventKey={4}>Inventory and Product Registration</Nav.Item>
 
-
-                                            <Nav.Menu
-
-                                                eventKey={Math.random()}
-                                                trigger="hover"
-                                                title="Jan 2023"
-                                                icon={<PlusIcon />}
-                                                placement="rightStart"
-                                            >
-                                                {
-                                                    fileData.map((item) =>
-
-                                                        <Nav.Item onClick={() => currentUseCase(item)} key={item?.id} eventKey={item?.id}>{item?.file_key?.replaceAll('_', ' ')?.toUpperCase()}</Nav.Item>
-                                                    )
-                                                }
-
-                                            </Nav.Menu>
-
-
-
-                                        }
                                     </Nav>
                                 </Sidenav.Body>
                             </Sidenav>

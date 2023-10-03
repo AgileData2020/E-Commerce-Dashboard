@@ -12,10 +12,17 @@ export const loginUser = createAsyncThunk("v1/login", async (payload, { rejectWi
     formData.append('username', payload.username);
     formData.append('password', payload.password);
 
+
+
+    // set your endpoint in .env file and restart application by using npm start commond  and uncomment below code for auth integration
+
     try {
-        const response = await axiosInstance.post(auth.Login, formData);
-        localStorage.setItem('token', response.data?.access_token)
-        return response.data.access_token;
+        // const response = await axiosInstance.post(auth.Login, formData);
+        // localStorage.setItem('token', response.data?.access_token)
+        // return response.data.access_token;
+
+        localStorage.setItem('token', Math.random())
+        return Math.random();
     } catch (error) {
         return rejectWithValue(error);
     }

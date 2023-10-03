@@ -13,14 +13,15 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from '@reduxjs/toolkit';
 import sliceLogin from "../slices/auth/login";
-import sliceCommon from "../slices/common";
+
+import inventory from "../slices/inventory";
 const persistConfig = {
     key: 'root', storage,
 }
 export const rootReducers = combineReducers({
 
     login: sliceLogin,
-    commonData: sliceCommon
+    inventory: inventory
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers)
 export default configureStore({

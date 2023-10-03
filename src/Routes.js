@@ -2,6 +2,7 @@ module.exports = {
     routesPath: {
         Login: '/',
         Dashboard: '/dashboard',
-        UploadData: '/upload',
+        Revenue_analysis: '/revenue/analysis',
+        Inventory: '/inventory'
     }
 }

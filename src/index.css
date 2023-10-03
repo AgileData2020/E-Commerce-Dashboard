@@ -25,3 +25,17 @@ code {
 .dx-theme-generic-typography a {
   color: #29292a !important;
 }
+body {
+    background-color: #f8fafd;
+   
+}
+.header-bg {
+    background-color: #fff;
+    width: 100%;
+    padding: 0px 6px 8px 5px;
+    box-shadow: 2px 2px 6px 0px #b1b1b12e;
+    display: flow-root;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+}

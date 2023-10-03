@@ -96,3 +96,40 @@ border-left-color:black !important;
 .rs-container {
     display:contents !important;
 }
+/* Define CSS classes for order statuses */
+.pending {
+
+  color: gray;
+ 
+}
+
+.processing {
+ 
+  color: orange;
+ 
+}
+
+.shipped {
+ 
+  color: green;
+ 
+  
+}
+
+.delivered {
+  
+  color: blue;
+ 
+
+}
+
+.cancelled {
+
+  color: red;
+ 
+}
+.stockLevel {
+  background:#f8d7da ;
+  color: rgb(148, 54, 54);
+  padding: 5px;
+}

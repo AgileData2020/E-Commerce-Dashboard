@@ -13,64 +13,42 @@ import {
 
 } from 'rsuite';
 import './style.css'
-import EyeIcon from '@rsuite/icons/legacy/Eye';
-import EyeSlashIcon from '@rsuite/icons/legacy/EyeSlash';
+
 import { TiArrowRightOutline } from 'react-icons/ti';
 import HelperClass from '../../helper';
 import { loginUser } from '../../redux/slices/auth/login';
-import { handleIsLoading } from '../../redux/slices/common';
+
 const Containerr = () => {
-    const [visible, setVisible] = useState(false);
+
     const [userName, setUserName] = useState(null);
     const [password, setPassword] = useState(null);
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const toaster = useToaster();
 
-    const handleChange = () => {
-        setVisible(!visible);
-    };
-    const isLoading = useSelector(state => state);
     useLayoutEffect(() => {
         if (localStorage.getItem('token')) {
-            navigate('/upload/file');
+            navigate('/dashboard');
         }
     })
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
         // Handle the form submission here
-        if (event) {
-            dispatch(handleIsLoading(true))
+
+        if (event && userName === 'amir' && password === 'task@123') {
+
             let payload = { 'username': userName, 'password': password }
-
-            try {
-                await dispatch(loginUser(payload)).unwrap().then((result) => {
-                    dispatch(handleIsLoading(false));
-
-                    navigate('/upload/' + 'file');
-                    toaster.push(<Message showIcon type={'success'} closable>
-                        User login successfully
-                    </Message>, { placement: 'topEnd', duration: 5000 })
-                });
-            } catch (rejectedValueOrSerializedError) {
-                dispatch(handleIsLoading(false))
-                if (rejectedValueOrSerializedError.response?.status === 401) {
-
-                    toaster.push(<Message showIcon type={'error'} closable>
-                        {rejectedValueOrSerializedError?.response?.data?.detail}
-                    </Message>, { placement: 'topEnd', duration: 5000 })
-                }
-                else {
-
-                    toaster.push(<Message showIcon type={'error'} closable>
-                        {rejectedValueOrSerializedError.message}
-                    </Message>, { placement: 'topEnd', duration: 5000 })
-                }
-
-            }
+            localStorage.setItem('token', Math.random())
+            navigate('/dashboard');
+            toaster.push(<Message showIcon type={'success'} closable>
+                User login successfully
+            </Message>, { placement: 'topEnd', duration: 5000 })
 
 
 
+        } else {
+            toaster.push(<Message showIcon type={'error'} closable>
+                Wrong Credentials
+            </Message>, { placement: 'topEnd', duration: 5000 })
         }
     };
 
@@ -79,16 +57,16 @@ const Containerr = () => {
 
             <div className='main_div'>
 
-                <div className="show-grid">
+                <div className="show-grid-auth">
                     <FlexboxGrid >
                         <FlexboxGrid.Item className="item" colspan={12}>
                             <div className="the_page">
                                 <img src="bgimg.png" alt="logo" />
                                 <FlexboxGrid style={{ marginLeft: '15px' }}>
                                     <FlexboxGrid.Item className="item" colspan={20}>
-                                        <div className='login-headign' style={{ color: 'white' }}>Welcome to Hydrocarbon</div>
+                                        <div className='login-headign' style={{ color: 'white', marginTop: '20px', textAlign: 'center' }}>Welcome Fake Store</div>
                                     </FlexboxGrid.Item>
-                                    <FlexboxGrid.Item colspan={16} ><div className='the_page_text'>The intelligence client Project admin board </div></FlexboxGrid.Item>
+
                                 </FlexboxGrid>
                             </div>
                         </FlexboxGrid.Item>
@@ -99,7 +77,7 @@ const Containerr = () => {
 
                                 <FlexboxGrid.Item className="item text-center" colspan={20}>
 
-                                    <img src="hydro.png" alt="logo" />
+                                    <h1 style={{ color: '#1b32d5' }}> Fake Store</h1>
                                 </FlexboxGrid.Item>
                                 <FlexboxGrid.Item className="item" colspan={20}>
 
@@ -114,12 +92,7 @@ const Containerr = () => {
                                                 <Form.Control name={'username'} onChange={(e) => setUserName(e)} className='input1' placeholder='User name' />
                                             </Form.Group>
                                             <Form.Group>
-                                                {/* <InputGroup inside style={styles}>
-                                                    <Input name={'password'} className='input1' type={visible ? 'text' : 'password'} />
-                                                    <InputGroup.Button className='input_password ' onClick={handleChange}>
-                                                        {visible ? <EyeIcon /> : <EyeSlashIcon />}
-                                                    </InputGroup.Button>
-                                                </InputGroup> */}
+
                                                 <Form.Control className='input1' onChange={(e) => setPassword(e)} name="password" type="password" autoComplete="off" placeholder='Password' />
                                             </Form.Group>
                                             <Form.Group>

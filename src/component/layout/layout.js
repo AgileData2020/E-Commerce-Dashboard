@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
-import { sheetEndPoint } from '../../api/endPoints';
-import { useToaster, Message } from 'rsuite';
+
 import './style.css';
-import { Container, IconButton, Content, Navbar } from 'rsuite';
+import { Container, Content, Navbar } from 'rsuite';
 import AngleLeftIcon from '@rsuite/icons/legacy/AngleLeft';
 import AngleRightIcon from '@rsuite/icons/legacy/AngleRight';
-import ArowBackIcon from '@rsuite/icons/ArowBack';
-import axiosInstance from '../../api/axiosInstance';
-import FileUploadIcon from '@rsuite/icons/FileUpload';
-import hydrocarbonIconMobile from '../../assets/img/hydro-mobile.png'
-import { setCollapse } from '../../redux/slices/common';
-import { Nav } from 'rsuite';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import CustomeDrawer from '../customeDrawer';
 
+import { Nav } from 'rsuite';
+import { useNavigate } from 'react-router-dom';
+
+import CustomeDrawer from '../customeDrawer';
+import Widget from '../widget';
 
 const NavToggle = ({ expand, onChange }) => {
     return (
@@ -35,50 +30,16 @@ const NavToggle = ({ expand, onChange }) => {
 
 const Layout = ({ children }) => {
     const [expand, setExpand] = useState(false);
-    const [isLoading, setLoading] = useState(false);
 
-
-    const [fileData, setFilesData] = useState([])
-    const { file } = useParams();
     const navigate = useNavigate();
 
-    const toaster = useToaster();
     const logoutUser = () => {
         localStorage.clear();
         navigate('/');
     }
 
-    const dispatch = useDispatch();
-    const userInfo = useSelector(state => state);
-    const getAllSheetData = async () => {
-
-        setLoading(true);
-        setExpand(!expand)
-        axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}`;
-        try {
-            const response = await axiosInstance.get(sheetEndPoint.GET_ALL_SHEETS);
-            if (response.status === 200) {
-
-                setLoading(false);
-                setFilesData(response.data);
 
 
-
-            }
-
-        } catch (error) {
-            setLoading(false)
-
-            if (error?.response?.status === 400) {
-                toaster.push(<Message type="error">{error.response?.data?.detail}</Message>);
-
-            } else if (error?.response?.status === 404) {
-                toaster.push(<Message type="error">{error.response?.data?.detail}</Message>);
-            } else {
-                toaster.push(<Message type="error">{error.message}</Message>);
-            }
-        }
-    }
 
     return (
         <div className="show-fake-browser sidebar-page">
@@ -87,45 +48,28 @@ const Layout = ({ children }) => {
 
             <Container>
 
-                <CustomeDrawer open={expand} setOpen={setExpand} fileData={fileData} fileParams={file} />
+                <CustomeDrawer open={expand} setOpen={setExpand} />
                 <Container>
                     <header className='header-bg'>
 
 
                         <div className='togal-buttons'>
-                            <div className='flot-left mob-logo'><img src={hydrocarbonIconMobile} alt="logo" /></div>
+                            <div className='flot-left'> <h1 onClick={() => navigate('/dashboard')} style={{ color: '#2d64aa', cursor: 'pointer' }}>Store</h1></div>
 
 
-                            {<div className='flot-left'> <NavToggle expand={expand} onChange={() => getAllSheetData()} /></div>}
+                            {<div className='flot-left'> <NavToggle expand={expand} onChange={() => setExpand(!expand)} /></div>}
 
 
                         </div>
 
                         <div className='togal-right pd-13'>
-                            <div className='flot-left ms-30'>
-                                {
-                                    !file &&
-                                    (
-                                        userInfo?.commonData?.collapseable ?
-                                            <IconButton onClick={() => dispatch(setCollapse())} appearance="primary" title='back to sheet' icon={<ArowBackIcon />}>
-                                                Back
 
-                                            </IconButton> :
-
-                                            <IconButton onClick={() => dispatch(setCollapse())} appearance="primary" title='Upload new file' icon={<FileUploadIcon />}>
-
-                                                Upload
-                                            </IconButton>
-                                    )
-                                }
-
-                            </div>
                             <div className='flot-left'>
                                 <img className='profile-pic' src="/profile-circle.png" alt="logo" />
                             </div>
                             <div className='flot-left profile-detail'>
                                 <Nav>
-                                    <Nav.Menu title={userInfo?.login?.first_name + " " + userInfo?.login?.last_name}>
+                                    <Nav.Menu title={'Amir Yousaf'}>
 
                                         <Nav.Item onClick={() => logoutUser()}>Logout</Nav.Item>
                                     </Nav.Menu>
@@ -134,6 +78,7 @@ const Layout = ({ children }) => {
 
                         </div>
                     </header>
+                    <Widget />
                     <Content className='content'>
                         {children}
 

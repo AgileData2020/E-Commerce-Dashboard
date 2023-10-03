@@ -12,9 +12,9 @@ import PrivateRoute from './routes/PrivateRoute';
 import { useSelector, UseSelector } from 'react-redux/es/hooks/useSelector';
 import Loader from '../src/component/Loader/loader'
 const Login = lazy(() => import('./auth/login'));
-const Dashboard = lazy(() => import('./Dashboard/index'));
-const Upload = lazy(() => import("./upload/index"));
-
+const Dashboard = lazy(() => import('./dashboard/index'));
+const Revenue = lazy(() => import('./revenue/renenue'));
+const Inventory = lazy(() => import('./inventory/inventory'));
 
 
 
@@ -22,7 +22,7 @@ function App() {
 
 
   const toaster = useToaster();
-  const isLoading = useSelector(state => state)
+  const isLoading = useSelector(state => state);
 
 
 
@@ -71,8 +71,9 @@ function App() {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path={routesPath.Login} element={<Login />}></Route>
-          <Route path={routesPath.UploadData + '/:file?'} element={<PrivateRoute Component={Upload} roles={['admin']} />} />
           <Route path={routesPath.Dashboard} element={<PrivateRoute Component={Dashboard} roles={['admin']} />} />
+          <Route path={routesPath.Revenue_analysis} element={<PrivateRoute Component={Revenue} roles={['admin']} />} />
+          <Route path={routesPath.Inventory} element={<PrivateRoute Component={Inventory} roles={['admin']} />} />
         </Routes>
       </Suspense>
   );

@@ -1,5 +1,6 @@
 // staticClass.js
 import { Schema } from "rsuite";
+import { salesTypesData, bestSallingProducts } from "./testData";
 const HelperClass = {
     // Define your static functions as properties
     loginSchema: () => {
@@ -10,39 +11,145 @@ const HelperClass = {
                 .isRequired('This field required')
         });
     },
+    salesTypes: () => {
+        let offLineSale = [];
+        let onLineSale = [];
+        let salesTime = [];
+        salesTypesData.forEach((item) => {
+            offLineSale.push(item.OnlineSales);
+            onLineSale.push(item.OfflineSales)
+            salesTime.push(item.Month)
+        })
 
-
-    sheetDataMaker: (type, data) => {
-        return data[type];
+        return {
+            offLineSale,
+            onLineSale,
+            salesTime
+        }
     },
 
-    getTableColumns: (tableHeaderData) => {
-        let tableColumnHeaders = [];
-        tableHeaderData?.forEach(element => {
-            tableColumnHeaders.push(element.data_key)
-        });
+    bestSalesProducts: () => {
+        let products = [];
+        let sales = [];
 
-        return tableColumnHeaders;
+        bestSallingProducts.forEach((item) => {
+            products.push(item.Product);
+            sales.push(item.Sales)
+
+        })
+
+        return {
+            products,
+            sales
+        }
     },
 
+    generateFakeOrders: (count) => {
+        const orders = [];
+        const orderStatuses = ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'];
 
-    tableHeightDecider: (dataLength) => {
+        for (let i = 1; i <= count; i++) {
+            const order = {
+                OrderID: i,
+                CustomerName: `Customer ${i}`,
+                OrderDate: new Date(2023, Math.floor(Math.random() * 12), Math.floor(Math.random() * 28)),
+                ShipCity: `City ${Math.floor(Math.random() * 10)}`,
+                Total: Math.floor(Math.random() * 1000) + 100,
+                OrderStatus: orderStatuses[Math.floor(Math.random() * orderStatuses.length)], // Random order status
+            };
+            orders.push(order);
+        }
+        return orders;
+    },
+
+    timeAggregation: (data, type) => {
 
 
-        if (dataLength?.length >= 100) {
 
-            return 600;
-        } else if (dataLength?.length <= 4) {
-            return 200;
-        } else if (dataLength?.length == 1) {
+        if (type === 'y') {
 
-            return 100
-        } else {
+            const aggregatedDataYearly = data.reduce((result, item) => {
+                const timestamp = new Date(item.date);
+                const yearKey = timestamp.getFullYear().toString();
 
-            return 600;
+                if (!result[yearKey]) {
+                    result[yearKey] = {
+                        revenue: 0,
+                        inventory: 0,
+                        orders: 0,
+                    };
+                }
+
+                result[yearKey].revenue += item.revenue;
+                result[yearKey].inventory += item.inventory;
+                result[yearKey].orders += item.orders;
+
+                return result;
+            }, {});
+
+            return aggregatedDataYearly;
+        } else if (type === 'w') {
+
+            const aggregatedDataWeekly = data.reduce((result, item) => {
+                const timestamp = new Date(item.date);
+                const weekOfYear = getWeekOfYear(timestamp);
+
+                console.log(weekOfYear, 'weekOfYear')
+                if (!result[weekOfYear]) {
+                    result[weekOfYear] = {
+                        revenue: 0,
+                        inventory: 0,
+                        orders: 0,
+                    };
+                }
+
+                result[weekOfYear].revenue += item.revenue;
+                result[weekOfYear].inventory += item.inventory;
+                result[weekOfYear].orders += item.orders;
+
+                return result;
+            }, {});
+
+            // Helper function to calculate the week of the year
+            function getWeekOfYear(date) {
+                const startOfYear = new Date(date.getFullYear(), 0, 1);
+                const days = Math.floor((date - startOfYear) / (24 * 60 * 60 * 1000));
+                return Math.ceil((days + startOfYear.getDay() + 1) / 7);
+            }
+            return aggregatedDataWeekly
+        } else if (type === 'm') {
+            const aggregatedDataMonthly = data.reduce((result, item) => {
+                const timestamp = new Date(item.date);
+                const yearMonthKey = `${timestamp.getFullYear()}-${(timestamp.getMonth() + 1)
+                    .toString()
+                    .padStart(2, '0')}`;
+
+                if (!result[yearMonthKey]) {
+                    result[yearMonthKey] = {
+                        revenue: 0,
+                        inventory: 0,
+                        orders: 0,
+                    };
+                }
+
+                result[yearMonthKey].revenue += item.revenue;
+                result[yearMonthKey].inventory += item.inventory;
+                result[yearMonthKey].orders += item.orders;
+
+                return result;
+            }, {});
+
+
+
+            return aggregatedDataMonthly;
         }
 
-    },
+
+    }
+
+
+
+
 };
 
 // Export the object
