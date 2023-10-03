@@ -40,7 +40,7 @@ const CustomeDrawer = ({ open, setOpen }) => {
                             <Sidenav.Header>
                                 <div style={headerStyles}>
 
-                                    <h1 onClick={() => setPage(routesPath.Dashboard)} style={{ color: '#2d64aa', cursor: 'pointer' }}>Fake Store</h1>
+                                    <h1 onClick={() => setPage('/dashboard')} style={{ color: '#2d64aa', cursor: 'pointer' }}>Fake Store</h1>
 
 
                                 </div>
@@ -49,12 +49,12 @@ const CustomeDrawer = ({ open, setOpen }) => {
                             <Sidenav expanded={true} defaultOpenKeys={['3']} appearance="subtle">
                                 <Sidenav.Body>
                                     <Nav>
-                                        <Nav.Item onClick={() => setPage(routesPath.Revenue_analysis)} eventKey={4}>Revenue Analytics</Nav.Item>
+                                        <Nav.Item onClick={() => setPage('/revenue/analysis')} eventKey={4}>Revenue Analytics</Nav.Item>
 
                                     </Nav>
 
                                     <Nav>
-                                        <Nav.Item style={{ background: '#f9f9f9' }} onClick={() => setPage(routesPath.Inventory)} eventKey={4}>Inventory and Product Registration</Nav.Item>
+                                        <Nav.Item style={{ background: '#f9f9f9' }} onClick={() => setPage('/inventory')} eventKey={4}>Inventory and Product Registration</Nav.Item>
 
                                     </Nav>
                                 </Sidenav.Body>
