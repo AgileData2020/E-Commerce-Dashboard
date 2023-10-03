@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+# About Project:
+Name = E-Commerce-Dashboard
+Hosted url = https://admin-dashboard-254f6.web.app/
+username: amir
+password:task@123
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Technologies Used: 
+1- Javascript 
+2- React js
+3- React router dom 
+4- Redux toolkit for manage data and thunk middleware
+5- axios 
+6- react apexcharts
+7- Deveextreme data grid 
+# Project description:
+# Login and Dashboard Pages
+  E-Commerce-Dashboard mainly have 4 pages login page for enter into system dashboard page have 
+ online and offline products sale status as well as best selling products statistics and list of 
+ recent order with their status.
 
-## Available Scripts
+ # Revenue Analytics Page 
+ 
+ There is a small arrow icon on top left at header when click on it a sidebar menu open which have a Revenue 
+ Analytics click to navigate Revenue Analytics Page . This page have order , sales and inventory trends over
+ time actually it's a line chart which have 4 tabs at left top of for convering data into Weeks,Months and years.
+ Revenue Analytics Page have one more bar chart for Revenue data filter by category .
 
-In the project directory, you can run:
+ # Inventory and product registeration page 
 
-### `npm start`
+ From left side bar menu we can naviagte this page it has a table showing current inventory status and at top
+ of table there is button for adding new record in inventory and it's effect we can see in Revenue Analytics in
+ line chart. For editing just click on any cell of table and update his value .
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+ # Setup / Installation 
+ 
+ 1- pubic repository : https://github.com/AgileData2020/E-Commerce-Dashboard
+ 2- git clone git@github.com:AgileData2020/E-Commerce-Dashboard.git or direct download 
+ 3- At root run commond npm install --legacy-peer-deps 
+ 4- npm start 
+ 5- for endpoint create .env at root and set REACT_APP_API_URL = your endpoint
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#
