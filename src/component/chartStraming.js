@@ -79,7 +79,7 @@ const ChartStraming = ({ seriesData, title, colors, revenueFlag, }) => {
             },
             {
                 name: "Online Sales",
-                data: seriesData?.onlineSeries
+                data: seriesData?.onLineSeries
             }
         ]
 
