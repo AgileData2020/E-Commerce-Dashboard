@@ -7,7 +7,7 @@ import AngleRightIcon from '@rsuite/icons/legacy/AngleRight';
 
 import { Nav } from 'rsuite';
 import { useNavigate } from 'react-router-dom';
-
+import profilImg from './images/profile-circle.png'
 import CustomeDrawer from '../customeDrawer';
 import Widget from '../widget';
 
@@ -65,7 +65,7 @@ const Layout = ({ children }) => {
                         <div className='togal-right pd-13'>
 
                             <div className='flot-left'>
-                                <img className='profile-pic' src="/profile-circle.png" alt="logo" />
+                                <img className='profile-pic' src={profilImg} alt="test" />
                             </div>
                             <div className='flot-left profile-detail'>
                                 <Nav>

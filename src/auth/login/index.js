@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import BgImg from './images/bgimg.png'
 import {
 
     Form,
@@ -61,7 +62,7 @@ const Containerr = () => {
                     <FlexboxGrid >
                         <FlexboxGrid.Item className="item" colspan={12}>
                             <div className="the_page">
-                                <img src="bgimg.png" alt="logo" />
+                                <img src={BgImg} alt="logo" />
                                 <FlexboxGrid style={{ marginLeft: '15px' }}>
                                     <FlexboxGrid.Item className="item" colspan={20}>
                                         <div className='login-headign' style={{ color: 'white', marginTop: '20px', textAlign: 'center' }}>Welcome Fake Store</div>
