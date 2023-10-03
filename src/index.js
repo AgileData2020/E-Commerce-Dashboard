@@ -8,7 +8,7 @@ import store from './redux/store/store';
 import { Provider } from 'react-redux'
 
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 import 'rsuite/dist/rsuite-no-reset.min.css';
@@ -20,11 +20,11 @@ root.render(
     <Provider store={store}>
       <PersistGate persistor={persistor}>
 
-        <BrowserRouter>
+        <HashRouter>
 
           <App />
 
-        </BrowserRouter>
+        </HashRouter>
 
       </PersistGate>
     </Provider>
