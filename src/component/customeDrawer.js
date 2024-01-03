@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './customeDrawer.css';
 import { Drawer, Nav, Sidenav, Sidebar } from 'rsuite';
 import { useNavigate } from 'react-router-dom';
@@ -15,9 +15,12 @@ const headerStyles = {
 const CustomeDrawer = ({ open, setOpen }) => {
 
     const navigate = useNavigate();
-    const [currentPage, setCurrentPage] = useState('')
-    //   currentUseCase for dispaching and show data on dashboard of current file click from sidebar 
 
+    const [customOpen, setCustomOpen] = useState(open);
+
+    useEffect(() => {
+        setCustomOpen(open)
+    }, [open])
     const setPage = (path) => {
         setOpen((open) => !open);
         navigate(path);
@@ -28,7 +31,7 @@ const CustomeDrawer = ({ open, setOpen }) => {
     return (
         <>
 
-            <Drawer size={'xs'} placement={'left'} backdrop={false} open={open} onClose={() => setOpen(false)}>
+            <Drawer size={'xs'} placement={'left'} backdrop={false} open={customOpen} onClose={() => setOpen(false)}>
                 <Drawer.Body>
 
 

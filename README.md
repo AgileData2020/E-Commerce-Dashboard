@@ -1,8 +1,8 @@
 # About Project:
 Name = E-Commerce-Dashboard
 Hosted url = https://admin-dashboard-254f6.web.app/
-username: amir
-password:task@123
+username: admin
+password:admin@123
 
 # Technologies Used: 
 1- Javascript 

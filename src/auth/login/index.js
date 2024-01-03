@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useLayoutEffect } from 'react'
+import React, { useEffect, useState, useLayoutEffect, useRef } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import BgImg from './images/bgimg.png'
+import BgImg from './images/bgimg.png';
+import QRCode from 'qrcode.react';
 import {
 
     Form,
@@ -13,29 +14,41 @@ import {
     useToaster
 
 } from 'rsuite';
+import { saveAs } from 'file-saver';
 import './style.css'
 
+import { QrReader } from 'react-qr-reader';
 import { TiArrowRightOutline } from 'react-icons/ti';
 import HelperClass from '../../helper';
 import { loginUser } from '../../redux/slices/auth/login';
 
 const Containerr = () => {
-
+    const qrCodeValue = [1, 2, 3, 4, 4, 5, 55, 5, 55, 5, 5, 5, 5, 5];
     const [userName, setUserName] = useState(null);
     const [password, setPassword] = useState(null);
     const navigate = useNavigate();
     const toaster = useToaster();
-
+    const canvasRef = useRef(null);
     useLayoutEffect(() => {
         if (localStorage.getItem('token')) {
             navigate('/dashboard');
         }
     })
 
+    const handleScan = (data) => {
+        if (data) {
+            // setResult(data);
+
+        }
+    };
+
+    const handleError = (error) => {
+        console.error(error);
+    };
     const handleSubmit = (event) => {
         // Handle the form submission here
 
-        if (event && userName === 'amir' && password === 'task@123') {
+        if (event && userName === 'admin' && password === 'admin@123') {
 
             let payload = { 'username': userName, 'password': password }
             localStorage.setItem('token', Math.random())
@@ -53,6 +66,14 @@ const Containerr = () => {
         }
     };
 
+    const downloadQRCode = () => {
+        // Create a data URL from the canvas
+        console.log(canvasRef, 'canvasRef')
+        const qrCodeDataURL = canvasRef.current.toDataURL('image/png');
+
+        // Save the data URL as a file
+        saveAs(qrCodeDataURL, 'qrcode.png');
+    };
     return (
         <>
 
@@ -65,7 +86,16 @@ const Containerr = () => {
                                 <img src={BgImg} alt="logo" />
                                 <FlexboxGrid style={{ marginLeft: '15px' }}>
                                     <FlexboxGrid.Item className="item" colspan={20}>
-                                        <div className='login-headign' style={{ color: 'white', marginTop: '20px', textAlign: 'center' }}>Welcome Fake Store</div>
+                                        <div className='login-headign' style={{ color: 'white', marginTop: '20px', textAlign: 'center' }}>
+                                            Welcome Fake Store
+
+                                            {/* <QrReader
+                                                delay={300}
+                                                onError={handleError}
+                                                onScan={handleScan}
+                                                style={{ width: '100%' }}
+                                            /> */}
+                                        </div>
                                     </FlexboxGrid.Item>
 
                                 </FlexboxGrid>
@@ -111,6 +141,20 @@ const Containerr = () => {
 
                                             </Form.Group>
                                         </Form>
+                                        {/* <QRCode
+                                            value={qrCodeValue}
+                                            size={128} // Size of the QR code
+                                            fgColor="#000" // Foreground color
+                                            bgColor="#fff" // Background color
+                                        /> */}
+
+
+
+                                        {/* <QRCode value={qrCodeValue} renderAs="canvas" size={128} fgColor="#000" bgColor="#fff" level="H" ref={canvasRef} /> */}
+                                        {/* <button onClick={downloadQRCode}>Download QR Code</button> */}
+
+
+
                                     </FlexboxGrid.Item>
                                 </FlexboxGrid>
                             </FlexboxGrid>

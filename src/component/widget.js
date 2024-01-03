@@ -6,7 +6,7 @@ import ImageIcon from '@rsuite/icons/Image';
 import SpeakerIcon from '@rsuite/icons/Speaker';
 import PeoplesIcon from '@rsuite/icons/Peoples';
 
-
+import { useNavigate } from 'react-router-dom';
 const Widget = () => {
     const dollarSvg = <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 100 100">
         <text x="30" y="70" font-size="60" fill="white">$</text>
@@ -16,7 +16,7 @@ const Widget = () => {
         <text x="20" y="70" font-size="60" fill="white">&#128522;</text>
     </svg>
 
-
+    const navgate = useNavigate()
 
 
     return (
@@ -84,11 +84,11 @@ const Widget = () => {
                     <Panel shaded style={{ background: 'white' }}>
                         <div style={{ display: 'flex' }}>
                             <div>
-                                <IconButton icon={<PeoplesIcon style={{ fontSize: '2rem' }} />} color="blue" appearance="primary" circle />
+                                <IconButton icon={<PeoplesIcon onClick={() => navgate('/traffic')} style={{ fontSize: '2rem' }} />} color="blue" appearance="primary" circle />
 
                             </div>
-                            <div style={{ marginLeft: '15px' }}>
-                                <div style={{ marginTop: '8px', fontSize: '1rem' }}>Visitors</div>
+                            <div style={{ marginLeft: '15px', cursor: 'pointer' }}>
+                                <div style={{ marginTop: '8px', fontSize: '1rem' }} onClick={() => navgate('/traffic')}>Visitors</div>
                                 <span>10,44</span>
                             </div>
                         </div>

@@ -67,7 +67,7 @@ border-right-color:black !important;
 border-left-color:black !important;
 }
 
-.dx-datagrid-headers .headerBgRollup{
+/* .dx-datagrid-headers .headerBgRollup{
     background-color: #44546A;
     color: white !important;
 }
@@ -90,7 +90,7 @@ border-left-color:black !important;
  .dx-datagrid-headers .Rollup_Compressibility {
     background-color: #843C0B;
     color: white !important;
-}
+} */
 
 
 .rs-container {

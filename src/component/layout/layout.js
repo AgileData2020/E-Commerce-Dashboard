@@ -69,7 +69,7 @@ const Layout = ({ children }) => {
                             </div>
                             <div className='flot-left profile-detail'>
                                 <Nav>
-                                    <Nav.Menu title={'Amir Yousaf'}>
+                                    <Nav.Menu title={'admin'}>
 
                                         <Nav.Item onClick={() => logoutUser()}>Logout</Nav.Item>
                                     </Nav.Menu>

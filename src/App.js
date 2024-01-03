@@ -15,8 +15,7 @@ const Login = lazy(() => import('./auth/login'));
 const Dashboard = lazy(() => import('./dashboard/index'));
 const Revenue = lazy(() => import('./revenue/renenue'));
 const Inventory = lazy(() => import('./inventory/inventory'));
-
-
+const Organic = lazy(() => import('./organic/index'));
 
 function App() {
 
@@ -71,6 +70,7 @@ function App() {
       <Suspense fallback={<Loader />}>
         <Routes>
           <Route path={routesPath.Login} element={<Login />}></Route>
+          <Route path={'/traffic'} element={<PrivateRoute Component={Organic} roles={['admin']} />} />
           <Route path={'/dashboard'} element={<PrivateRoute Component={Dashboard} roles={['admin']} />} />
           <Route path={routesPath.Revenue_analysis} element={<PrivateRoute Component={Revenue} roles={['admin']} />} />
           <Route path={routesPath.Inventory} element={<PrivateRoute Component={Inventory} roles={['admin']} />} />

@@ -1,6 +1,7 @@
 // staticClass.js
 import { Schema } from "rsuite";
 import { salesTypesData, bestSallingProducts } from "./testData";
+import { faker } from '@faker-js/faker';
 const HelperClass = {
     // Define your static functions as properties
     loginSchema: () => {
@@ -145,7 +146,31 @@ const HelperClass = {
         }
 
 
+    },
+    //  generate fake time series data 
+
+    generateTimeSeriesData: () => {
+
+
+        return [
+            { id: 1, date: "2023-10-01 08:00:00", name: 'Fridge', description: 'test 1', organic: 5080, category: 'Electronics', inorganic: 6000, inventory: 7000, orders: 800 },
+            { id: 2, date: "2024-10-02 08:00:00", name: 'Oven', description: 'test 1', organic: 4500, category: 'Electronics', inorganic: 2500, inventory: 800, orders: 1900 },
+            { id: 3, date: "2023-10-03 12:00:00", name: 'Light', description: 'test 1', organic: 8500, category: 'Electronics', inorganic: 120, inventory: 7500, orders: 7200 },
+            { id: 4, date: "2024-10-04 18:00:00", name: 'Radio', description: 'test 1', organic: 8700, category: 'Electronics', inorganic: 750, inventory: 6000, orders: 210 },
+            { id: 5, date: "2021-10-01 08:00:00", name: 'Tie', description: 'test 1', organic: 700, category: 'Clothing', inorganic: 3500, inventory: 4000, orders: 600 },
+            { id: 6, date: "2022-10-02 08:00:00", name: 'Jeans', description: 'test 1', organic: 800, category: 'Clothing', inorganic: 1800, inventory: 1200, orders: 1400 },
+            { id: 7, date: "2022-10-03 12:00:00", name: 'Shirt', description: 'test 1', organic: 300, category: 'Clothing', inorganic: 200, inventory: 3500, orders: 4000 },
+            { id: 8, date: "2021-10-04 18:00:00", name: 'Jacket', description: 'test 1', organic: 1400, category: 'Clothing', inorganic: 600, inventory: 3000, orders: 800 },
+            { id: 9, date: "2024-10-01 08:00:00", name: 'Lamp light', description: 'test 1', organic: 1500, category: 'Home Decor', inorganic: 4500, inventory: 6000, orders: 750 },
+            { id: 10, date: "2025-10-02 08:00:00", name: 'Sheet', description: 'test 1', organic: 100, category: 'Home Decor', inorganic: 2100, inventory: 900, orders: 1900 },
+            { id: 11, date: "2022-10-03 12:00:00", name: 'light', description: 'test 1', organic: 700, category: 'Home Decor', inorganic: 150, inventory: 5800, orders: 720 },
+            { id: 12, date: "2023-10-04 18:00:00", name: 'Table', description: 'test 1', organic: 5100, category: 'Home Decor', inorganic: 800, inventory: 6500, orders: 320 },
+
+        ]
     }
+
+
+
 
 
 

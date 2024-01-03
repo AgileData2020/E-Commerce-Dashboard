@@ -55,6 +55,7 @@ const Renenue = () => {
         categories
     }
 
+
     return (
         <>
             <Stack divider={<Divider vertical />}>
